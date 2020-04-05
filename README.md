@@ -17,16 +17,14 @@ import yxc, { createSchema } from "@dotvirus/yxc";
 //    const { createSchema } = require("@dotvirus/yxc");
 
 // Create a schema using the createSchema utility
-// Prefer using functions to avoid having global state
 // Properties are *required* by default, unless specified otherwise (.optional(), .nullable())
-const Album = () =>
-  createSchema({
-    title: yxc.string(),
-    artist: yxc.string(),
-    songCount: yxc.number().min(1),
-    releaseYear: yxc.number().nullable(),
-    genres: yxc.array(yxc.string().max(30)),
-  });
+const Album = createSchema({
+  title: yxc.string(),
+  artist: yxc.string(),
+  songCount: yxc.number().min(1),
+  releaseYear: yxc.number().nullable(),
+  genres: yxc.array(yxc.string().max(30)),
+});
 
 // Our object to validate
 const faith = {
@@ -41,12 +39,12 @@ const faith = {
   // createSchema returns a function to validate anything with
   // The result is an array of invalid properties in the input
   // If the result array is empty, the object is a valid instance of the provided schema
-  const result = Album()(faith);
+  const result = Album(faith);
   console.log(result); // -> []
 }
 
 {
-  const result = Album()({ name: "Invalid" });
+  const result = Album({ name: "Invalid" });
   console.log(result);
   // [
   //   { key: [ 'name' ], message: 'Value not allowed' },
@@ -91,10 +89,9 @@ Require something - use .use() to narrow down what this value should be
 const prefix = (prefix: string) => (str: string) => str.startsWith(prefix);
 
 // Require 'description' to start with 'Hello! '
-const MySchema = () =>
-  yxc.object({
-    description: yxc.string().use(prefix("Hello! ")),
-  });
+const MySchema = createSchema({
+  description: yxc.string().use(prefix("Hello! ")),
+});
 ```
 
 # Schema composition
@@ -103,35 +100,33 @@ const MySchema = () =>
 // Create a validation handler
 // Note that this does not return a function,
 // so it can be used in another schema to compose more complex schemas
-const Song = () =>
-  yxc.object({
-    name: yxc.string().notEmpty(),
-    titleTrack: {
-      handler: yxc.boolean(),
-      default: () => false,
-    },
-    duration: yxc.number().min(1),
-  });
+const Song = yxc.object({
+  name: yxc.string().notEmpty(),
+  titleTrack: {
+    handler: yxc.boolean(),
+    default: () => false,
+  },
+  duration: yxc.number().min(1),
+});
 
 // If you really wanted to validate a single song, use:
-const songValidator = createExecutableSchema(Song());
+const songValidator = createExecutableSchema(Song);
 // This creates/curries a function you can validate your input with.
 console.log(songValidator({ name: "My song" })); // -> not valid
 
 // createSchema(schema) is a shortcut for createExecutableSchema(yxc.object(schema))
 
 // Compose the Album schema with "tracklist" being an array of Songs
-const Album = () =>
-  createSchema({
-    title: yxc.string(),
-    artist: yxc.string(),
-    tracklist: yxc.array(Song()).notEmpty(),
-    releaseYear: yxc.number().nullable(),
-    genres: yxc.array(yxc.string()),
-  });
+const Album = createSchema({
+  title: yxc.string(),
+  artist: yxc.string(),
+  tracklist: yxc.array(Song).notEmpty(),
+  releaseYear: yxc.number().nullable(),
+  genres: yxc.array(yxc.string()),
+});
 
 {
-  const result = Album()({
+  const result = Album({
     title: "Faith",
     artist: "The Cure",
     tracklist: [],
@@ -183,7 +178,7 @@ const Album = () =>
     releaseYear: 1981,
     genres: ["Post punk", "Gothic rock"],
   };
-  const result = Album()(faith);
+  const result = Album(faith);
   console.log(result); // -> [] -- Valid!
   console.log(faith.tracklist.find((t) => t.titleTrack).name); // -> "Faith"
   // All the other songs have titleTrack = false, even though they were never provided originally
@@ -197,7 +192,7 @@ const Album = () =>
 // Let's take another look at the result array.
 // Take the example schemas from above:
 
-const result = Album()({
+const result = Album({
   title: "Faith",
   artist: "The Cure",
   tracklist: [
@@ -265,7 +260,7 @@ import { connect } from "@dotvirus/yxc";
 
 const app = express();
 
-app.post("/song", connect({ body: Song() }), createSong);
+app.post("/song", connect({ body: Song }), createSong);
 ```
 
 ### Custom error handler
@@ -281,7 +276,7 @@ const app = express();
 
 app.post(
   "/song",
-  connect({ body: Song() }, (result) => "Bad request!"),
+  connect({ body: Song }, (result) => "Bad request!"),
   createSong
 );
 // -> Calls next("Bad request!") on validation fail

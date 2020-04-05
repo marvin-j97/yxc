@@ -115,6 +115,7 @@ export class ObjectHandler extends Handler<object> {
               deepSet(root, [...key, myKey], mutate);
             }
 
+            if (this._partial) handler.handler.optional();
             const hadError = !!getResults(handler.handler);
 
             if (!hadError && handler.mutateAfter) {
