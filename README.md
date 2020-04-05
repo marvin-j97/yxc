@@ -19,12 +19,13 @@ import yxc, { createSchema } from "@dotvirus/yxc";
 // Create a schema using the createSchema utility
 // Prefer using functions to avoid having global state
 // Properties are *required* by default, unless specified otherwise (.optional(), .nullable())
-const Album = () => createSchema({
+const Album = () =>
+  createSchema({
     title: yxc.string(),
     artist: yxc.string(),
-    songCount: yxc.number(),
+    songCount: yxc.number().min(1),
     releaseYear: yxc.number().nullable(),
-    genres: yxc.array(yxc.string())
+    genres: yxc.array(yxc.string().max(30)),
   });
 
 // Our object to validate
@@ -33,7 +34,7 @@ const faith = {
   artist: "The Cure",
   songCount: 8,
   releaseYear: 1981,
-  genres: ["Post punk", "Gothic rock"]
+  genres: ["Post punk", "Gothic rock"],
 };
 
 {
@@ -60,25 +61,45 @@ const faith = {
 
 # Handlers
 
-#### yxc.object(/* keys? */):
+#### yxc.object(/_ keys? _/):
+
 Require an object - the object constructor can receive a dictionary of yxc handlers to check keys with.
 
 #### yxc.string:
+
 Require a string
 
 #### yxc.number:
+
 Require a number, add .integer() for integers only
 
 #### yxc.boolean:
+
 Require a boolean
-  
+
 #### yxc.array(handler!):
+
 Require an array - the array constructor requires a handler that describes what the array contains
+
+#### yxc.any()
+
+Require something - use .use() to narrow down what this value should be
+
+# Custom functions
+
+```typescript
+const prefix = (prefix: string) => (str: string) => str.startsWith(prefix);
+
+// Require 'description' to start with 'Hello! '
+const MySchema = () =>
+  yxc.object({
+    description: yxc.string().use(prefix("Hello! ")),
+  });
+```
 
 # Schema composition
 
 ```typescript
-
 // Create a validation handler
 // Note that this does not return a function,
 // so it can be used in another schema to compose more complex schemas
@@ -95,7 +116,7 @@ const Song = () =>
 // If you really wanted to validate a single song, use:
 const songValidator = createExecutableSchema(Song());
 // This creates/curries a function you can validate your input with.
-console.log(songValidator({ name: "My song" })) // -> not valid
+console.log(songValidator({ name: "My song" })); // -> not valid
 
 // createSchema(schema) is a shortcut for createExecutableSchema(yxc.object(schema))
 
@@ -161,7 +182,7 @@ const Album = () =>
     ],
     releaseYear: 1981,
     genres: ["Post punk", "Gothic rock"],
-  }
+  };
   const result = Album()(faith);
   console.log(result); // -> [] -- Valid!
   console.log(faith.tracklist.find((t) => t.titleTrack).name); // -> "Faith"
@@ -258,6 +279,10 @@ import { connect } from "@dotvirus/yxc";
 
 const app = express();
 
-app.post("/song", connect({ body: Song() }, result => "Bad request!"), createSong);
+app.post(
+  "/song",
+  connect({ body: Song() }, (result) => "Bad request!"),
+  createSong
+);
 // -> Calls next("Bad request!") on validation fail
 ```
