@@ -35,13 +35,11 @@ export class StringHandler extends Handler<string> {
   }
 
   match(regexp: RegExp) {
-    this.regex(regexp);
-    return this;
+    return this.regex(regexp);
   }
 
   pattern(regexp: RegExp) {
-    this.regex(regexp);
-    return this;
+    return this.regex(regexp);
   }
 
   length(num: number) {
@@ -52,18 +50,15 @@ export class StringHandler extends Handler<string> {
   }
 
   len(num: number) {
-    this.length(num);
-    return this;
+    return this.length(num);
   }
 
   notEmpty() {
-    this.min(1);
-    return this;
+    return this.min(1);
   }
 
   between(min: number, max: number) {
-    this.min(min).max(max);
-    return this;
+    return this.min(min).max(max);
   }
 
   min(min: number) {

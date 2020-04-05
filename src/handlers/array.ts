@@ -10,6 +10,24 @@ export class ArrayHandler<T = any> extends Handler<T[]> {
     this._handler = handler;
   }
 
+  any(pred: (v: T, i: number, arr: T[]) => boolean) {
+    return this.some(pred);
+  }
+
+  all(pred: (v: T, i: number, arr: T[]) => boolean) {
+    return this.every(pred);
+  }
+
+  some(pred: (v: T, i: number, arr: T[]) => boolean) {
+    this._rules.push((arr) => arr.some(pred));
+    return this;
+  }
+
+  every(pred: (v: T, i: number, arr: T[]) => boolean) {
+    this._rules.push((arr) => arr.every(pred));
+    return this;
+  }
+
   length(num: number) {
     this._rules.push(
       (v: any[]) => v.length == num || `Must be of length ${num}`
