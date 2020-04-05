@@ -1,6 +1,5 @@
 import { Handler } from "./index";
-import { IValidationResult, ISchemaDefinition } from "../schema";
-import { ObjectHandler } from "./object";
+import { IValidationResult } from "../schema";
 
 export class ArrayHandler<T = any> extends Handler<T[]> {
   _handler: Handler;
