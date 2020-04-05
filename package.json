@@ -9,7 +9,7 @@
     "test": "mocha --bail --exit -r ts-node/register test/index.ts"
   },
   "author": "dotvirus",
-  "license": "ISC",
+  "license": "MIT",
   "files": [
     "dist/"
   ],
