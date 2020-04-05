@@ -62,6 +62,7 @@ export abstract class Handler<T = any> {
       if (typeof result === "string" || !result) {
         log("Rule failed!");
         results.push({ key: key || [], message: result });
+        log("Rule result: " + result);
       } else {
         log("Rule passed!");
       }

@@ -1,3 +1,6 @@
+import objectTests from "./object";
+objectTests();
+
 import stringTests from "./string";
 stringTests();
 

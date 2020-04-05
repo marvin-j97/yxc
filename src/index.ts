@@ -10,6 +10,7 @@ import { ObjectHandler } from "./handlers/object";
 import { NumberHandler } from "./handlers/number";
 import { BooleanHandler } from "./handlers/boolean";
 import { ArrayHandler } from "./handlers/array";
+import { AnyHandler } from "./handlers/any";
 import { connect, koa, graphql } from "./middlewares";
 import { Handler } from "./handlers/index";
 
@@ -30,5 +31,5 @@ export default {
   number: () => new NumberHandler(),
   boolean: () => new BooleanHandler(),
   array: <T = any>(handler: Handler) => new ArrayHandler<T>(handler),
-  // TODO: any
+  any: () => new AnyHandler(),
 };

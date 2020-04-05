@@ -18,7 +18,7 @@ function deepSet(root: any, segments: string[], value: any): void {
       if (typeof obj === "object" && obj !== null) {
         (<any>obj)[seg] = value;
       } else {
-        throw `PTree: Tried to set property of atomic value`;
+        throw new TypeError(`Tried to set property of atomic value`);
       }
     }
 
@@ -32,7 +32,7 @@ function deepSet(root: any, segments: string[], value: any): void {
   }
 }
 
-export class ObjectHandler extends Handler<object> {
+export class ObjectHandler extends Handler<Record<string, any>> {
   private _keys: ISchemaDefinition = {};
   private _arbitrary = false;
   private _partial = false;
@@ -45,6 +45,24 @@ export class ObjectHandler extends Handler<object> {
     if (keys) {
       this._keys = keys;
     }
+  }
+
+  any(pred: (v: any, k: string, obj: any) => boolean) {
+    return this.some(pred);
+  }
+
+  all(pred: (v: any, k: string, obj: any) => boolean) {
+    return this.every(pred);
+  }
+
+  some(pred: (v: any, k: string, obj: any) => boolean) {
+    this._rules.push((o) => Object.keys(o).some((k) => pred(o[k], k, o)));
+    return this;
+  }
+
+  every(pred: (v: any, k: string, obj: any) => boolean) {
+    this._rules.push((o) => Object.keys(o).every((k) => pred(o[k], k, o)));
+    return this;
   }
 
   partial() {
@@ -115,6 +133,7 @@ export class ObjectHandler extends Handler<object> {
               deepSet(root, [...key, myKey], mutate);
             }
 
+            if (this._partial) handler.handler.optional();
             const hadError = !!getResults(handler.handler);
 
             if (!hadError && handler.mutateAfter) {

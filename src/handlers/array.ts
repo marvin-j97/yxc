@@ -1,6 +1,5 @@
 import { Handler } from "./index";
-import { IValidationResult, ISchemaDefinition } from "../schema";
-import { ObjectHandler } from "./object";
+import { IValidationResult } from "../schema";
 
 export class ArrayHandler<T = any> extends Handler<T[]> {
   _handler: Handler;
@@ -9,6 +8,24 @@ export class ArrayHandler<T = any> extends Handler<T[]> {
     super();
     this._rules.push((v) => Array.isArray(v) || "Must be an array");
     this._handler = handler;
+  }
+
+  any(pred: (v: T, i: number, arr: T[]) => boolean) {
+    return this.some(pred);
+  }
+
+  all(pred: (v: T, i: number, arr: T[]) => boolean) {
+    return this.every(pred);
+  }
+
+  some(pred: (v: T, i: number, arr: T[]) => boolean) {
+    this._rules.push((arr) => arr.some(pred));
+    return this;
+  }
+
+  every(pred: (v: T, i: number, arr: T[]) => boolean) {
+    this._rules.push((arr) => arr.every(pred));
+    return this;
   }
 
   length(num: number) {
