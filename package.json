@@ -1,10 +1,11 @@
 {
   "name": "@dotvirus/yxc",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "Schema validation with composition & API middlewares",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "scripts": {
+    "build": "tsc",
     "test:verbose": "set DEBUG=yxc && mocha --bail --exit -r ts-node/register test/index.ts",
     "test": "mocha --bail --exit -r ts-node/register test/index.ts"
   },
