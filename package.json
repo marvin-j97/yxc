@@ -5,6 +5,7 @@
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "scripts": {
+    "build": "tsc",
     "test:verbose": "set DEBUG=yxc && mocha --bail --exit -r ts-node/register test/index.ts",
     "test": "mocha --bail --exit -r ts-node/register test/index.ts"
   },
