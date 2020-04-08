@@ -1,17 +1,18 @@
 import debug from "debug";
-import { createExecutableSchema } from "./index";
-import { IValidationResult } from "./schema";
+import { ISchemaDefinition, createExecutableSchema } from "./index";
+import { createSchema, IValidationResult } from "./schema";
 import { ObjectHandler } from "./handlers/object";
 
 const log = debug("yxc");
 
 export function connect(
-  schema: ObjectHandler,
+  schema: ISchemaDefinition,
   formatError?: (result: IValidationResult[]) => any
 ) {
   return async (req: any, res: any, next: Function) => {
     try {
-      const result = createExecutableSchema(schema)(req);
+      const handler = new ObjectHandler(schema).arbitrary();
+      const result = createExecutableSchema(handler)(req);
 
       if (result.length) {
         log(`Validation fail, calling error middleware...`);
@@ -35,12 +36,13 @@ interface IKoaContext {
 }
 
 export function koa(
-  schema: ObjectHandler,
+  schema: ISchemaDefinition,
   formatError?: (result: IValidationResult[]) => any
 ) {
   return async (ctx: IKoaContext, next: Function) => {
     try {
-      const result = createExecutableSchema(schema)(ctx.req);
+      const handler = new ObjectHandler(schema).arbitrary();
+      const result = createExecutableSchema(handler)(ctx.req);
 
       if (result.length) {
         log(`Validation fail, calling error middleware...`);
@@ -69,13 +71,14 @@ type IGraphQLResolver = (
 ) => Promise<any>;
 
 export function graphql(
-  schema: ObjectHandler,
+  schema: ISchemaDefinition,
   cb: IGraphQLResolver,
   formatError?: (result: IValidationResult[]) => any
 ) {
   return async (parent: unknown, args: any, ctx: unknown, info: unknown) => {
     try {
-      const result = createExecutableSchema(schema)(args);
+      const handler = new ObjectHandler(schema).arbitrary();
+      const result = createExecutableSchema(handler)(args);
 
       if (result.length) {
         log(`Validation fail, throwing error...`);
