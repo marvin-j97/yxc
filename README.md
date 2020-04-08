@@ -234,7 +234,7 @@ console.log(result);
 //   { key: [ 'tracklist', '4', 'duration' ], message: 'Value required' },
 //   { key: [ 'tracklist', '5', 'duration' ], message: 'Value required' },
 //   { key: [ 'tracklist', '6', 'duration' ], message: 'Value required' },
-//  { key: [ 'tracklist', '7', 'duration' ], message: 'Value required' }
+//   { key: [ 'tracklist', '7', 'duration' ], message: 'Value required' }
 // ]
 // Yikes, we forgot the durations. This is also getting pretty messy.
 // However, there is an utility function to format the result array:

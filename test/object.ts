@@ -65,5 +65,20 @@ export default () => {
       expect(schema({ hey: true, no: 4 })).to.have.length(1);
       expect(schema({ hey: true })).to.have.length(0);
     });
+
+    it("Should check specific keys in arbitrary object", () => {
+      const schema = createExecutableSchema(
+        yxc
+          .object({
+            name: yxc.string(),
+          })
+          .arbitrary()
+      );
+
+      expect(schema({})).to.have.length(1);
+      expect(schema({ name: "str", no: 4 })).to.have.length(0);
+      expect(schema({ name: 2, no: 4 })).to.have.length(1);
+      expect(schema({ hey: true })).to.have.length(1);
+    });
   });
 };

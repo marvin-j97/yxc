@@ -1,6 +1,7 @@
 import debug from "debug";
-import { ISchemaDefinition } from "./index";
+import { ISchemaDefinition, createExecutableSchema } from "./index";
 import { createSchema, IValidationResult } from "./schema";
+import { ObjectHandler } from "./handlers/object";
 
 const log = debug("yxc");
 
@@ -10,7 +11,8 @@ export function connect(
 ) {
   return async (req: any, res: any, next: Function) => {
     try {
-      const result = createSchema(schema)(req);
+      const handler = new ObjectHandler(schema).arbitrary();
+      const result = createExecutableSchema(handler)(req);
 
       if (result.length) {
         log(`Validation fail, calling error middleware...`);
@@ -39,7 +41,8 @@ export function koa(
 ) {
   return async (ctx: IKoaContext, next: Function) => {
     try {
-      const result = createSchema(schema)(ctx.req);
+      const handler = new ObjectHandler(schema).arbitrary();
+      const result = createExecutableSchema(handler)(ctx.req);
 
       if (result.length) {
         log(`Validation fail, calling error middleware...`);
@@ -74,7 +77,8 @@ export function graphql(
 ) {
   return async (parent: unknown, args: any, ctx: unknown, info: unknown) => {
     try {
-      const result = createSchema(schema)(args);
+      const handler = new ObjectHandler(schema).arbitrary();
+      const result = createExecutableSchema(handler)(args);
 
       if (result.length) {
         log(`Validation fail, throwing error...`);
