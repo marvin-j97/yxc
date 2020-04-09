@@ -134,7 +134,7 @@ export class ObjectHandler extends Handler<Record<string, any>> {
             }
 
             if (this._partial) handler.handler.optional();
-            const hadError = !!getResults(handler.handler);
+            const hadError = !!getResults(handler.handler).length;
 
             if (!hadError && handler.mutateAfter) {
               log("Mutate after");
