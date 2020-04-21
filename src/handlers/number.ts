@@ -46,7 +46,7 @@ export class NumberHandler extends Handler<number> {
 
   max(max: number) {
     this._rules.push(
-      (v: number) => v >= max || `Must be less than or equal ${max}`
+      (v: number) => v <= max || `Must be less than or equal ${max}`
     );
     return this;
   }
