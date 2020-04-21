@@ -63,7 +63,7 @@ export class ArrayHandler<T = any> extends Handler<T[]> {
 
   max(max: number) {
     this._rules.push(
-      (v: any[]) => v.length >= max || `Must have at most ${max} characters`
+      (v: any[]) => v.length <= max || `Must have at most ${max} characters`
     );
     return this;
   }
