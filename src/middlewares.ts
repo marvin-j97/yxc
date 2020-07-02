@@ -1,6 +1,6 @@
 import debug from "debug";
 import { ISchemaDefinition, createExecutableSchema } from "./index";
-import { createSchema, IValidationResult } from "./schema";
+import { IValidationResult } from "./schema";
 import { ObjectHandler } from "./handlers/object";
 
 const log = debug("yxc");
@@ -30,8 +30,6 @@ export function connect(
 }
 
 interface IKoaContext {
-  req: any;
-  res: any;
   throw: (code: number, message: string) => void;
 }
 
@@ -40,21 +38,15 @@ export function koa(
   formatError?: (result: IValidationResult[]) => any
 ) {
   return async (ctx: IKoaContext, next: Function) => {
-    try {
-      const handler = new ObjectHandler(schema).arbitrary();
-      const result = createExecutableSchema(handler)(ctx.req);
+    const handler = new ObjectHandler(schema).arbitrary();
+    const result = createExecutableSchema(handler)(ctx);
 
-      if (result.length) {
-        log(`Validation fail, calling error middleware...`);
-        ctx.throw(400, formatError ? formatError(result) : "Bad request");
-      } else {
-        log(`Validation success, calling next middleware...`);
-        return next();
-      }
-    } catch (error) {
-      log(`INTERNAL validation error, calling error middleware with 500...`);
-      console.error(error);
-      ctx.throw(500, error.message);
+    if (result.length) {
+      log(`Validation fail, calling error middleware...`);
+      ctx.throw(400, formatError ? formatError(result) : "Bad request");
+    } else {
+      log(`Validation success, calling next middleware...`);
+      return next();
     }
   };
 }
