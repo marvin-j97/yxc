@@ -6,6 +6,18 @@ export class StringHandler extends Handler<string> {
     this._rules.push((v) => typeof v == "string" || "Must be a string");
   }
 
+  endsWith(substr: string) {
+    this._rules.push((v) => v.endsWith(substr));
+  }
+
+  beginsWith(substr: string) {
+    return this.startsWith(substr);
+  }
+
+  startsWith(substr: string) {
+    this._rules.push((v) => v.startsWith(substr));
+  }
+
   email() {
     const emailRegex = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
     this._rules.push((v) => emailRegex.test(v) || `Must be a valid email`);
