@@ -24,6 +24,12 @@ export class StringHandler extends Handler<string> {
     return this;
   }
 
+  numeric() {
+    const regexp = /[^0-9]/;
+    this._rules.push((v) => !regexp.test(v) || `Must be numeric`);
+    return this;
+  }
+
   alphanum(allowSpaces?: boolean) {
     const regexp = allowSpaces ? /[^a-zA-Z0-9 ]/ : /[^a-zA-Z0-9]/;
     this._rules.push((v) => !regexp.test(v) || `Must be alphanumeric`);
