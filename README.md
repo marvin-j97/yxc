@@ -59,7 +59,7 @@ const faith = {
 
 # Handlers
 
-#### yxc.object(/_ keys? _/):
+#### yxc.object(keys?):
 
 Require an object - the object constructor can receive a dictionary of yxc handlers to check keys with.
 
@@ -83,7 +83,7 @@ Require an array - the array constructor requires a handler that describes what 
 
 Require something - use .use() to narrow down what this value should be
 
-#### yxc.union()
+#### yxc.union(handlers!)
 
 Require something that matches any of the given types
 
