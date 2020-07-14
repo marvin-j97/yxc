@@ -83,6 +83,10 @@ Require an array - the array constructor requires a handler that describes what 
 
 Require something - use .use() to narrow down what this value should be
 
+#### yxc.union()
+
+Require something that matches any of the given types
+
 # Custom functions
 
 ```typescript
