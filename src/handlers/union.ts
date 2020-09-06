@@ -7,7 +7,7 @@ export class UnionHandler extends Handler<unknown> {
       if (handlers.some((h) => h.validate(v).length === 0)) {
         return true;
       }
-      return "Input is not matching any of the given schemas";
+      return "Input is not matching any of the expected schemas";
     });
   }
 }

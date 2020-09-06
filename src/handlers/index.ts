@@ -102,3 +102,29 @@ export abstract class Handler<T = any> {
     return this;
   }
 }
+
+export class AtomicHandler<T = string | number | boolean> extends Handler<T> {
+  equals(expected: T) {
+    this._rules.push(
+      (v: T) => v === expected || `Must be equal to ${expected}`
+    );
+    return this;
+  }
+
+  eq(expected: T) {
+    return this.equals(expected);
+  }
+
+  equal(expected: T) {
+    return this.equals(expected);
+  }
+
+  enum(values: T[]) {
+    this._rules.push(
+      (v) =>
+        values.includes(v) ||
+        `Must be one of the following values: ${values.join(", ")}`
+    );
+    return this;
+  }
+}

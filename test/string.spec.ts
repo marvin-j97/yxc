@@ -16,6 +16,17 @@ describe("Strings", () => {
     });
   }
 
+  describe("Equals", () => {
+    it("Should be equal", () => {
+      expect(yxc.string().equals("test").validate("test")).to.have.length(0);
+    });
+    it("Should not be equal", () => {
+      expect(yxc.string().equals("test").validate("not test")).to.have.length(
+        1
+      );
+    });
+  });
+
   describe("Extra rules", () => {
     {
       const handler = yxc.string().notEmpty();

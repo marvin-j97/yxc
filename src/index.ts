@@ -14,6 +14,7 @@ import { AnyHandler } from "./handlers/any";
 import { UnionHandler } from "./handlers/union";
 import { connect, koa, graphql } from "./middlewares";
 import { Handler } from "./handlers/index";
+import { NullHandler } from "./handlers/null";
 
 export { IKeyOptions, ISchemaDefinition };
 
@@ -34,4 +35,5 @@ export default {
   array: <T = any>(handler: Handler) => new ArrayHandler<T>(handler),
   any: () => new AnyHandler(),
   union: (handlers: Handler[]) => new UnionHandler(handlers),
+  null: () => new NullHandler(),
 };

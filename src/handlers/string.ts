@@ -1,9 +1,9 @@
-import { Handler } from "./index";
+import { AtomicHandler } from "./index";
 
-export class StringHandler extends Handler<string> {
+export class StringHandler extends AtomicHandler<string> {
   constructor() {
     super();
-    this._rules.push((v) => typeof v == "string" || "Must be a string");
+    this._rules.push((v) => typeof v === "string" || "Must be a string");
   }
 
   endsWith(substr: string) {
@@ -33,15 +33,6 @@ export class StringHandler extends Handler<string> {
   alphanum(allowSpaces?: boolean) {
     const regexp = allowSpaces ? /[^a-zA-Z0-9 ]/ : /[^a-zA-Z0-9]/;
     this._rules.push((v) => !regexp.test(v) || `Must be alphanumeric`);
-    return this;
-  }
-
-  enum(values: string[]) {
-    this._rules.push(
-      (v) =>
-        values.includes(v) ||
-        `Must be one of the following values: ${values.join(", ")}`
-    );
     return this;
   }
 
