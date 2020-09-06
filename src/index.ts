@@ -14,7 +14,7 @@ import { AnyHandler } from "./handlers/any";
 import { UnionHandler } from "./handlers/union";
 import { connect, koa, graphql } from "./middlewares";
 import { Handler } from "./handlers/index";
-import { NullHandler } from "handlers/null";
+import { NullHandler } from "./handlers/null";
 
 export { IKeyOptions, ISchemaDefinition };
 
