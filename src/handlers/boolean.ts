@@ -1,9 +1,9 @@
-import { Handler } from "./index";
+import { AtomicHandler } from "./index";
 
-export class BooleanHandler extends Handler<boolean> {
+export class BooleanHandler extends AtomicHandler<boolean> {
   constructor() {
     super();
-    this._rules.push((v) => typeof v == "boolean" || "Must be a boolean");
+    this._rules.push((v) => typeof v === "boolean" || "Must be a boolean");
   }
 
   true() {

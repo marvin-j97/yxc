@@ -1,23 +1,14 @@
-import { Handler } from "./index";
+import { AtomicHandler } from "./index";
 
-export class NumberHandler extends Handler<number> {
+export class NumberHandler extends AtomicHandler<number> {
   constructor() {
     super();
-    this._rules.push((v) => typeof v == "number" || "Must be a number");
+    this._rules.push((v) => typeof v === "number" || "Must be a number");
   }
 
   integer() {
     this._rules.push(
       (v: number) => Number.isInteger(v) || `Must be an integer`
-    );
-    return this;
-  }
-
-  enum(values: number[]) {
-    this._rules.push(
-      (v) =>
-        values.includes(v) ||
-        `Must be one of the following values: ${values.join(", ")}`
     );
     return this;
   }

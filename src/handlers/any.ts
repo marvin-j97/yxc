@@ -1,6 +1,6 @@
-import { Handler } from "./index";
+import { AtomicHandler } from "./index";
 
-export class AnyHandler extends Handler<any> {
+export class AnyHandler extends AtomicHandler<any> {
   constructor() {
     super();
   }
