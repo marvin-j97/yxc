@@ -1,5 +1,6 @@
 import { Rule } from "../types";
 import debug from "debug";
+import { IValidationResult } from "schema";
 
 const log = debug("yxc");
 
@@ -8,11 +9,11 @@ export abstract class Handler<T = any> {
   protected _optional = false;
   protected _nullable = false;
 
-  isNullable() {
+  isNullable(): boolean {
     return this._nullable;
   }
 
-  isOptional() {
+  isOptional(): boolean {
     return this._optional;
   }
 
@@ -31,7 +32,11 @@ export abstract class Handler<T = any> {
   //   return this;
   // }
 
-  validate(value: any, key?: string[], root?: any) {
+  validate(
+    value: unknown,
+    key?: string[],
+    root?: unknown,
+  ): IValidationResult[] {
     const results: { key: string[]; message: string | boolean }[] = [];
 
     log("Checking if undefined");
@@ -58,7 +63,7 @@ export abstract class Handler<T = any> {
 
     log("Checking rules");
     for (const rule of this._rules) {
-      const result = rule(value, key || [], root || value);
+      const result = rule(<any>value, key || [], root || value);
       if (typeof result === "string" || !result) {
         log("Rule failed!");
         results.push({ key: key || [], message: result });
@@ -72,58 +77,58 @@ export abstract class Handler<T = any> {
     return results;
   }
 
-  test(rule: Rule<T>) {
+  test(rule: Rule<T>): Handler {
     this.custom(rule);
     return this;
   }
 
-  check(rule: Rule<T>) {
+  check(rule: Rule<T>): Handler {
     this.custom(rule);
     return this;
   }
 
-  use(rule: Rule<T>) {
+  use(rule: Rule<T>): Handler {
     this.custom(rule);
     return this;
   }
 
-  custom(rule: Rule<T>) {
+  custom(rule: Rule<T>): Handler {
     this._rules.push(rule);
     return this;
   }
 
-  optional() {
+  optional(): Handler {
     this._optional = true;
     return this;
   }
 
-  nullable() {
+  nullable(): Handler {
     this._nullable = true;
     return this;
   }
 }
 
 export class AtomicHandler<T = string | number | boolean> extends Handler<T> {
-  equals(expected: T) {
+  equals(expected: T): AtomicHandler<T> {
     this._rules.push(
-      (v: T) => v === expected || `Must be equal to ${expected}`
+      (v: T) => v === expected || `Must be equal to ${expected}`,
     );
     return this;
   }
 
-  eq(expected: T) {
+  eq(expected: T): AtomicHandler<T> {
     return this.equals(expected);
   }
 
-  equal(expected: T) {
+  equal(expected: T): AtomicHandler<T> {
     return this.equals(expected);
   }
 
-  enum(values: T[]) {
+  enum(values: T[]): AtomicHandler<T> {
     this._rules.push(
       (v) =>
         values.includes(v) ||
-        `Must be one of the following values: ${values.join(", ")}`
+        `Must be one of the following values: ${values.join(", ")}`,
     );
     return this;
   }

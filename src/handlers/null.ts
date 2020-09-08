@@ -1,4 +1,3 @@
-import { AtomicHandler } from "./index";
 import { AnyHandler } from "./any";
 
 export class NullHandler extends AnyHandler {

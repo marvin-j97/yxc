@@ -10,65 +10,69 @@ export class ArrayHandler<T = any> extends Handler<T[]> {
     this._handler = handler;
   }
 
-  any(pred: (v: T, i: number, arr: T[]) => boolean) {
+  any(pred: (v: T, i: number, arr: T[]) => boolean): ArrayHandler<T> {
     return this.some(pred);
   }
 
-  all(pred: (v: T, i: number, arr: T[]) => boolean) {
+  all(pred: (v: T, i: number, arr: T[]) => boolean): ArrayHandler<T> {
     return this.every(pred);
   }
 
-  some(pred: (v: T, i: number, arr: T[]) => boolean) {
+  some(pred: (v: T, i: number, arr: T[]) => boolean): ArrayHandler<T> {
     this._rules.push((arr) => arr.some(pred));
     return this;
   }
 
-  every(pred: (v: T, i: number, arr: T[]) => boolean) {
+  every(pred: (v: T, i: number, arr: T[]) => boolean): ArrayHandler<T> {
     this._rules.push((arr) => arr.every(pred));
     return this;
   }
 
-  length(num: number) {
+  length(num: number): ArrayHandler<T> {
     this._rules.push(
-      (v: any[]) => v.length == num || `Must be of length ${num}`
+      (v: any[]) => v.length == num || `Must be of length ${num}`,
     );
     return this;
   }
 
-  len(num: number) {
+  len(num: number): ArrayHandler<T> {
     this.length(num);
     return this;
   }
 
-  notEmpty() {
+  notEmpty(): ArrayHandler<T> {
     this._rules.push((v: any[]) => !!v.length || `Must not be empty`);
     return this;
   }
 
-  between(min: number, max: number) {
+  between(min: number, max: number): ArrayHandler<T> {
     this._rules.push(
       (v: any[]) =>
         (v.length >= min && v.length <= max) ||
-        `Must be between ${min} and ${max} characters long`
+        `Must have between ${min} and ${max} items`,
     );
     return this;
   }
 
-  min(min: number) {
+  min(min: number): ArrayHandler<T> {
     this._rules.push(
-      (v: any[]) => v.length >= min || `Must be at least ${min} characters long`
+      (v: any[]) => v.length >= min || `Must have at least ${min} items`,
     );
     return this;
   }
 
-  max(max: number) {
+  max(max: number): ArrayHandler<T> {
     this._rules.push(
-      (v: any[]) => v.length <= max || `Must have at most ${max} characters`
+      (v: any[]) => v.length <= max || `Must have at most ${max} items`,
     );
     return this;
   }
 
-  validate(value: any, key: string[] = [], root?: any): IValidationResult[] {
+  validate(
+    value: unknown,
+    key: string[] = [],
+    root?: unknown,
+  ): IValidationResult[] {
     const myResults = super.validate(value, key, root);
     const keyResults: IValidationResult[] = [];
 

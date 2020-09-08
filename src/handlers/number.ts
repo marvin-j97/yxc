@@ -6,38 +6,38 @@ export class NumberHandler extends AtomicHandler<number> {
     this._rules.push((v) => typeof v === "number" || "Must be a number");
   }
 
-  integer() {
+  integer(): NumberHandler {
     this._rules.push(
-      (v: number) => Number.isInteger(v) || `Must be an integer`
+      (v: number) => Number.isInteger(v) || `Must be an integer`,
     );
     return this;
   }
 
-  negative() {
+  negative(): NumberHandler {
     this._rules.push((v: number) => v < 0 || `Must be a negative number`);
     return this;
   }
 
-  positive() {
+  positive(): NumberHandler {
     this._rules.push((v: number) => v >= 0 || `Must be a positive number`);
     return this;
   }
 
-  between(min: number, max: number) {
+  between(min: number, max: number): NumberHandler {
     this._rules.push(
-      (v: number) => (v >= min && v <= max) || `Must be ${min} and ${max}`
+      (v: number) => (v >= min && v <= max) || `Must be ${min} and ${max}`,
     );
     return this;
   }
 
-  min(min: number) {
+  min(min: number): NumberHandler {
     this._rules.push((v: number) => v >= min || `Must be at least ${min}`);
     return this;
   }
 
-  max(max: number) {
+  max(max: number): NumberHandler {
     this._rules.push(
-      (v: number) => v <= max || `Must be less than or equal ${max}`
+      (v: number) => v <= max || `Must be less than or equal ${max}`,
     );
     return this;
   }

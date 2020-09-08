@@ -6,12 +6,12 @@ export class BooleanHandler extends AtomicHandler<boolean> {
     this._rules.push((v) => typeof v === "boolean" || "Must be a boolean");
   }
 
-  true() {
+  true(): BooleanHandler {
     this._rules.push((v) => v == true || "Must be true");
     return this;
   }
 
-  false() {
+  false(): BooleanHandler {
     this._rules.push((v) => v == false || "Must be false");
     return this;
   }

@@ -28,12 +28,14 @@ export {
 };
 
 export default {
-  object: (schema?: ISchemaDefinition) => new ObjectHandler(schema),
-  string: () => new StringHandler(),
-  number: () => new NumberHandler(),
-  boolean: () => new BooleanHandler(),
-  array: <T = any>(handler: Handler) => new ArrayHandler<T>(handler),
-  any: () => new AnyHandler(),
-  union: (handlers: Handler[]) => new UnionHandler(handlers),
-  null: () => new NullHandler(),
+  object: (schema?: ISchemaDefinition): ObjectHandler =>
+    new ObjectHandler(schema),
+  string: (): StringHandler => new StringHandler(),
+  number: (): NumberHandler => new NumberHandler(),
+  boolean: (): BooleanHandler => new BooleanHandler(),
+  array: <T = any>(handler: Handler): ArrayHandler<T> =>
+    new ArrayHandler<T>(handler),
+  any: (): AnyHandler => new AnyHandler(),
+  union: (handlers: Handler[]): UnionHandler => new UnionHandler(handlers),
+  null: (): NullHandler => new NullHandler(),
 };

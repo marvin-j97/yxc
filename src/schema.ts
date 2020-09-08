@@ -20,14 +20,14 @@ export interface ISchemaDefinition {
   [key: string]: Handler | IKeyOptions;
 }
 
-export function createExecutableSchema(handler: ObjectHandler) {
-  return (value: any) => handler.validate(value, [], value);
+export function createExecutableSchema<T>(handler: ObjectHandler) {
+  return (value: T) => handler.validate(value, [], value);
 }
 
 export function createSchema(def: ISchemaDefinition) {
   return createExecutableSchema(new ObjectHandler(def));
 }
 
-export function formatResult(result: IValidationResult[]) {
+export function formatResult(result: IValidationResult[]): string[] {
   return result.map((v) => v.key.join(".") + ": " + v.message);
 }

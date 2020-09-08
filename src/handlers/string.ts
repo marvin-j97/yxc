@@ -6,81 +6,83 @@ export class StringHandler extends AtomicHandler<string> {
     this._rules.push((v) => typeof v === "string" || "Must be a string");
   }
 
-  endsWith(substr: string) {
+  endsWith(substr: string): StringHandler {
     this._rules.push((v) => v.endsWith(substr));
+    return this;
   }
 
-  beginsWith(substr: string) {
+  beginsWith(substr: string): StringHandler {
     return this.startsWith(substr);
   }
 
-  startsWith(substr: string) {
+  startsWith(substr: string): StringHandler {
     this._rules.push((v) => v.startsWith(substr));
+    return this;
   }
 
-  email() {
+  email(): StringHandler {
     const emailRegex = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
     this._rules.push((v) => emailRegex.test(v) || `Must be a valid email`);
     return this;
   }
 
-  numeric() {
+  numeric(): StringHandler {
     const regexp = /[^0-9]/;
     this._rules.push((v) => !regexp.test(v) || `Must be numeric`);
     return this;
   }
 
-  alphanum(allowSpaces?: boolean) {
+  alphanum(allowSpaces?: boolean): StringHandler {
     const regexp = allowSpaces ? /[^a-zA-Z0-9 ]/ : /[^a-zA-Z0-9]/;
     this._rules.push((v) => !regexp.test(v) || `Must be alphanumeric`);
     return this;
   }
 
-  regex(regexp: RegExp) {
+  regex(regexp: RegExp): StringHandler {
     this._rules.push(
-      (v: string) => regexp.test(v) || `Does not match ${regexp.toString()}`
+      (v: string) => regexp.test(v) || `Does not match ${regexp.toString()}`,
     );
     return this;
   }
 
-  match(regexp: RegExp) {
+  match(regexp: RegExp): StringHandler {
     return this.regex(regexp);
   }
 
-  pattern(regexp: RegExp) {
+  pattern(regexp: RegExp): StringHandler {
     return this.regex(regexp);
   }
 
-  length(num: number) {
+  length(num: number): StringHandler {
     this._rules.push(
-      (v: string) => v.length == num || `Must be of length ${num}`
+      (v: string) => v.length == num || `Must be of length ${num}`,
     );
     return this;
   }
 
-  len(num: number) {
+  len(num: number): StringHandler {
     return this.length(num);
   }
 
-  notEmpty() {
+  notEmpty(): StringHandler {
     return this.min(1);
   }
 
-  between(min: number, max: number) {
+  between(min: number, max: number): StringHandler {
     return this.min(min).max(max);
   }
 
-  min(min: number) {
+  min(min: number): StringHandler {
     this._rules.push(
       (v: string) =>
-        v.length >= min || `Must be at least ${min} characters long`
+        v.length >= min || `Must be at least ${min} characters long`,
     );
     return this;
   }
 
-  max(max: number) {
+  max(max: number): StringHandler {
     this._rules.push(
-      (v: string) => v.length <= max || `Must have at most ${max} characters`
+      (v: string) => v.length <= max || `Must have at most ${max} characters`,
     );
     return this;
   }

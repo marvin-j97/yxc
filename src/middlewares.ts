@@ -7,9 +7,9 @@ const log = debug("yxc");
 
 export function connect(
   schema: ISchemaDefinition,
-  formatError?: (result: IValidationResult[]) => any
+  formatError?: (result: IValidationResult[]) => any,
 ) {
-  return async (req: any, res: any, next: Function) => {
+  return async (req: any, res: any, next: (error?: unknown) => unknown) => {
     try {
       const handler = new ObjectHandler(schema).arbitrary();
       const result = createExecutableSchema(handler)(req);
@@ -35,7 +35,7 @@ interface IKoaContext {
 
 export function koa(
   schema: ISchemaDefinition,
-  formatError?: (result: IValidationResult[]) => any
+  formatError?: (result: IValidationResult[]) => any,
 ) {
   return async (ctx: IKoaContext, next: Function) => {
     const handler = new ObjectHandler(schema).arbitrary();
@@ -59,13 +59,13 @@ type IGraphQLResolver = (
   parent: any,
   args: any,
   ctx: any,
-  info: any
+  info: any,
 ) => Promise<any>;
 
 export function graphql(
   schema: ISchemaDefinition,
   cb: IGraphQLResolver,
-  formatError?: (result: IValidationResult[]) => any
+  formatError?: (result: IValidationResult[]) => any,
 ) {
   return async (parent: unknown, args: any, ctx: unknown, info: unknown) => {
     try {
