@@ -1,6 +1,6 @@
 {
   "name": "@dotvirus/yxc",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "Schema validation with composition & API middlewares",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -12,6 +12,10 @@
   },
   "author": "dotvirus",
   "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/dotvirus/yxc.git"
+  },
   "files": [
     "dist/"
   ],
