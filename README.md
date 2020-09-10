@@ -1,6 +1,6 @@
 # yxc
 
-Schema validation with composition &amp; API middlewares
+Schema validation with composition &amp; API middlewares, written in Typescript.
 
 [![npm version](https://badge.fury.io/js/%40dotvirus%2Fyxc.svg)](https://badge.fury.io/js/%40dotvirus%2Fyxc)
 ![Node.js CI](https://github.com/dotvirus/yxc/workflows/Node.js%20CI/badge.svg)
@@ -34,10 +34,12 @@ const result = schema({
   age: 32,
 });
 console.log(result);
+//
 // {
 //   ok: true,
 //   errors: []
 // }
+//
 
 const result = schema({
   id: 52165,
@@ -45,6 +47,7 @@ const result = schema({
   age: -5,
 });
 console.log(result);
+//
 // {
 //   ok: false,
 //   errors: [
@@ -53,6 +56,7 @@ console.log(result);
 //     }
 //   ]
 // }
+//
 ```
 
 Validate a union type
@@ -110,10 +114,37 @@ console.log(
     releaseYear: 2015,
   }).errors,
 );
+//
 // [
 //   {
 //     key: ['songs'],
 //     message: 'Must not be empty'
 //   }
 // ]
+//
+```
+
+Infer a schema type (Typescript only!)
+
+| `NOTE` | Turn on 'strictNullChecks' in your tsconfig.json, otherwise values may not be inferred correctly. |
+| ------ | ------------------------------------------------------------------------------------------------- |
+
+
+```typescript
+import yxc, { Infer } from "@dotvirus/yxc";
+
+const songSchema = yxc.object({
+  title: yxc.string().notEmpty(),
+  duration: yxc.number().positive().int(),
+  rating: yxc.number().positive().int().nullable(),
+});
+
+type Song = Infer<typeof songSchema>;
+//
+// type Song = {
+//   title: string;
+//   duration: number;
+//   rating: number | null;
+// }
+//
 ```

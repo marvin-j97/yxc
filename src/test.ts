@@ -11,3 +11,10 @@ const schema = yxc.object({
 });
 
 type SchemaType = Infer<typeof schema>;
+
+const songSchema = yxc.object({
+  title: yxc.string().notEmpty(),
+  duration: yxc.number().positive().int(),
+});
+
+type Song = Infer<typeof songSchema>;
