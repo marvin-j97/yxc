@@ -31,28 +31,20 @@ export class RecordHandler<T extends Handler> extends Handler {
     return new UnionHandler([this, new OptionalHandler()]);
   }
 
-  any(
-    pred: (v: Record<string, Infer<T>>, k: string, obj: any) => boolean,
-  ): this {
+  any(pred: (v: Infer<T>, k: string, obj: any) => boolean): this {
     return this.some(pred);
   }
 
-  all(
-    pred: (v: Record<string, Infer<T>>, k: string, obj: any) => boolean,
-  ): this {
+  all(pred: (v: Infer<T>, k: string, obj: any) => boolean): this {
     return this.every(pred);
   }
 
-  some(
-    pred: (v: Record<string, Infer<T>>, k: string, obj: any) => boolean,
-  ): this {
+  some(pred: (v: Infer<T>, k: string, obj: any) => boolean): this {
     this._rules.push((o) => Object.keys(o).some((k) => pred(o[k], k, o)));
     return this;
   }
 
-  every(
-    pred: (v: Record<string, Infer<T>>, k: string, obj: any) => boolean,
-  ): this {
+  every(pred: (v: Infer<T>, k: string, obj: any) => boolean): this {
     this._rules.push((o) => Object.keys(o).every((k) => pred(o[k], k, o)));
     return this;
   }

@@ -39,20 +39,20 @@ export class ObjectHandler<T extends Record<string, Handler>> extends Handler {
     return new UnionHandler([this, new OptionalHandler()]);
   }
 
-  any(pred: (v: InferredObject<T>, k: string, obj: any) => boolean): this {
+  any(pred: (v: unknown, k: string, obj: any) => boolean): this {
     return this.some(pred);
   }
 
-  all(pred: (v: InferredObject<T>, k: string, obj: any) => boolean): this {
+  all(pred: (v: unknown, k: string, obj: any) => boolean): this {
     return this.every(pred);
   }
 
-  some(pred: (v: InferredObject<T>, k: string, obj: any) => boolean): this {
+  some(pred: (v: unknown, k: string, obj: any) => boolean): this {
     this._rules.push((o) => Object.keys(o).some((k) => pred(o[k], k, o)));
     return this;
   }
 
-  every(pred: (v: InferredObject<T>, k: string, obj: any) => boolean): this {
+  every(pred: (v: unknown, k: string, obj: any) => boolean): this {
     this._rules.push((o) => Object.keys(o).every((k) => pred(o[k], k, o)));
     return this;
   }
