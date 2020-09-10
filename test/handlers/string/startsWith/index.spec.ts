@@ -1,11 +1,11 @@
-import fixture from "./type.fixture";
+import fixture from "./fixture";
 import { expect } from "chai";
-import yxc, { createExecutableSchema } from "../../../src/index";
+import yxc, { createExecutableSchema } from "../../../../src/index";
 
-describe("String type check", () => {
+describe("String startsWith", () => {
   for (const test of fixture) {
-    const handler = yxc.string();
-    it(`${test.value} should be a ${
+    const handler = yxc.string().startsWith(test.prefix);
+    it(`${test.prefix} before ${test.value} should be a ${
       test.expected ? "valid" : "invalid"
     } string`, () => {
       const result = createExecutableSchema(handler)(test.value);

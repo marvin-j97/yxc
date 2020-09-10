@@ -1,4 +1,4 @@
-export default [
+export default (<[string, boolean][]>[
   ["", true],
   ["asdasdasd", true],
   ["15125125", true],
@@ -9,11 +9,11 @@ export default [
   [{ a: 2 }, false],
   [[2, 4, 56], false],
   [["dsad"], false],
-  [undefined, false],
+  [undefined, true],
   [4, false],
   [5.4, false],
   [NaN, false],
-].map((tuple) => ({
+]).map((tuple) => ({
   value: tuple[0],
   expected: tuple[1],
 }));

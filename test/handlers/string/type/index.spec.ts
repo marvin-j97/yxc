@@ -1,13 +1,13 @@
-import fixture from "./type.fixture";
+import fixture from "./fixture";
 import { expect } from "chai";
-import yxc, { createExecutableSchema } from "../../../src/index";
+import yxc, { createExecutableSchema } from "../../../../src/index";
 
-describe("Optional strings", () => {
+describe("String type check", () => {
   for (const test of fixture) {
     const handler = yxc.string();
     it(`${test.value} should be a ${
       test.expected ? "valid" : "invalid"
-    } optional string`, () => {
+    } string`, () => {
       const result = createExecutableSchema(handler)(test.value);
       if (test.expected) {
         expect(result.errors).to.be.empty;

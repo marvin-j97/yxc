@@ -25,10 +25,10 @@ export class StringHandler extends AtomicHandler<string> {
   }
 
   /**
-   * Alias for [[starsWith]]
+   * Alias for [[startsWith]]
    */
   prefix(substr: string): this {
-    return this.endsWith(substr);
+    return this.startsWith(substr);
   }
 
   /**
@@ -49,12 +49,14 @@ export class StringHandler extends AtomicHandler<string> {
    * ```
    */
   endsWith(substr: string): this {
-    this._rules.push((v) => v.endsWith(substr));
+    this._rules.push(
+      (v) => v.endsWith(substr) || `Value has to end with ${substr}`,
+    );
     return this;
   }
 
   /**
-   * Alias for [[starsWith]]
+   * Alias for [[startsWith]]
    */
   beginsWith(substr: string): this {
     return this.startsWith(substr);
@@ -71,7 +73,9 @@ export class StringHandler extends AtomicHandler<string> {
    * ```
    */
   startsWith(substr: string): this {
-    this._rules.push((v) => v.startsWith(substr));
+    this._rules.push(
+      (v) => v.startsWith(substr) || `Value has to start with ${substr}`,
+    );
     return this;
   }
 
