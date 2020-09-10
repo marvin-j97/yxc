@@ -2,20 +2,6 @@ import yxc from "../src/index";
 import { expect } from "chai";
 
 describe("Strings", () => {
-  const validStrings = ["a string", ""];
-  for (const string of validStrings) {
-    it("Should be a valid string", () => {
-      expect(yxc.string().validate(string)).to.have.length(0);
-    });
-  }
-
-  const invalidStrings = [4, true, null, undefined, false, [], {}, () => {}];
-  for (const value of invalidStrings) {
-    it("Should not be a valid string", () => {
-      expect(yxc.string().validate(value)).to.have.length(1);
-    });
-  }
-
   describe("Equals", () => {
     it("Should be equal", () => {
       expect(yxc.string().equals("test").validate("test")).to.have.length(0);

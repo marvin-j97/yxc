@@ -24,7 +24,7 @@ export function createExecutableSchema<T>(handler: Handler) {
   return (value: T) => {
     const result = handler.validate(value, [], value);
     return {
-      ok: !!result.length,
+      ok: !result.length,
       errors: result,
     };
   };
