@@ -1,7 +1,5 @@
-import debug from "debug";
 import { IValidationResult, Rule } from "../types";
-
-const log = debug("yxc");
+import { log } from "../log";
 
 /**
  * Abstract base handler

@@ -1,12 +1,9 @@
 import { Handler } from "./index";
 import { IValidationResult, ISchemaDefinition } from "../types";
-// import debug from "debug";
 import { UnionHandler } from "./union";
 import { NullHandler } from "./null";
 import { OptionalHandler } from "./optional";
 import { Infer } from "../index";
-
-// const log = debug("yxc"); // TODO: use logging
 
 export class ObjectHandler<T extends Record<string, Handler>> extends Handler {
   _type!: {

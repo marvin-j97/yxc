@@ -9,7 +9,7 @@
     "coverage": "nyc npm test",
     "postcoverage": "nyc report --reporter=json",
     "build": "tsc",
-    "test:verbose": "cross-env DEBUG=yxc npm test",
+    "test:verbose": "cross-env YXC_DEBUG=yxc npm test",
     "test": "mocha --exit -r ts-node/register test/**/*.spec.ts",
     "lint": "eslint src --ext .ts",
     "lint:fix": "eslint src --fix --ext .ts"
@@ -30,7 +30,6 @@
   ],
   "devDependencies": {
     "@types/chai": "^4.2.11",
-    "@types/debug": "^4.1.5",
     "@types/mocha": "^8.0.0",
     "@types/node": "^14.0.1",
     "@typescript-eslint/eslint-plugin": "^3.10.1",
@@ -45,7 +44,5 @@
     "typedoc": "^0.19.1",
     "typescript": "^4.0.2"
   },
-  "dependencies": {
-    "debug": "^4.1.1"
-  }
+  "dependencies": {}
 }
