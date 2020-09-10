@@ -3,9 +3,10 @@ import { IValidationResult } from "../types";
 import { UnionHandler } from "./union";
 import { NullHandler } from "./null";
 import { OptionalHandler } from "./optional";
+import { Infer } from "../index";
 
 export class ArrayHandler<T extends Handler> extends Handler {
-  _type!: Array<T["_type"]>;
+  _type!: Array<Infer<T>>;
 
   _handler: Handler;
 
@@ -38,12 +39,12 @@ export class ArrayHandler<T extends Handler> extends Handler {
   }
 
   some(pred: (v: T, i: number, arr: T[]) => boolean): ArrayHandler<T> {
-    this._rules.push((arr: Array<T["_type"]>) => arr.some(pred));
+    this._rules.push((arr: Array<Infer<T>>) => arr.some(pred));
     return this;
   }
 
   every(pred: (v: T, i: number, arr: T[]) => boolean): ArrayHandler<T> {
-    this._rules.push((arr: Array<T["_type"]>) => arr.every(pred));
+    this._rules.push((arr: Array<Infer<T>>) => arr.every(pred));
     return this;
   }
 
@@ -60,15 +61,13 @@ export class ArrayHandler<T extends Handler> extends Handler {
   }
 
   notEmpty(): ArrayHandler<T> {
-    this._rules.push(
-      (v: Array<T["_type"]>) => !!v.length || `Must not be empty`,
-    );
+    this._rules.push((v: Array<Infer<T>>) => !!v.length || `Must not be empty`);
     return this;
   }
 
   between(min: number, max: number): ArrayHandler<T> {
     this._rules.push(
-      (v: Array<T["_type"]>) =>
+      (v: Array<Infer<T>>) =>
         (v.length >= min && v.length <= max) ||
         `Must have between ${min} and ${max} items`,
     );
@@ -77,7 +76,7 @@ export class ArrayHandler<T extends Handler> extends Handler {
 
   min(min: number): ArrayHandler<T> {
     this._rules.push(
-      (v: Array<T["_type"]>) =>
+      (v: Array<Infer<T>>) =>
         v.length >= min || `Must have at least ${min} items`,
     );
     return this;
@@ -85,7 +84,7 @@ export class ArrayHandler<T extends Handler> extends Handler {
 
   max(max: number): ArrayHandler<T> {
     this._rules.push(
-      (v: Array<T["_type"]>) =>
+      (v: Array<Infer<T>>) =>
         v.length <= max || `Must have at most ${max} items`,
     );
     return this;
@@ -100,7 +99,7 @@ export class ArrayHandler<T extends Handler> extends Handler {
     const keyResults: IValidationResult[] = [];
 
     if (Array.isArray(value)) {
-      (<Array<T["_type"]>>value).forEach((v, i) => {
+      (<Array<Infer<T>>>value).forEach((v, i) => {
         const myKey = i.toString();
         const results = this._handler.validate(v, [...key, myKey], root);
         keyResults.push(...results);

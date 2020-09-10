@@ -4,11 +4,14 @@ import { UnionHandler } from "./union";
 import { NullHandler } from "./null";
 import { OptionalHandler } from "./optional";
 import { Infer } from "../index";
+import { isObject } from "../util";
+
+type InferredObject<T extends Record<string, Handler>> = {
+  [K in keyof T]: Infer<T[K]>;
+};
 
 export class ObjectHandler<T extends Record<string, Handler>> extends Handler {
-  _type!: {
-    [K in keyof T]: Infer<T[K]>;
-  };
+  _type!: InferredObject<T>;
 
   private _keys: ISchemaDefinition = {};
   private _arbitrary = false;
@@ -16,11 +19,7 @@ export class ObjectHandler<T extends Record<string, Handler>> extends Handler {
 
   constructor(keys?: ISchemaDefinition) {
     super();
-    this._rules.push(
-      (v) =>
-        (typeof v === "object" && !Array.isArray(v) && v !== null) ||
-        "Must be an object",
-    );
+    this._rules.push((v) => isObject(v) || "Must be an object");
     if (keys) {
       this._keys = keys;
     }
@@ -40,52 +39,20 @@ export class ObjectHandler<T extends Record<string, Handler>> extends Handler {
     return new UnionHandler([this, new OptionalHandler()]);
   }
 
-  any(
-    pred: (
-      v: {
-        [K in keyof T]: T[K]["_type"];
-      },
-      k: string,
-      obj: any,
-    ) => boolean,
-  ): this {
+  any(pred: (v: InferredObject<T>, k: string, obj: any) => boolean): this {
     return this.some(pred);
   }
 
-  all(
-    pred: (
-      v: {
-        [K in keyof T]: T[K]["_type"];
-      },
-      k: string,
-      obj: any,
-    ) => boolean,
-  ): this {
+  all(pred: (v: InferredObject<T>, k: string, obj: any) => boolean): this {
     return this.every(pred);
   }
 
-  some(
-    pred: (
-      v: {
-        [K in keyof T]: T[K]["_type"];
-      },
-      k: string,
-      obj: any,
-    ) => boolean,
-  ): this {
+  some(pred: (v: InferredObject<T>, k: string, obj: any) => boolean): this {
     this._rules.push((o) => Object.keys(o).some((k) => pred(o[k], k, o)));
     return this;
   }
 
-  every(
-    pred: (
-      v: {
-        [K in keyof T]: T[K]["_type"];
-      },
-      k: string,
-      obj: any,
-    ) => boolean,
-  ): this {
+  every(pred: (v: InferredObject<T>, k: string, obj: any) => boolean): this {
     this._rules.push((o) => Object.keys(o).every((k) => pred(o[k], k, o)));
     return this;
   }
