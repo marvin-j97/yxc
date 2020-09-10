@@ -2,12 +2,12 @@ import fixture from "./type.fixture";
 import { expect } from "chai";
 import yxc, { createExecutableSchema } from "../../../src/index";
 
-describe("String type check", () => {
+describe("Nullable strings", () => {
   for (const test of fixture) {
     const handler = yxc.string();
     it(`${test.value} should be a ${
       test.expected ? "valid" : "invalid"
-    } string`, () => {
+    } nullable string`, () => {
       const result = createExecutableSchema(handler)(test.value);
       if (test.expected) {
         expect(result.errors).to.be.empty;
