@@ -14,6 +14,7 @@ describe("Base handler custom function", () => {
         yxc.any().use(isSeven),
         yxc.any().test(isSeven),
         yxc.any().check(isSeven),
+        yxc.any().rule(isSeven),
       ];
 
       for (const handler of handlers) {

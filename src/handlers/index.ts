@@ -49,6 +49,14 @@ export abstract class Handler<T = any> {
   }
 
   /**
+   * Alias for [[custom]]
+   */
+  rule(rule: Rule<T>): Handler {
+    this.custom(rule);
+    return this;
+  }
+
+  /**
    * Add a custom function to test the value with
    *
    * ```typescript
