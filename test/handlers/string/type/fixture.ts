@@ -13,6 +13,8 @@ export default (<[string, boolean][]>[
   [4, false],
   [5.4, false],
   [NaN, false],
+  [false, false],
+  [true, false],
 ]).map((tuple) => ({
   value: tuple[0],
   expected: tuple[1],
