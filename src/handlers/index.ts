@@ -1,6 +1,6 @@
 import { Rule } from "../types";
 import debug from "debug";
-import { IValidationResult } from "../schema";
+import { IValidationResult } from "../types";
 
 const log = debug("yxc");
 

@@ -1,24 +1,6 @@
 import { Handler } from "./handlers/index";
-import { VoidFunc, Mutation } from "./types";
 import { ObjectHandler } from "./handlers/object";
-
-export interface IKeyOptions {
-  handler: Handler;
-  onBefore?: VoidFunc;
-  onAfter?: VoidFunc;
-  mutateBefore?: Mutation;
-  mutateAfter?: Mutation;
-  default?: Mutation;
-}
-
-export interface IValidationResult {
-  key: string[];
-  message: string | boolean;
-}
-
-export interface ISchemaDefinition {
-  [key: string]: Handler;
-}
+import { ISchemaDefinition, IValidationResult } from "./types";
 
 export function createExecutableSchema(handler: Handler) {
   return (value: unknown) => {

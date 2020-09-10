@@ -1,5 +1,5 @@
 import { Handler } from "./index";
-import { IValidationResult } from "../schema";
+import { IValidationResult } from "../types";
 // import debug from "debug";
 import { UnionHandler } from "./union";
 import { NullHandler } from "./null";

@@ -1,5 +1,5 @@
 import { Handler } from "./index";
-import { IValidationResult, ISchemaDefinition } from "../schema";
+import { IValidationResult, ISchemaDefinition } from "../types";
 // import debug from "debug";
 import { UnionHandler } from "./union";
 import { NullHandler } from "./null";

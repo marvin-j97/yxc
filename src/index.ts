@@ -1,33 +1,19 @@
 import { StringHandler } from "./handlers/string";
-import {
-  createSchema,
-  IKeyOptions,
-  ISchemaDefinition,
-  formatResult,
-  createExecutableSchema,
-} from "./schema";
+import { createSchema, formatResult, createExecutableSchema } from "./schema";
 import { ObjectHandler } from "./handlers/object";
 import { NumberHandler } from "./handlers/number";
 import { BooleanHandler } from "./handlers/boolean";
 import { ArrayHandler } from "./handlers/array";
 import { AnyHandler } from "./handlers/any";
 import { UnionHandler } from "./handlers/union";
-import { connect, koa, graphql } from "./middlewares";
 import { Handler } from "./handlers/index";
 import { NullHandler } from "./handlers/null";
 import { OptionalHandler } from "./handlers/optional";
 import { RecordHandler } from "./handlers/record";
+import { ISchemaDefinition, IValidationResult } from "./types";
 
-export { IKeyOptions, ISchemaDefinition };
-
-export {
-  createSchema,
-  formatResult,
-  createExecutableSchema,
-  connect,
-  koa,
-  graphql,
-};
+export { IValidationResult, ISchemaDefinition };
+export { createSchema, formatResult, createExecutableSchema };
 
 /**
  * Infers a type
