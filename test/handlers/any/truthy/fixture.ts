@@ -1,0 +1,21 @@
+export default (<[string, boolean][]>[
+  ["", false],
+  ["asdasdasd", true],
+  ["15125125", true],
+  ["qw4bqwb4qw4", true],
+  [":AW_EW_EWA_%§", true],
+  [null, false],
+  [{}, true],
+  [{ a: 2 }, true],
+  [[2, 4, 56], true],
+  [["dsad"], true],
+  [undefined, false],
+  [4, true],
+  [5.4, true],
+  [NaN, false],
+  [false, false],
+  [true, true],
+]).map((tuple) => ({
+  value: tuple[0],
+  expected: tuple[1],
+}));
