@@ -21,7 +21,7 @@ describe("Person schema tests", () => {
     };
 
     expect(Person().validate(person)).to.have.length(0);
-    expect(createExecutableSchema(Person())(person)).to.have.length(0);
+    expect(createExecutableSchema(Person())(person).errors).to.have.length(0);
   });
 
   it("Should have invalid first name", () => {
@@ -33,8 +33,8 @@ describe("Person schema tests", () => {
       gender: 0,
     };
     const result = createExecutableSchema(Person())(person);
-    expect(result).to.have.length(1);
-    expect(result[0].key).to.deep.equal(["firstName"]);
+    expect(result.errors).to.have.length(1);
+    expect(result.errors[0].key).to.deep.equal(["firstName"]);
   });
 
   it("Should have invalid first name", () => {
@@ -46,8 +46,8 @@ describe("Person schema tests", () => {
       gender: 2,
     };
     const result = createExecutableSchema(Person())(person);
-    expect(result).to.have.length(2);
-    expect(result[0].key).to.deep.equal(["ssn"]);
-    expect(result[1].key).to.deep.equal(["gender"]);
+    expect(result.errors).to.have.length(2);
+    expect(result.errors[0].key).to.deep.equal(["ssn"]);
+    expect(result.errors[1].key).to.deep.equal(["gender"]);
   });
 });

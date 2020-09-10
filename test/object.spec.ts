@@ -3,7 +3,7 @@ import { expect } from "chai";
 
 describe("Objects", () => {
   it("Should be a valid object", () => {
-    expect(createExecutableSchema(yxc.object())({})).to.have.length(0);
+    expect(createExecutableSchema(yxc.object())({}).errors).to.have.length(0);
   });
 
   const invalidObjects = [
@@ -19,7 +19,9 @@ describe("Objects", () => {
   ];
   for (const value of invalidObjects) {
     it("Should not be a valid object", () => {
-      expect(createExecutableSchema(yxc.object())(value)).to.have.length(1);
+      expect(createExecutableSchema(yxc.object())(value).errors).to.have.length(
+        1,
+      );
     });
   }
 
@@ -28,7 +30,7 @@ describe("Objects", () => {
       createExecutableSchema(yxc.object().arbitrary())({
         value: 4,
         test: "string",
-      })
+      }).errors,
     ).to.have.length(0);
   });
 
@@ -41,14 +43,14 @@ describe("Objects", () => {
     const partial = person().partial();
     it("Should not be a valid instance of schema", () => {
       expect(
-        createExecutableSchema(person())({ name: "name" })
+        createExecutableSchema(person())({ name: "name" }).errors,
       ).to.have.length.greaterThan(0);
     });
 
     it("Should be a valid instance of partial schema", () => {
-      expect(createExecutableSchema(partial)({ name: "name" })).to.have.length(
-        0
-      );
+      expect(
+        createExecutableSchema(partial)({ name: "name" }).errors,
+      ).to.have.length(0);
     });
   }
 
@@ -57,12 +59,12 @@ describe("Objects", () => {
       yxc
         .object()
         .arbitrary()
-        .every((v) => typeof v == "boolean")
+        .every((v) => typeof v == "boolean"),
     );
 
-    expect(schema({})).to.have.length(0);
-    expect(schema({ hey: true, no: 4 })).to.have.length(1);
-    expect(schema({ hey: true })).to.have.length(0);
+    expect(schema({}).errors).to.have.length(0);
+    expect(schema({ hey: true, no: 4 }).errors).to.have.length(1);
+    expect(schema({ hey: true }).errors).to.have.length(0);
   });
 
   it("Should check specific keys in arbitrary object", () => {
@@ -71,12 +73,12 @@ describe("Objects", () => {
         .object({
           name: yxc.string(),
         })
-        .arbitrary()
+        .arbitrary(),
     );
 
-    expect(schema({})).to.have.length(1);
-    expect(schema({ name: "str", no: 4 })).to.have.length(0);
-    expect(schema({ name: 2, no: 4 })).to.have.length(1);
-    expect(schema({ hey: true })).to.have.length(1);
+    expect(schema({}).errors).to.have.length(1);
+    expect(schema({ name: "str", no: 4 }).errors).to.have.length(0);
+    expect(schema({ name: 2, no: 4 }).errors).to.have.length(1);
+    expect(schema({ hey: true }).errors).to.have.length(1);
   });
 });

@@ -14,9 +14,9 @@ export function connect(
       const handler = new ObjectHandler(schema).arbitrary();
       const result = createExecutableSchema(handler)(req);
 
-      if (result.length) {
+      if (!result.ok) {
         log(`Validation fail, calling error middleware...`);
-        next(formatError ? formatError(result) : 400);
+        next(formatError ? formatError(result.errors) : 400);
       } else {
         log(`Validation success, calling next middleware...`);
         next();
@@ -41,9 +41,9 @@ export function koa(
     const handler = new ObjectHandler(schema).arbitrary();
     const result = createExecutableSchema(handler)(ctx);
 
-    if (result.length) {
+    if (!result.ok) {
       log(`Validation fail, calling error middleware...`);
-      ctx.throw(400, formatError ? formatError(result) : "Bad request");
+      ctx.throw(400, formatError ? formatError(result.errors) : "Bad request");
     } else {
       log(`Validation success, calling next middleware...`);
       return next();
@@ -72,9 +72,11 @@ export function graphql(
       const handler = new ObjectHandler(schema).arbitrary();
       const result = createExecutableSchema(handler)(args);
 
-      if (result.length) {
+      if (!result.ok) {
         log(`Validation fail, throwing error...`);
-        throw new Error(formatError ? formatError(result) : "BAD_REQUEST");
+        throw new Error(
+          formatError ? formatError(result.errors) : "BAD_REQUEST",
+        );
       } else {
         log(`Validation success, calling resolver...`);
         cb(parent, args, ctx, info);

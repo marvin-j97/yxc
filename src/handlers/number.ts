@@ -1,9 +1,26 @@
 import { AtomicHandler } from "./index";
+import { UnionHandler } from "./union";
+import { NullHandler } from "./null";
+import { OptionalHandler } from "./optional";
 
 export class NumberHandler extends AtomicHandler<number> {
   constructor() {
     super();
-    this._rules.push((v) => typeof v === "number" || "Must be a number");
+    this._rules.push(
+      (v: unknown) => typeof v === "number" || "Must be a number",
+    );
+  }
+
+  nullable(): UnionHandler<[this, NullHandler]> {
+    return new UnionHandler([this, new NullHandler()]);
+  }
+
+  optional(): UnionHandler<[this, OptionalHandler]> {
+    return new UnionHandler([this, new OptionalHandler()]);
+  }
+
+  int(): NumberHandler {
+    return this.integer();
   }
 
   integer(): NumberHandler {

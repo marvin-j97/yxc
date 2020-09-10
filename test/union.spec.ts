@@ -34,13 +34,13 @@ describe("Unions", () => {
 
   for (const valid of validIdObjects) {
     it("Should be a valid ID object", () => {
-      expect(schema(valid)).to.have.length(0);
+      expect(schema(valid).errors).to.have.length(0);
     });
   }
 
   for (const invalid of invalidIdObjects) {
     it("Should be a invalid ID object", () => {
-      expect(schema(invalid)).to.have.length.greaterThan(0);
+      expect(schema(invalid).errors).to.have.length.greaterThan(0);
     });
   }
 });

@@ -15,6 +15,8 @@ import { UnionHandler } from "./handlers/union";
 import { connect, koa, graphql } from "./middlewares";
 import { Handler } from "./handlers/index";
 import { NullHandler } from "./handlers/null";
+import { OptionalHandler } from "./handlers/optional";
+import { RecordHandler } from "./handlers/record";
 
 export { IKeyOptions, ISchemaDefinition };
 
@@ -27,15 +29,22 @@ export {
   graphql,
 };
 
+export type Infer<T extends Handler> = T["_type"];
+
 export default {
-  object: (schema?: ISchemaDefinition): ObjectHandler =>
+  object: <T extends ISchemaDefinition>(schema?: T): ObjectHandler<T> =>
     new ObjectHandler(schema),
+  record: <T extends Handler>(schema: T): RecordHandler<T> =>
+    new RecordHandler(schema),
   string: (): StringHandler => new StringHandler(),
   number: (): NumberHandler => new NumberHandler(),
   boolean: (): BooleanHandler => new BooleanHandler(),
-  array: <T = any>(handler: Handler): ArrayHandler<T> =>
+  array: <T extends Handler>(handler: T): ArrayHandler<T> =>
     new ArrayHandler<T>(handler),
   any: (): AnyHandler => new AnyHandler(),
-  union: (handlers: Handler[]): UnionHandler => new UnionHandler(handlers),
+  union: <T extends [Handler, Handler, ...Handler[]]>(handlers: T) =>
+    new UnionHandler(handlers),
   null: (): NullHandler => new NullHandler(),
+  optional: (): OptionalHandler => new OptionalHandler(),
+  undefined: (): OptionalHandler => new OptionalHandler(),
 };
