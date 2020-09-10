@@ -14,3 +14,18 @@ export interface IValidationResult {
 export interface ISchemaDefinition {
   [key: string]: Handler;
 }
+
+/**
+ * Infers a type
+ *
+ * ```typescript
+ * import yxc, { Infer } from "@dotvirus/yxc"
+ *
+ * const myObject = yxc.object({
+ *   name: yxc.string()
+ * });
+ *
+ * type MyType = Infer<typeof myObject>;
+ * ```
+ */
+export type Infer<T extends Handler> = T["_type"];

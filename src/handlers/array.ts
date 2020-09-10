@@ -10,7 +10,7 @@ export class ArrayHandler<T extends Handler> extends Handler {
 
   _handler: Handler;
 
-  constructor(handler: Handler) {
+  constructor(handler: T) {
     super();
     this._rules.push((v: unknown) => Array.isArray(v) || "Must be an array");
     this._handler = handler;

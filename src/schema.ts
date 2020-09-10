@@ -1,6 +1,6 @@
 import { Handler } from "./handlers/index";
 import { ObjectHandler } from "./handlers/object";
-import { ISchemaDefinition } from "./types";
+import { ISchemaDefinition, Infer } from "./types";
 
 export function createExecutableSchema(handler: Handler) {
   return (value: unknown) => {
@@ -14,4 +14,11 @@ export function createExecutableSchema(handler: Handler) {
 
 export function createSchema(def: ISchemaDefinition) {
   return createExecutableSchema(new ObjectHandler(def));
+}
+
+export function is<T extends Handler>(
+  value: unknown,
+  handler: T,
+): value is Infer<T> {
+  return createExecutableSchema(handler)(value).ok;
 }

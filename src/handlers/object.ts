@@ -1,9 +1,8 @@
 import { Handler } from "./index";
-import { IValidationResult, ISchemaDefinition } from "../types";
+import { IValidationResult, ISchemaDefinition, Infer } from "../types";
 import { UnionHandler } from "./union";
 import { NullHandler } from "./null";
 import { OptionalHandler } from "./optional";
-import { Infer } from "../index";
 import { isObject } from "../util";
 
 export class ObjectHandler<T extends Record<string, Handler>> extends Handler {
@@ -15,7 +14,7 @@ export class ObjectHandler<T extends Record<string, Handler>> extends Handler {
   private _arbitrary = false;
   private _partial = false;
 
-  constructor(keys?: ISchemaDefinition) {
+  constructor(keys?: T) {
     super();
     this._rules.push((v) => isObject(v) || "Must be an object");
     if (keys) {

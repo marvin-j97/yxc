@@ -1,5 +1,4 @@
 import { StringHandler } from "./handlers/string";
-import { createSchema, createExecutableSchema } from "./schema";
 import { ObjectHandler } from "./handlers/object";
 import { NumberHandler } from "./handlers/number";
 import { BooleanHandler } from "./handlers/boolean";
@@ -10,25 +9,7 @@ import { Handler } from "./handlers/index";
 import { NullHandler } from "./handlers/null";
 import { OptionalHandler } from "./handlers/optional";
 import { RecordHandler } from "./handlers/record";
-import { ISchemaDefinition, IValidationResult } from "./types";
-
-export { IValidationResult, ISchemaDefinition };
-export { createSchema, createExecutableSchema };
-
-/**
- * Infers a type
- *
- * ```typescript
- * import yxc, { Infer } from "@dotvirus/yxc"
- *
- * const myObject = yxc.object({
- *   name: yxc.string()
- * });
- *
- * type MyType = Infer<typeof myObject>;
- * ```
- */
-export type Infer<T extends Handler> = T["_type"];
+import { ISchemaDefinition } from "./types";
 
 export default {
   object: <T extends ISchemaDefinition>(schema?: T): ObjectHandler<T> =>
@@ -48,3 +29,6 @@ export default {
   optional: (): OptionalHandler => new OptionalHandler(),
   undefined: (): OptionalHandler => new OptionalHandler(),
 };
+
+export * from "./types";
+export * from "./schema";
