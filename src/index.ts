@@ -1,5 +1,5 @@
 import { StringHandler } from "./handlers/string";
-import { createSchema, formatResult, createExecutableSchema } from "./schema";
+import { createSchema, createExecutableSchema } from "./schema";
 import { ObjectHandler } from "./handlers/object";
 import { NumberHandler } from "./handlers/number";
 import { BooleanHandler } from "./handlers/boolean";
@@ -13,7 +13,7 @@ import { RecordHandler } from "./handlers/record";
 import { ISchemaDefinition, IValidationResult } from "./types";
 
 export { IValidationResult, ISchemaDefinition };
-export { createSchema, formatResult, createExecutableSchema };
+export { createSchema, createExecutableSchema };
 
 /**
  * Infers a type

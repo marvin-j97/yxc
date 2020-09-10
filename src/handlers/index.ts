@@ -1,6 +1,5 @@
-import { Rule } from "../types";
 import debug from "debug";
-import { IValidationResult } from "../types";
+import { IValidationResult, Rule } from "../types";
 
 const log = debug("yxc");
 
@@ -89,6 +88,7 @@ export abstract class Handler<T = any> {
         log("Rule failed!");
         results.push({ key: key || [], message: result });
         log("Rule result: " + result);
+        return results;
       } else {
         log("Rule passed!");
       }

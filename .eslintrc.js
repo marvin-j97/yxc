@@ -14,6 +14,5 @@ module.exports = {
   rules: {
     curly: "error",
     "@typescript-eslint/no-explicit-any": "off",
-    "no-useless-escape": "warn",
   },
 };
