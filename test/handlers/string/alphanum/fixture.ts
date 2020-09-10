@@ -1,0 +1,20 @@
+export default (<[string, boolean, boolean][]>[
+  ["", false, false],
+  ["2", false, true],
+  ["wrqwrqwr2525252", false, true],
+  ["523525asdasd", false, true],
+  ["asdasdasd", false, true],
+  ["15125125", false, true],
+  ["qw4bqwb4qw4", false, true],
+  [":AW_EW_EWA_%§", false, false],
+  ["wrqwrqw r2525252", false, false],
+  ["2 ", false, false],
+  ["wrqwrqw r2525252", true, true],
+  ["2 ", true, true],
+  ["a_", true, false],
+  ["a  b  4", true, true],
+]).map((tuple) => ({
+  value: tuple[0],
+  spaces: tuple[1],
+  expected: tuple[2],
+}));
