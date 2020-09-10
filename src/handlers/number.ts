@@ -29,6 +29,8 @@ export class NumberHandler extends AtomicHandler<number> {
     return new UnionHandler([this, new OptionalHandler()]);
   }
 
+  // TODO: .natural({ withZero: boolean }) -> .positive().integer()
+
   /**
    * Alias for [[integer]]
    */
