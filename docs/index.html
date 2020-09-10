@@ -1,0 +1,434 @@
+<!doctype html>
+<html class="default no-js">
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>@dotvirus/yxc</title>
+	<meta name="description" content="Documentation for @dotvirus/yxc">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="assets/css/main.css">
+</head>
+<body>
+<header>
+	<div class="tsd-page-toolbar">
+		<div class="container">
+			<div class="table-wrap">
+				<div class="table-cell" id="tsd-search" data-index="assets/js/search.json" data-base=".">
+					<div class="field">
+						<label for="tsd-search-field" class="tsd-widget search no-caption">Search</label>
+						<input id="tsd-search-field" type="text" />
+					</div>
+					<ul class="results">
+						<li class="state loading">Preparing search index...</li>
+						<li class="state failure">The search index is not available</li>
+					</ul>
+					<a href="index.html" class="title">@dotvirus/yxc</a>
+				</div>
+				<div class="table-cell" id="tsd-widgets">
+					<div id="tsd-filter">
+						<a href="#" class="tsd-widget options no-caption" data-toggle="options">Options</a>
+						<div class="tsd-filter-group">
+							<div class="tsd-select" id="tsd-filter-visibility">
+								<span class="tsd-select-label">All</span>
+								<ul class="tsd-select-list">
+									<li data-value="public">Public</li>
+									<li data-value="protected">Public/Protected</li>
+									<li data-value="private" class="selected">All</li>
+								</ul>
+							</div>
+							<input type="checkbox" id="tsd-filter-inherited" checked />
+							<label class="tsd-widget" for="tsd-filter-inherited">Inherited</label>
+							<input type="checkbox" id="tsd-filter-externals" checked />
+							<label class="tsd-widget" for="tsd-filter-externals">Externals</label>
+							<input type="checkbox" id="tsd-filter-only-exported" />
+							<label class="tsd-widget" for="tsd-filter-only-exported">Only exported</label>
+						</div>
+					</div>
+					<a href="#" class="tsd-widget menu no-caption" data-toggle="menu">Menu</a>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="tsd-page-title">
+		<div class="container">
+			<ul class="tsd-breadcrumb">
+				<li>
+					<a href="globals.html">Globals</a>
+				</li>
+			</ul>
+			<h1>@dotvirus/yxc</h1>
+		</div>
+	</div>
+</header>
+<div class="container container-main">
+	<div class="row">
+		<div class="col-8 col-content">
+			<div class="tsd-panel tsd-typography">
+				<p><a href="https://badge.fury.io/js/%40dotvirus%2Fyxc"><img src="https://badge.fury.io/js/%40dotvirus%2Fyxc.svg" alt="npm version"></a>
+				<img src="https://github.com/dotvirus/yxc/workflows/Node.js%20CI/badge.svg" alt="Node.js CI"></p>
+				<a href="#yxc" id="yxc" style="color: inherit; text-decoration: none;">
+					<h1>yxc</h1>
+				</a>
+				<p>Schema validation with composition &amp; API middlewares</p>
+				<pre><code><span class="hljs-built_in">npm</span> i @dotvirus/yxc</code></pre>
+				<a href="#create-amp-validate-a-schema" id="create-amp-validate-a-schema" style="color: inherit; text-decoration: none;">
+					<h1>Create &amp; validate a schema</h1>
+				</a>
+				<pre><code class="language-typescript"><span class="hljs-keyword">import</span> yxc, { createSchema } <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;@dotvirus/yxc&quot;</span>;
+<span class="hljs-comment">// or const yxc = require(&quot;@dotvirus/yxc&quot;).default;</span>
+<span class="hljs-comment">//    const { createSchema } = require(&quot;@dotvirus/yxc&quot;);</span>
+
+<span class="hljs-comment">// Create a schema using the createSchema utility</span>
+<span class="hljs-comment">// Properties are *required* by default, unless specified otherwise (.optional(), .nullable())</span>
+<span class="hljs-keyword">const</span> Album = createSchema({
+  title: yxc.string(),
+  artist: yxc.string(),
+  songCount: yxc.number().min(<span class="hljs-number">1</span>),
+  releaseYear: yxc.number().nullable(),
+  genres: yxc.array(yxc.string().max(<span class="hljs-number">30</span>)),
+});
+
+<span class="hljs-comment">// Our object to validate</span>
+<span class="hljs-keyword">const</span> faith = {
+  title: <span class="hljs-string">&quot;Faith&quot;</span>,
+  artist: <span class="hljs-string">&quot;The Cure&quot;</span>,
+  songCount: <span class="hljs-number">8</span>,
+  releaseYear: <span class="hljs-number">1981</span>,
+  genres: [<span class="hljs-string">&quot;Post punk&quot;</span>, <span class="hljs-string">&quot;Gothic rock&quot;</span>],
+};
+
+{
+  <span class="hljs-comment">// createSchema returns a function to validate anything with</span>
+  <span class="hljs-comment">// The result is an array of invalid properties in the input</span>
+  <span class="hljs-comment">// If the result array is empty, the object is a valid instance of the provided schema</span>
+  <span class="hljs-keyword">const</span> result = Album(faith);
+  <span class="hljs-built_in">console</span>.log(result); <span class="hljs-comment">// -&gt; []</span>
+}
+
+{
+  <span class="hljs-keyword">const</span> result = Album({ name: <span class="hljs-string">&quot;Invalid&quot;</span> });
+  <span class="hljs-built_in">console</span>.log(result);
+  <span class="hljs-comment">// [</span>
+  <span class="hljs-comment">//   { key: [ &#x27;name&#x27; ], message: &#x27;Value not allowed&#x27; },</span>
+  <span class="hljs-comment">//   { key: [ &#x27;title&#x27; ], message: &#x27;Value required&#x27; },</span>
+  <span class="hljs-comment">//   { key: [ &#x27;artist&#x27; ], message: &#x27;Value required&#x27; },</span>
+  <span class="hljs-comment">//   { key: [ &#x27;songCount&#x27; ], message: &#x27;Value required&#x27; },</span>
+  <span class="hljs-comment">//   { key: [ &#x27;releaseYear&#x27; ], message: &#x27;Value required&#x27; },</span>
+  <span class="hljs-comment">//   { key: [ &#x27;genres&#x27; ], message: &#x27;Value required&#x27; }</span>
+  <span class="hljs-comment">// ]</span>
+}</code></pre>
+				<a href="#handlers" id="handlers" style="color: inherit; text-decoration: none;">
+					<h1>Handlers</h1>
+				</a>
+				<a href="#yxcobjectkeys" id="yxcobjectkeys" style="color: inherit; text-decoration: none;">
+					<h4>yxc.object(keys?):</h4>
+				</a>
+				<p>Require an object - the object constructor can receive a dictionary of yxc handlers to check keys with.</p>
+				<a href="#yxcstring" id="yxcstring" style="color: inherit; text-decoration: none;">
+					<h4>yxc.string:</h4>
+				</a>
+				<p>Require a string</p>
+				<a href="#yxcnumber" id="yxcnumber" style="color: inherit; text-decoration: none;">
+					<h4>yxc.number:</h4>
+				</a>
+				<p>Require a number, add .integer() for integers only</p>
+				<a href="#yxcboolean" id="yxcboolean" style="color: inherit; text-decoration: none;">
+					<h4>yxc.boolean:</h4>
+				</a>
+				<p>Require a boolean</p>
+				<a href="#yxcarrayhandler" id="yxcarrayhandler" style="color: inherit; text-decoration: none;">
+					<h4>yxc.array(handler!):</h4>
+				</a>
+				<p>Require an array - the array constructor requires a handler that describes what the array contains</p>
+				<a href="#yxcany" id="yxcany" style="color: inherit; text-decoration: none;">
+					<h4>yxc.any()</h4>
+				</a>
+				<p>Require something - use .use() to narrow down what this value should be</p>
+				<a href="#yxcunionhandlers" id="yxcunionhandlers" style="color: inherit; text-decoration: none;">
+					<h4>yxc.union(handlers!)</h4>
+				</a>
+				<p>Require something that matches any of the given types</p>
+				<a href="#custom-functions" id="custom-functions" style="color: inherit; text-decoration: none;">
+					<h1>Custom functions</h1>
+				</a>
+				<pre><code class="language-typescript"><span class="hljs-keyword">const</span> prefix = <span class="hljs-function">(<span class="hljs-params">prefix: <span class="hljs-built_in">string</span></span>) =&gt;</span> (str: <span class="hljs-built_in">string</span>) =&gt; str.startsWith(prefix);
+
+<span class="hljs-comment">// Require &#x27;description&#x27; to start with &#x27;Hello! &#x27;</span>
+<span class="hljs-keyword">const</span> MySchema = createSchema({
+  description: yxc.string().use(prefix(<span class="hljs-string">&quot;Hello! &quot;</span>)),
+});</code></pre>
+				<a href="#schema-composition" id="schema-composition" style="color: inherit; text-decoration: none;">
+					<h1>Schema composition</h1>
+				</a>
+				<pre><code class="language-typescript"><span class="hljs-comment">// Create a validation handler</span>
+<span class="hljs-comment">// Note that this does not return a function,</span>
+<span class="hljs-comment">// so it can be used in another schema to compose more complex schemas</span>
+<span class="hljs-keyword">const</span> Song = yxc.object({
+  name: yxc.string().notEmpty(),
+  titleTrack: {
+    handler: yxc.boolean(),
+    <span class="hljs-keyword">default</span>: <span class="hljs-function">() =&gt;</span> <span class="hljs-literal">false</span>,
+  },
+  duration: yxc.number().min(<span class="hljs-number">1</span>),
+});
+
+<span class="hljs-comment">// If you really wanted to validate a single song, use:</span>
+<span class="hljs-keyword">const</span> songValidator = createExecutableSchema(Song);
+<span class="hljs-comment">// This creates/curries a function you can validate your input with.</span>
+<span class="hljs-built_in">console</span>.log(songValidator({ name: <span class="hljs-string">&quot;My song&quot;</span> })); <span class="hljs-comment">// -&gt; not valid</span>
+
+<span class="hljs-comment">// createSchema(schema) is a shortcut for createExecutableSchema(yxc.object(schema))</span>
+
+<span class="hljs-comment">// Compose the Album schema with &quot;tracklist&quot; being an array of Songs</span>
+<span class="hljs-keyword">const</span> Album = createSchema({
+  title: yxc.string(),
+  artist: yxc.string(),
+  tracklist: yxc.array(Song).notEmpty(),
+  releaseYear: yxc.number().nullable(),
+  genres: yxc.array(yxc.string()),
+});
+
+{
+  <span class="hljs-keyword">const</span> result = Album({
+    title: <span class="hljs-string">&quot;Faith&quot;</span>,
+    artist: <span class="hljs-string">&quot;The Cure&quot;</span>,
+    tracklist: [],
+    releaseYear: <span class="hljs-number">1981</span>,
+    genres: [<span class="hljs-string">&quot;Post punk&quot;</span>, <span class="hljs-string">&quot;Gothic rock&quot;</span>],
+  });
+  <span class="hljs-built_in">console</span>.log(result); <span class="hljs-comment">// -&gt; [ { key: [ &#x27;tracklist&#x27; ], message: &#x27;Must not be empty&#x27; } ]</span>
+}
+
+{
+  <span class="hljs-keyword">const</span> faith = {
+    title: <span class="hljs-string">&quot;Faith&quot;</span>,
+    artist: <span class="hljs-string">&quot;The Cure&quot;</span>,
+    tracklist: [
+      {
+        name: <span class="hljs-string">&quot;The Holy Hour&quot;</span>,
+        duration: <span class="hljs-number">123</span>,
+      },
+      {
+        name: <span class="hljs-string">&quot;Primary&quot;</span>,
+        duration: <span class="hljs-number">123</span>,
+      },
+      {
+        name: <span class="hljs-string">&quot;Other Voices&quot;</span>,
+        duration: <span class="hljs-number">123</span>,
+      },
+      {
+        name: <span class="hljs-string">&quot;All Cats Are Grey&quot;</span>,
+        duration: <span class="hljs-number">123</span>,
+      },
+      {
+        name: <span class="hljs-string">&quot;The Funeral Party&quot;</span>,
+        duration: <span class="hljs-number">123</span>,
+      },
+      {
+        name: <span class="hljs-string">&quot;Doubt&quot;</span>,
+        duration: <span class="hljs-number">123</span>,
+      },
+      {
+        name: <span class="hljs-string">&quot;The Drowning Man&quot;</span>,
+        duration: <span class="hljs-number">123</span>,
+      },
+      {
+        name: <span class="hljs-string">&quot;Faith&quot;</span>,
+        titleTrack: <span class="hljs-literal">true</span>,
+        duration: <span class="hljs-number">123</span>,
+      },
+    ],
+    releaseYear: <span class="hljs-number">1981</span>,
+    genres: [<span class="hljs-string">&quot;Post punk&quot;</span>, <span class="hljs-string">&quot;Gothic rock&quot;</span>],
+  };
+  <span class="hljs-keyword">const</span> result = Album(faith);
+  <span class="hljs-built_in">console</span>.log(result); <span class="hljs-comment">// -&gt; [] -- Valid!</span>
+  <span class="hljs-built_in">console</span>.log(faith.tracklist.find(<span class="hljs-function">(<span class="hljs-params">t</span>) =&gt;</span> t.titleTrack).name); <span class="hljs-comment">// -&gt; &quot;Faith&quot;</span>
+  <span class="hljs-comment">// All the other songs have titleTrack = false, even though they were never provided originally</span>
+  <span class="hljs-comment">// Note that default values and mutations should be used with care as they mutate the input state</span>
+}</code></pre>
+				<a href="#format-result" id="format-result" style="color: inherit; text-decoration: none;">
+					<h1>Format result</h1>
+				</a>
+				<pre><code class="language-typescript"><span class="hljs-comment">// Let&#x27;s take another look at the result array.</span>
+<span class="hljs-comment">// Take the example schemas from above:</span>
+
+<span class="hljs-keyword">const</span> result = Album({
+  title: <span class="hljs-string">&quot;Faith&quot;</span>,
+  artist: <span class="hljs-string">&quot;The Cure&quot;</span>,
+  tracklist: [
+    {
+      name: <span class="hljs-string">&quot;The Holy Hour&quot;</span>,
+    },
+    {
+      name: <span class="hljs-string">&quot;Primary&quot;</span>,
+    },
+    {
+      name: <span class="hljs-string">&quot;Other Voices&quot;</span>,
+    },
+    {
+      name: <span class="hljs-string">&quot;All Cats Are Grey&quot;</span>,
+    },
+    {
+      name: <span class="hljs-string">&quot;The Funeral Party&quot;</span>,
+    },
+    {
+      name: <span class="hljs-string">&quot;Doubt&quot;</span>,
+    },
+    {
+      name: <span class="hljs-string">&quot;The Drowning Man&quot;</span>,
+    },
+    {
+      name: <span class="hljs-string">&quot;Faith&quot;</span>,
+      titleTrack: <span class="hljs-literal">true</span>,
+    },
+  ],
+  releaseYear: <span class="hljs-number">1981</span>,
+  genres: [<span class="hljs-string">&quot;Post punk&quot;</span>, <span class="hljs-string">&quot;Gothic rock&quot;</span>],
+});
+<span class="hljs-built_in">console</span>.log(result);
+<span class="hljs-comment">// [</span>
+<span class="hljs-comment">//   { key: [ &#x27;tracklist&#x27;, &#x27;0&#x27;, &#x27;duration&#x27; ], message: &#x27;Value required&#x27; },</span>
+<span class="hljs-comment">//   { key: [ &#x27;tracklist&#x27;, &#x27;1&#x27;, &#x27;duration&#x27; ], message: &#x27;Value required&#x27; },</span>
+<span class="hljs-comment">//   { key: [ &#x27;tracklist&#x27;, &#x27;2&#x27;, &#x27;duration&#x27; ], message: &#x27;Value required&#x27; },</span>
+<span class="hljs-comment">//   { key: [ &#x27;tracklist&#x27;, &#x27;3&#x27;, &#x27;duration&#x27; ], message: &#x27;Value required&#x27; },</span>
+<span class="hljs-comment">//   { key: [ &#x27;tracklist&#x27;, &#x27;4&#x27;, &#x27;duration&#x27; ], message: &#x27;Value required&#x27; },</span>
+<span class="hljs-comment">//   { key: [ &#x27;tracklist&#x27;, &#x27;5&#x27;, &#x27;duration&#x27; ], message: &#x27;Value required&#x27; },</span>
+<span class="hljs-comment">//   { key: [ &#x27;tracklist&#x27;, &#x27;6&#x27;, &#x27;duration&#x27; ], message: &#x27;Value required&#x27; },</span>
+<span class="hljs-comment">//   { key: [ &#x27;tracklist&#x27;, &#x27;7&#x27;, &#x27;duration&#x27; ], message: &#x27;Value required&#x27; }</span>
+<span class="hljs-comment">// ]</span>
+<span class="hljs-comment">// Yikes, we forgot the durations. This is also getting pretty messy.</span>
+<span class="hljs-comment">// However, there is an utility function to format the result array:</span>
+
+<span class="hljs-keyword">import</span> { formatResult } <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;@dotvirus/yxc&quot;</span>;
+<span class="hljs-built_in">console</span>.log(formatResult(result));
+<span class="hljs-comment">// [</span>
+<span class="hljs-comment">//   &#x27;tracklist.0.duration: Value required&#x27;,</span>
+<span class="hljs-comment">//   &#x27;tracklist.1.duration: Value required&#x27;,</span>
+<span class="hljs-comment">//   &#x27;tracklist.2.duration: Value required&#x27;,</span>
+<span class="hljs-comment">//   &#x27;tracklist.3.duration: Value required&#x27;,</span>
+<span class="hljs-comment">//   &#x27;tracklist.4.duration: Value required&#x27;,</span>
+<span class="hljs-comment">//   &#x27;tracklist.5.duration: Value required&#x27;,</span>
+<span class="hljs-comment">//   &#x27;tracklist.6.duration: Value required&#x27;,</span>
+<span class="hljs-comment">//   &#x27;tracklist.7.duration: Value required&#x27;</span>
+<span class="hljs-comment">// ]</span></code></pre>
+				<a href="#use-as-expressconnect-middleware" id="use-as-expressconnect-middleware" style="color: inherit; text-decoration: none;">
+					<h1>Use as Express/connect middleware</h1>
+				</a>
+				<pre><code class="language-typescript"><span class="hljs-keyword">import</span> { connect } <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;@dotvirus/yxc&quot;</span>;
+
+<span class="hljs-keyword">const</span> app = express();
+
+app.post(<span class="hljs-string">&quot;/song&quot;</span>, connect({ body: Song }), createSong);</code></pre>
+				<a href="#custom-error-handler" id="custom-error-handler" style="color: inherit; text-decoration: none;">
+					<h3>Custom error handler</h3>
+				</a>
+				<p>By default, on validation fail, the middleware calls next(400).
+					This can be adjusted using a custom error formatter as the 2nd argument.
+				The input is the validation result array.</p>
+				<pre><code class="language-typescript"><span class="hljs-keyword">import</span> { connect } <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;@dotvirus/yxc&quot;</span>;
+
+<span class="hljs-keyword">const</span> app = express();
+
+app.post(
+  <span class="hljs-string">&quot;/song&quot;</span>,
+  connect({ body: Song }, <span class="hljs-function">(<span class="hljs-params">result</span>) =&gt;</span> <span class="hljs-string">&quot;Bad request!&quot;</span>),
+  createSong
+);
+<span class="hljs-comment">// -&gt; Calls next(&quot;Bad request!&quot;) on validation fail</span></code></pre>
+			</div>
+		</div>
+		<div class="col-4 col-menu menu-sticky-wrap menu-highlight">
+			<nav class="tsd-navigation primary">
+				<ul>
+					<li class="globals  ">
+						<a href="globals.html"><em>Globals</em></a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/_handlers_any_.html">&quot;handlers/any&quot;</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/_handlers_array_.html">&quot;handlers/array&quot;</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/_handlers_atomic_.html">&quot;handlers/atomic&quot;</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/_handlers_boolean_.html">&quot;handlers/boolean&quot;</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/_handlers_index_.html">&quot;handlers/index&quot;</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/_handlers_null_.html">&quot;handlers/null&quot;</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/_handlers_number_.html">&quot;handlers/number&quot;</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/_handlers_object_.html">&quot;handlers/object&quot;</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/_handlers_optional_.html">&quot;handlers/optional&quot;</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/_handlers_record_.html">&quot;handlers/record&quot;</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/_handlers_string_.html">&quot;handlers/string&quot;</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/_handlers_union_.html">&quot;handlers/union&quot;</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/_index_.html">&quot;index&quot;</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/_middlewares_.html">&quot;middlewares&quot;</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/_schema_.html">&quot;schema&quot;</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/_test_.html">&quot;test&quot;</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/_types_.html">&quot;types&quot;</a>
+					</li>
+				</ul>
+			</nav>
+			<nav class="tsd-navigation secondary menu-sticky">
+				<ul class="before-current">
+				</ul>
+			</nav>
+		</div>
+	</div>
+</div>
+<footer class="with-border-bottom">
+	<div class="container">
+		<h2>Legend</h2>
+		<div class="tsd-legend-group">
+			<ul class="tsd-legend">
+				<li class="tsd-kind-variable"><span class="tsd-kind-icon">Variable</span></li>
+				<li class="tsd-kind-function"><span class="tsd-kind-icon">Function</span></li>
+				<li class="tsd-kind-function tsd-has-type-parameter"><span class="tsd-kind-icon">Function with type parameter</span></li>
+				<li class="tsd-kind-type-alias"><span class="tsd-kind-icon">Type alias</span></li>
+				<li class="tsd-kind-type-alias tsd-has-type-parameter"><span class="tsd-kind-icon">Type alias with type parameter</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-class"><span class="tsd-kind-icon">Class</span></li>
+				<li class="tsd-kind-class tsd-has-type-parameter"><span class="tsd-kind-icon">Class with type parameter</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-interface"><span class="tsd-kind-icon">Interface</span></li>
+			</ul>
+		</div>
+	</div>
+</footer>
+<div class="container tsd-generator">
+	<p>Generated using <a href="https://typedoc.org/" target="_blank">TypeDoc</a></p>
+</div>
+<div class="overlay"></div>
+<script src="assets/js/main.js"></script>
+</body>
+</html>

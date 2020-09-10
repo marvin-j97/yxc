@@ -1,7 +1,8 @@
-import { AtomicHandler } from "./index";
+import { AtomicHandler } from "./atomic";
 import { UnionHandler } from "./union";
 import { NullHandler } from "./null";
 import { OptionalHandler } from "./optional";
+import { isEmail } from "../email";
 
 export class StringHandler extends AtomicHandler<string> {
   constructor() {
@@ -9,81 +10,158 @@ export class StringHandler extends AtomicHandler<string> {
     this._rules.push((v) => typeof v === "string" || "Must be a string");
   }
 
+  /**
+   * Allows null value
+   */
   nullable(): UnionHandler<[this, NullHandler]> {
     return new UnionHandler([this, new NullHandler()]);
   }
 
+  /**
+   * Allows undefined value
+   */
   optional(): UnionHandler<[this, OptionalHandler]> {
     return new UnionHandler([this, new OptionalHandler()]);
   }
 
-  endsWith(substr: string): StringHandler {
+  /**
+   * Alias for [[starsWith]]
+   */
+  prefix(substr: string): this {
+    return this.endsWith(substr);
+  }
+
+  /**
+   * Alias for [[endsWith]]
+   */
+  suffix(substr: string): this {
+    return this.endsWith(substr);
+  }
+
+  /**
+   * Check ending of a string
+   *
+   * ```typescript
+   * import yxc from "@dotvirus/yxc"
+   *
+   * yxc.string().endsWith("pusher").validate("test") // -> Fails
+   * yxc.string().endsWith("pusher").validate("Squarepusher") // -> OK
+   * ```
+   */
+  endsWith(substr: string): this {
     this._rules.push((v) => v.endsWith(substr));
     return this;
   }
 
-  beginsWith(substr: string): StringHandler {
+  /**
+   * Alias for [[starsWith]]
+   */
+  beginsWith(substr: string): this {
     return this.startsWith(substr);
   }
 
-  startsWith(substr: string): StringHandler {
+  /**
+   * Check beginning of a string
+   *
+   * ```typescript
+   * import yxc from "@dotvirus/yxc"
+   *
+   * yxc.string().startsWith("pusher").validate("Squarepusher") // -> Fails
+   * yxc.string().startsWith("Squ").validate("Squarepusher") // -> OK
+   * ```
+   */
+  startsWith(substr: string): this {
     this._rules.push((v) => v.startsWith(substr));
     return this;
   }
 
-  email(): StringHandler {
-    const emailRegex = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-    this._rules.push((v) => emailRegex.test(v) || `Must be a valid email`);
+  /**
+   * Check if string is an email
+   */
+  email(): this {
+    this._rules.push((v) => isEmail(v) || `Must be a valid email`);
     return this;
   }
 
-  numeric(): StringHandler {
+  /**
+   * Fails if string contains non-number (0-9) values
+   */
+  numeric(): this {
     const regexp = /[^0-9]/;
     this._rules.push((v) => !regexp.test(v) || `Must be numeric`);
     return this;
   }
 
-  alphanum(allowSpaces?: boolean): StringHandler {
+  /**
+   * Only allow alphanumeric values
+   *
+   * @param allowSpaces Allow spaces
+   */
+  alphanum(allowSpaces?: boolean): this {
     const regexp = allowSpaces ? /[^a-zA-Z0-9 ]/ : /[^a-zA-Z0-9]/;
     this._rules.push((v) => !regexp.test(v) || `Must be alphanumeric`);
     return this;
   }
 
-  regex(regexp: RegExp): StringHandler {
+  /**
+   * Check a regex
+   */
+  regex(regexp: RegExp): this {
     this._rules.push(
       (v: string) => regexp.test(v) || `Does not match ${regexp.toString()}`,
     );
     return this;
   }
 
-  match(regexp: RegExp): StringHandler {
+  /**
+   * Alias for [[regex]]
+   */
+  match(regexp: RegExp): this {
     return this.regex(regexp);
   }
 
-  pattern(regexp: RegExp): StringHandler {
+  /**
+   * Alias for [[regex]]
+   */
+  pattern(regexp: RegExp): this {
     return this.regex(regexp);
   }
 
-  length(num: number): StringHandler {
+  /**
+   * Test string length
+   */
+  length(num: number): this {
     this._rules.push(
       (v: string) => v.length == num || `Must be of length ${num}`,
     );
     return this;
   }
 
-  len(num: number): StringHandler {
+  /**
+   * Alias for [[length]]
+   */
+  len(num: number): this {
     return this.length(num);
   }
 
+  /**
+   * Require string to have at least 1 character
+   */
   notEmpty(): StringHandler {
     return this.min(1);
   }
 
-  between(min: number, max: number): StringHandler {
+  /**
+   * Require string to have a length between min and max
+   */
+  between(min: number, max: number): this {
     return this.min(min).max(max);
   }
 
-  min(min: number): StringHandler {
+  /**
+   * Require minimum string length
+   */
+  min(min: number): this {
     this._rules.push(
       (v: string) =>
         v.length >= min || `Must be at least ${min} characters long`,
@@ -91,7 +169,10 @@ export class StringHandler extends AtomicHandler<string> {
     return this;
   }
 
-  max(max: number): StringHandler {
+  /**
+   * Limit string length
+   */
+  max(max: number): this {
     this._rules.push(
       (v: string) => v.length <= max || `Must have at most ${max} characters`,
     );

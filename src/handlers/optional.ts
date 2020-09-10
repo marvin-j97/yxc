@@ -10,6 +10,9 @@ export class OptionalHandler extends Handler {
     this._rules.push((v: unknown) => v === undefined || "Must be undefined");
   }
 
+  /**
+   * Allows null value
+   */
   nullable(): UnionHandler<[this, NullHandler]> {
     return new UnionHandler([this, new NullHandler()]);
   }

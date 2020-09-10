@@ -4,6 +4,9 @@ import { IValidationResult } from "../schema";
 
 const log = debug("yxc");
 
+/**
+ * Abstract base handler
+ */
 export abstract class Handler<T = any> {
   _type!: any;
 
@@ -24,26 +27,54 @@ export abstract class Handler<T = any> {
   //   return this;
   // }
 
+  /**
+   * Alias for [[custom]]
+   */
   test(rule: Rule<T>): Handler {
     this.custom(rule);
     return this;
   }
 
+  /**
+   * Alias for [[custom]]
+   */
   check(rule: Rule<T>): Handler {
     this.custom(rule);
     return this;
   }
 
+  /**
+   * Alias for [[custom]]
+   */
   use(rule: Rule<T>): Handler {
     this.custom(rule);
     return this;
   }
 
+  /**
+   * Add a custom function to test the value with
+   *
+   * ```typescript
+   * import yxc from "@dotvirus/yxc"
+   *
+   * yxc.string().test()
+   * ```
+   */
   custom(rule: Rule<T>): Handler {
     this._rules.push(rule);
     return this;
   }
 
+  /**
+   * Validate a value
+   * Returns a [[IValidationResult]] array
+   *
+   * ```typescript
+   * import yxc from "@dotvirus/yxc"
+   *
+   * yxc.string().validate(myValue)
+   * ```
+   */
   validate(
     value: unknown,
     key?: string[],
@@ -65,33 +96,5 @@ export abstract class Handler<T = any> {
 
     log(`Checked rules, ${results.length} errors`);
     return results;
-  }
-}
-
-export class AtomicHandler<T = string | number | boolean> extends Handler {
-  _type!: T;
-
-  equals(expected: T): this {
-    this._rules.push(
-      (v: T) => v === expected || `Must be equal to ${expected}`,
-    );
-    return this;
-  }
-
-  eq(expected: T): this {
-    return this.equals(expected);
-  }
-
-  equal(expected: T): this {
-    return this.equals(expected);
-  }
-
-  enum(values: T[]): this {
-    this._rules.push(
-      (v: T) =>
-        values.includes(v) ||
-        `Must be one of the following values: ${values.join(", ")}`,
-    );
-    return this;
   }
 }

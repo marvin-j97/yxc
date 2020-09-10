@@ -18,10 +18,16 @@ export class UnionHandler<
     });
   }
 
+  /**
+   * Allows null value
+   */
   nullable(): UnionHandler<[this, NullHandler]> {
     return new UnionHandler([this, new NullHandler()]);
   }
 
+  /**
+   * Allows undefined value
+   */
   optional(): UnionHandler<[this, OptionalHandler]> {
     return new UnionHandler([this, new OptionalHandler()]);
   }

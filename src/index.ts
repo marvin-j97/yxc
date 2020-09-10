@@ -29,6 +29,19 @@ export {
   graphql,
 };
 
+/**
+ * Infers a type
+ *
+ * ```typescript
+ * import yxc, { Infer } from "@dotvirus/yxc"
+ *
+ * const myObject = yxc.object({
+ *   name: yxc.string()
+ * });
+ *
+ * type MyType = Infer<typeof myObject>;
+ * ```
+ */
 export type Infer<T extends Handler> = T["_type"];
 
 export default {
@@ -42,6 +55,7 @@ export default {
   array: <T extends Handler>(handler: T): ArrayHandler<T> =>
     new ArrayHandler<T>(handler),
   any: (): AnyHandler => new AnyHandler(),
+  // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
   union: <T extends [Handler, Handler, ...Handler[]]>(handlers: T) =>
     new UnionHandler(handlers),
   null: (): NullHandler => new NullHandler(),

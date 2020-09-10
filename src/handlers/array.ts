@@ -11,14 +11,20 @@ export class ArrayHandler<T extends Handler> extends Handler {
 
   constructor(handler: Handler) {
     super();
-    this._rules.push((v: T["_type"]) => Array.isArray(v) || "Must be an array");
+    this._rules.push((v: unknown) => Array.isArray(v) || "Must be an array");
     this._handler = handler;
   }
 
+  /**
+   * Allows null value
+   */
   nullable(): UnionHandler<[this, NullHandler]> {
     return new UnionHandler([this, new NullHandler()]);
   }
 
+  /**
+   * Allows undefined value
+   */
   optional(): UnionHandler<[this, OptionalHandler]> {
     return new UnionHandler([this, new OptionalHandler()]);
   }
@@ -54,13 +60,15 @@ export class ArrayHandler<T extends Handler> extends Handler {
   }
 
   notEmpty(): ArrayHandler<T> {
-    this._rules.push((v: any[]) => !!v.length || `Must not be empty`);
+    this._rules.push(
+      (v: Array<T["_type"]>) => !!v.length || `Must not be empty`,
+    );
     return this;
   }
 
   between(min: number, max: number): ArrayHandler<T> {
     this._rules.push(
-      (v: any[]) =>
+      (v: Array<T["_type"]>) =>
         (v.length >= min && v.length <= max) ||
         `Must have between ${min} and ${max} items`,
     );
@@ -69,14 +77,16 @@ export class ArrayHandler<T extends Handler> extends Handler {
 
   min(min: number): ArrayHandler<T> {
     this._rules.push(
-      (v: any[]) => v.length >= min || `Must have at least ${min} items`,
+      (v: Array<T["_type"]>) =>
+        v.length >= min || `Must have at least ${min} items`,
     );
     return this;
   }
 
   max(max: number): ArrayHandler<T> {
     this._rules.push(
-      (v: any[]) => v.length <= max || `Must have at most ${max} items`,
+      (v: Array<T["_type"]>) =>
+        v.length <= max || `Must have at most ${max} items`,
     );
     return this;
   }
@@ -90,7 +100,7 @@ export class ArrayHandler<T extends Handler> extends Handler {
     const keyResults: IValidationResult[] = [];
 
     if (Array.isArray(value)) {
-      (<any[]>value).forEach((v, i) => {
+      (<Array<T["_type"]>>value).forEach((v, i) => {
         const myKey = i.toString();
         const results = this._handler.validate(v, [...key, myKey], root);
         keyResults.push(...results);

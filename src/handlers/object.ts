@@ -1,12 +1,12 @@
 import { Handler } from "./index";
 import { IValidationResult, ISchemaDefinition } from "../schema";
-import debug from "debug";
+// import debug from "debug";
 import { UnionHandler } from "./union";
 import { NullHandler } from "./null";
 import { OptionalHandler } from "./optional";
 import { Infer } from "../index";
 
-const log = debug("yxc");
+// const log = debug("yxc"); // TODO: use logging
 
 export class ObjectHandler<T extends Record<string, Handler>> extends Handler {
   _type!: {
@@ -29,10 +29,16 @@ export class ObjectHandler<T extends Record<string, Handler>> extends Handler {
     }
   }
 
+  /**
+   * Allows null value
+   */
   nullable(): UnionHandler<[this, NullHandler]> {
     return new UnionHandler([this, new NullHandler()]);
   }
 
+  /**
+   * Allows undefined value
+   */
   optional(): UnionHandler<[this, OptionalHandler]> {
     return new UnionHandler([this, new OptionalHandler()]);
   }
