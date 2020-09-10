@@ -8,13 +8,9 @@ const schema = yxc.object({
   addresses: yxc.array(yxc.string()),
   something: yxc.union([yxc.string(), yxc.number().nullable()]).optional(),
   title: yxc.string().optional(),
+  test: yxc.object({
+    test: yxc.array(yxc.string()),
+  }),
 });
 
 type SchemaType = Infer<typeof schema>;
-
-const songSchema = yxc.object({
-  title: yxc.string().notEmpty(),
-  duration: yxc.number().positive().int(),
-});
-
-type Song = Infer<typeof songSchema>;

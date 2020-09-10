@@ -6,12 +6,10 @@ import { OptionalHandler } from "./optional";
 import { Infer } from "../index";
 import { isObject } from "../util";
 
-type InferredObject<T extends Record<string, Handler>> = {
-  [K in keyof T]: Infer<T[K]>;
-};
-
 export class ObjectHandler<T extends Record<string, Handler>> extends Handler {
-  _type!: InferredObject<T>;
+  _type!: {
+    [K in keyof T]: Infer<T[K]>;
+  };
 
   private _keys: ISchemaDefinition = {};
   private _arbitrary = false;
