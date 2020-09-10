@@ -10,7 +10,8 @@ export class NumberHandler extends AtomicHandler<number> {
   constructor() {
     super();
     this._rules.push(
-      (v: unknown) => typeof v === "number" || "Must be a number",
+      (v: unknown) =>
+        (typeof v === "number" && !isNaN(v)) || "Must be a number",
     );
   }
 
