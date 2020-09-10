@@ -1,4 +1,4 @@
-export default (<[string, boolean][]>[
+export default (<[any, boolean][]>[
   ["", true],
   ["asdasdasd", true],
   ["15125125", true],
