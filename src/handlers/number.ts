@@ -19,6 +19,10 @@ export class NumberHandler extends AtomicHandler<number> {
     return new UnionHandler([this, new OptionalHandler()]);
   }
 
+  int(): NumberHandler {
+    return this.integer();
+  }
+
   integer(): NumberHandler {
     this._rules.push(
       (v: number) => Number.isInteger(v) || `Must be an integer`,
