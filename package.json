@@ -1,6 +1,6 @@
 {
   "name": "@dotvirus/yxc",
-  "version": "1.0.0",
+  "version": "1.0.0-nightly.2",
   "description": "Schema validation with composition & API middlewares",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",

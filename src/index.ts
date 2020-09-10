@@ -16,6 +16,7 @@ import { connect, koa, graphql } from "./middlewares";
 import { Handler } from "./handlers/index";
 import { NullHandler } from "./handlers/null";
 import { OptionalHandler } from "./handlers/optional";
+import { RecordHandler } from "./handlers/record";
 
 export { IKeyOptions, ISchemaDefinition };
 
@@ -33,6 +34,8 @@ export type Infer<T extends Handler> = T["_type"];
 export default {
   object: <T extends ISchemaDefinition>(schema?: T): ObjectHandler<T> =>
     new ObjectHandler(schema),
+  record: <T extends Handler>(schema: T): RecordHandler<T> =>
+    new RecordHandler(schema),
   string: (): StringHandler => new StringHandler(),
   number: (): NumberHandler => new NumberHandler(),
   boolean: (): BooleanHandler => new BooleanHandler(),

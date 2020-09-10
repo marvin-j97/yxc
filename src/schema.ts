@@ -20,9 +20,7 @@ export interface ISchemaDefinition {
   [key: string]: Handler /*| IKeyOptions*/;
 }
 
-export function createExecutableSchema<S extends Record<string, Handler>, T>(
-  handler: ObjectHandler<S>,
-) {
+export function createExecutableSchema<T>(handler: Handler) {
   return (value: T) => {
     const result = handler.validate(value, [], value);
     return {
