@@ -1,6 +1,10 @@
 import { Handler } from "./index";
 import { IValidationResult, ISchemaDefinition } from "../schema";
 import debug from "debug";
+import { UnionHandler } from "./union";
+import { NullHandler } from "./null";
+import { OptionalHandler } from "./optional";
+import { Infer } from "../index";
 
 const log = debug("yxc");
 
@@ -38,7 +42,11 @@ function deepSet(
   }
 }
 
-export class ObjectHandler extends Handler<Record<string, any>> {
+export class ObjectHandler<T extends Record<string, Handler>> extends Handler {
+  _type!: {
+    [K in keyof T]: Infer<T[K]>;
+  };
+
   private _keys: ISchemaDefinition = {};
   private _arbitrary = false;
   private _partial = false;
@@ -46,45 +54,90 @@ export class ObjectHandler extends Handler<Record<string, any>> {
   constructor(keys?: ISchemaDefinition) {
     super();
     this._rules.push(
-      (v) => (typeof v == "object" && !Array.isArray(v)) || "Must be an object",
+      (v) =>
+        (typeof v === "object" && !Array.isArray(v) && v !== null) ||
+        "Must be an object",
     );
     if (keys) {
       this._keys = keys;
     }
   }
 
-  any(pred: (v: any, k: string, obj: any) => boolean): ObjectHandler {
+  nullable(): UnionHandler<[this, NullHandler]> {
+    return new UnionHandler([this, new NullHandler()]);
+  }
+
+  optional(): UnionHandler<[this, OptionalHandler]> {
+    return new UnionHandler([this, new OptionalHandler()]);
+  }
+
+  any(
+    pred: (
+      v: {
+        [K in keyof T]: T[K]["_type"];
+      },
+      k: string,
+      obj: any,
+    ) => boolean,
+  ): this {
     return this.some(pred);
   }
 
-  all(pred: (v: any, k: string, obj: any) => boolean): ObjectHandler {
+  all(
+    pred: (
+      v: {
+        [K in keyof T]: T[K]["_type"];
+      },
+      k: string,
+      obj: any,
+    ) => boolean,
+  ): this {
     return this.every(pred);
   }
 
-  some(pred: (v: any, k: string, obj: any) => boolean): ObjectHandler {
+  some(
+    pred: (
+      v: {
+        [K in keyof T]: T[K]["_type"];
+      },
+      k: string,
+      obj: any,
+    ) => boolean,
+  ): this {
     this._rules.push((o) => Object.keys(o).some((k) => pred(o[k], k, o)));
     return this;
   }
 
-  every(pred: (v: any, k: string, obj: any) => boolean): ObjectHandler {
+  every(
+    pred: (
+      v: {
+        [K in keyof T]: T[K]["_type"];
+      },
+      k: string,
+      obj: any,
+    ) => boolean,
+  ): this {
     this._rules.push((o) => Object.keys(o).every((k) => pred(o[k], k, o)));
     return this;
   }
 
-  partial(): ObjectHandler {
+  partial(): this {
     this._partial = true;
     return this;
   }
 
-  arbitrary(): ObjectHandler {
+  arbitrary(): this {
     this._arbitrary = true;
     return this;
   }
 
-  numKeys(num: number): ObjectHandler {
+  numKeys(num: number): this {
     this._rules.push(
-      (v: Record<string, any>) =>
-        Object.keys(v).length == num || `Must have ${num} keys`,
+      (
+        v: {
+          [K in keyof T]: T[K]["_type"];
+        },
+      ) => Object.keys(v).length == num || `Must have ${num} keys`,
     );
     return this;
   }
@@ -128,10 +181,11 @@ export class ObjectHandler extends Handler<Record<string, any>> {
 
         if (handler instanceof Handler) {
           if (this._partial) {
-            handler.optional();
+            //getResults(handler.optional());
+          } else {
+            getResults(handler);
           }
-          getResults(handler);
-        } else {
+        } /* else {
           if (handler.onBefore) {
             log("Before hook");
             handler.onBefore(_value[myKey], [...key, myKey], root);
@@ -156,10 +210,11 @@ export class ObjectHandler extends Handler<Record<string, any>> {
               deepSet(<Record<string, unknown>>root, [...key, myKey], mutate);
             }
 
-            if (this._partial) {
-              handler.handler.optional();
-            }
-            const hadError = !!getResults(handler.handler).length;
+            const toCheck = this._partial
+              ? handler.handler .optional()
+              : handler.handler;
+
+            const hadError = !!getResults(toCheck).length;
 
             if (!hadError && handler.mutateAfter) {
               log("Mutate after");
@@ -178,7 +233,7 @@ export class ObjectHandler extends Handler<Record<string, any>> {
             log("After hook");
             handler.onAfter(_value[myKey], [...key, myKey], root);
           }
-        }
+        }*/
       }
     }
 

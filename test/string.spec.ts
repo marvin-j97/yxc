@@ -22,7 +22,7 @@ describe("Strings", () => {
     });
     it("Should not be equal", () => {
       expect(yxc.string().equals("test").validate("not test")).to.have.length(
-        1
+        1,
       );
     });
   });

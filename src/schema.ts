@@ -17,11 +17,19 @@ export interface IValidationResult {
 }
 
 export interface ISchemaDefinition {
-  [key: string]: Handler | IKeyOptions;
+  [key: string]: Handler /*| IKeyOptions*/;
 }
 
-export function createExecutableSchema<T>(handler: ObjectHandler) {
-  return (value: T) => handler.validate(value, [], value);
+export function createExecutableSchema<S extends Record<string, Handler>, T>(
+  handler: ObjectHandler<S>,
+) {
+  return (value: T) => {
+    const result = handler.validate(value, [], value);
+    return {
+      ok: !!result.length,
+      errors: result,
+    };
+  };
 }
 
 export function createSchema(def: ISchemaDefinition) {

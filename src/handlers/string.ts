@@ -1,9 +1,20 @@
 import { AtomicHandler } from "./index";
+import { UnionHandler } from "./union";
+import { NullHandler } from "./null";
+import { OptionalHandler } from "./optional";
 
 export class StringHandler extends AtomicHandler<string> {
   constructor() {
     super();
     this._rules.push((v) => typeof v === "string" || "Must be a string");
+  }
+
+  nullable(): UnionHandler<[this, NullHandler]> {
+    return new UnionHandler([this, new NullHandler()]);
+  }
+
+  optional(): UnionHandler<[this, OptionalHandler]> {
+    return new UnionHandler([this, new OptionalHandler()]);
   }
 
   endsWith(substr: string): StringHandler {

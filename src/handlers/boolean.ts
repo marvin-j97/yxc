@@ -3,16 +3,16 @@ import { AtomicHandler } from "./index";
 export class BooleanHandler extends AtomicHandler<boolean> {
   constructor() {
     super();
-    this._rules.push((v) => typeof v === "boolean" || "Must be a boolean");
+    this._rules.push(
+      (v: unknown) => typeof v === "boolean" || "Must be a boolean",
+    );
   }
 
   true(): BooleanHandler {
-    this._rules.push((v) => v == true || "Must be true");
-    return this;
+    return this.equals(true);
   }
 
   false(): BooleanHandler {
-    this._rules.push((v) => v == false || "Must be false");
-    return this;
+    return this.equals(false);
   }
 }

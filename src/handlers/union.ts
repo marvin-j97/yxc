@@ -1,14 +1,28 @@
 import { Handler } from "./index";
+import { NullHandler } from "./null";
+import { OptionalHandler } from "./optional";
 
-export class UnionHandler extends Handler<unknown> {
-  constructor(handlers: Handler<unknown>[]) {
+export class UnionHandler<
+  T extends [Handler, Handler, ...Handler[]]
+> extends Handler {
+  _type!: T[number]["_type"];
+
+  constructor(handlers: T) {
     super();
-    this._rules.push((v) => {
+    this._rules.push((v: T[number]["_type"]) => {
       if (handlers.some((h) => h.validate(v).length === 0)) {
         return true;
       }
       // TODO: collect errors and display?
       return "Input is not matching any of the expected schemas";
     });
+  }
+
+  nullable(): UnionHandler<[this, NullHandler]> {
+    return new UnionHandler([this, new NullHandler()]);
+  }
+
+  optional(): UnionHandler<[this, OptionalHandler]> {
+    return new UnionHandler([this, new OptionalHandler()]);
   }
 }

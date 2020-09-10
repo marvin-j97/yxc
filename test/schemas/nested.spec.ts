@@ -22,28 +22,28 @@ export const ArrayTest = () =>
 describe("Nested tests", () => {
   it("Should have missing deep property", () => {
     const result = createExecutableSchema(Test())({});
-    expect(result).to.have.length(1);
-    expect(result[0].key).to.deep.equal(["layer0"]);
+    expect(result.errors).to.have.length(1);
+    expect(result.errors[0].key).to.deep.equal(["layer0"]);
   });
 
   it("Should have missing deep property", () => {
     const result = createExecutableSchema(Test())({ layer0: 4 });
-    expect(result).to.have.length(1);
-    expect(result[0].key).to.deep.equal(["layer0"]);
+    expect(result.errors).to.have.length(1);
+    expect(result.errors[0].key).to.deep.equal(["layer0"]);
   });
 
   it("Should have missing deep property", () => {
     const result = createExecutableSchema(Test())({ layer0: { layer1: {} } });
-    expect(result).to.have.length(1);
-    expect(result[0].key).to.deep.equal(["layer0", "layer1", "layer2"]);
+    expect(result.errors).to.have.length(1);
+    expect(result.errors[0].key).to.deep.equal(["layer0", "layer1", "layer2"]);
   });
 
   it("Should have missing deep property", () => {
     const result = createExecutableSchema(Test())({
       layer0: { layer1: { layer2: { layer3: {} } } },
     });
-    expect(result).to.have.length(1);
-    expect(result[0].key).to.deep.equal([
+    expect(result.errors).to.have.length(1);
+    expect(result.errors[0].key).to.deep.equal([
       "layer0",
       "layer1",
       "layer2",
@@ -56,8 +56,8 @@ describe("Nested tests", () => {
     const result = createExecutableSchema(Test())({
       layer0: { layer1: { layer2: { layer3: { value: "str" } } } },
     });
-    expect(result).to.have.length(1);
-    expect(result[0].key).to.deep.equal([
+    expect(result.errors).to.have.length(1);
+    expect(result.errors[0].key).to.deep.equal([
       "layer0",
       "layer1",
       "layer2",
@@ -70,68 +70,68 @@ describe("Nested tests", () => {
     const result = createExecutableSchema(Test())({
       layer0: { layer1: { layer2: { layer3: { value: 5 } } } },
     });
-    expect(result).to.have.length(0);
+    expect(result.errors).to.have.length(0);
   });
 
   it("Should have missing deep property", () => {
     const result = createExecutableSchema(ArrayTest())({
       value: {},
     });
-    expect(result).to.have.length(1);
-    expect(result[0].key).to.deep.equal(["value"]);
+    expect(result.errors).to.have.length(1);
+    expect(result.errors[0].key).to.deep.equal(["value"]);
   });
 
   it("Should have missing deep property", () => {
     const result = createExecutableSchema(ArrayTest())({
       value: [4],
     });
-    expect(result).to.have.length(1);
-    expect(result[0].key).to.deep.equal(["value", "0"]);
+    expect(result.errors).to.have.length(1);
+    expect(result.errors[0].key).to.deep.equal(["value", "0"]);
   });
 
   it("Should have missing deep property", () => {
     const result = createExecutableSchema(ArrayTest())({
       value: [[4]],
     });
-    expect(result).to.have.length(1);
-    expect(result[0].key).to.deep.equal(["value", "0", "0"]);
+    expect(result.errors).to.have.length(1);
+    expect(result.errors[0].key).to.deep.equal(["value", "0", "0"]);
   });
 
   it("Should have missing deep property", () => {
     const result = createExecutableSchema(ArrayTest())({
       value: [[[4]]],
     });
-    expect(result).to.have.length(1);
-    expect(result[0].key).to.deep.equal(["value", "0", "0", "0"]);
+    expect(result.errors).to.have.length(1);
+    expect(result.errors[0].key).to.deep.equal(["value", "0", "0", "0"]);
   });
 
   it("Should have missing deep property", () => {
     const result = createExecutableSchema(ArrayTest())({
       value: [[[]]],
     });
-    expect(result).to.have.length(0);
+    expect(result.errors).to.have.length(0);
   });
 
   it("Should have missing deep property", () => {
     const result = createExecutableSchema(ArrayTest())({
       value: [[[[]]]],
     });
-    expect(result).to.have.length(1);
-    expect(result[0].key).to.deep.equal(["value", "0", "0", "0"]);
+    expect(result.errors).to.have.length(1);
+    expect(result.errors[0].key).to.deep.equal(["value", "0", "0", "0"]);
   });
 
   it("Should have missing deep property", () => {
     const result = createExecutableSchema(ArrayTest())({
       value: [[[true, false, true, "string"]]],
     });
-    expect(result).to.have.length(1);
-    expect(result[0].key).to.deep.equal(["value", "0", "0", "3"]);
+    expect(result.errors).to.have.length(1);
+    expect(result.errors[0].key).to.deep.equal(["value", "0", "0", "3"]);
   });
 
   it("Should have missing deep property", () => {
     const result = createExecutableSchema(ArrayTest())({
       value: [[[true, false, true]]],
     });
-    expect(result).to.have.length(0);
+    expect(result.errors).to.have.length(0);
   });
 });
