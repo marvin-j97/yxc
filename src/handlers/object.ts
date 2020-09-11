@@ -1,7 +1,6 @@
 import { Handler } from "./index";
 import { IValidationResult, ISchemaDefinition, Infer } from "../types";
 import { UnionHandler } from "./union";
-import { NullHandler } from "./null";
 import { OptionalHandler } from "./optional";
 import { isObject } from "../util";
 
@@ -20,20 +19,6 @@ export class ObjectHandler<T extends Record<string, Handler>> extends Handler {
     if (keys) {
       this._keys = keys;
     }
-  }
-
-  /**
-   * Allows null value
-   */
-  nullable(): UnionHandler<[this, NullHandler]> {
-    return new UnionHandler([this, new NullHandler()]);
-  }
-
-  /**
-   * Allows undefined value
-   */
-  optional(): UnionHandler<[this, OptionalHandler]> {
-    return new UnionHandler([this, new OptionalHandler()]);
   }
 
   any(pred: (v: unknown, k: string, obj: any) => boolean): this {

@@ -7,17 +7,6 @@ export class UnionHandler<
 > extends Handler {
   _type!: T[number]["_type"];
 
-  constructor(handlers: T) {
-    super();
-    this._rules.push((v: T[number]["_type"]) => {
-      if (handlers.some((h) => h.validate(v).length === 0)) {
-        return true;
-      }
-      // TODO: collect errors and display?
-      return "Input is not matching any of the expected schemas";
-    });
-  }
-
   /**
    * Allows null value
    */
@@ -30,5 +19,16 @@ export class UnionHandler<
    */
   optional(): UnionHandler<[this, OptionalHandler]> {
     return new UnionHandler([this, new OptionalHandler()]);
+  }
+
+  constructor(handlers: T) {
+    super();
+    this._rules.push((v: T[number]["_type"]) => {
+      if (handlers.some((h) => h.validate(v).length === 0)) {
+        return true;
+      }
+      // TODO: collect errors and display?
+      return "Input is not matching any of the expected schemas";
+    });
   }
 }

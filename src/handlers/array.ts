@@ -1,11 +1,9 @@
 import { Handler } from "./index";
 import { IValidationResult } from "../types";
-import { UnionHandler } from "./union";
-import { NullHandler } from "./null";
-import { OptionalHandler } from "./optional";
 import { Infer } from "../index";
+import { BaseHandler } from "./base";
 
-export class ArrayHandler<T extends Handler> extends Handler {
+export class ArrayHandler<T extends Handler> extends BaseHandler {
   _type!: Array<Infer<T>>;
 
   _handler: Handler;
@@ -14,20 +12,6 @@ export class ArrayHandler<T extends Handler> extends Handler {
     super();
     this._rules.push((v: unknown) => Array.isArray(v) || "Must be an array");
     this._handler = handler;
-  }
-
-  /**
-   * Allows null value
-   */
-  nullable(): UnionHandler<[this, NullHandler]> {
-    return new UnionHandler([this, new NullHandler()]);
-  }
-
-  /**
-   * Allows undefined value
-   */
-  optional(): UnionHandler<[this, OptionalHandler]> {
-    return new UnionHandler([this, new OptionalHandler()]);
   }
 
   any(pred: (v: T, i: number, arr: T[]) => boolean): ArrayHandler<T> {

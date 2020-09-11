@@ -1,16 +1,17 @@
 import { Handler } from "./index";
 import { UnionHandler } from "./union";
+import { NullHandler } from "./null";
 import { OptionalHandler } from "./optional";
 
 /**
- * Null handler
+ * Base handler
  */
-export class NullHandler extends Handler {
-  _type!: null;
-
-  constructor() {
-    super();
-    this._rules.push((v: unknown) => v === null || "Must be null");
+export abstract class BaseHandler<T = any> extends Handler<T> {
+  /**
+   * Allows null value
+   */
+  nullable(): UnionHandler<[this, NullHandler]> {
+    return new UnionHandler([this, new NullHandler()]);
   }
 
   /**

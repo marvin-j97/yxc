@@ -1,6 +1,6 @@
+import { Handler } from "./index";
 import { UnionHandler } from "./union";
 import { NullHandler } from "./null";
-import { Handler } from "./index";
 
 export class OptionalHandler extends Handler {
   _type!: undefined;

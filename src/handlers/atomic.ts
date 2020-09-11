@@ -1,11 +1,11 @@
-import { Handler } from "./index";
+import { BaseHandler } from "./base";
 
 /**
  * Base handler for atomic values
  */
 export abstract class AtomicHandler<
   T = string | number | boolean
-> extends Handler {
+> extends BaseHandler {
   _type!: T;
 
   /**

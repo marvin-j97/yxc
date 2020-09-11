@@ -5,8 +5,9 @@ import { NullHandler } from "./null";
 import { OptionalHandler } from "./optional";
 import { Infer } from "../index";
 import { isObject } from "../util";
+import { BaseHandler } from "./base";
 
-export class RecordHandler<T extends Handler> extends Handler {
+export class RecordHandler<T extends Handler> extends BaseHandler {
   _type!: Record<string, Infer<T>>;
 
   private _schema: Handler;
@@ -15,20 +16,6 @@ export class RecordHandler<T extends Handler> extends Handler {
     super();
     this._rules.push((v) => isObject(v) || "Must be an object");
     this._schema = schema;
-  }
-
-  /**
-   * Allows null value
-   */
-  nullable(): UnionHandler<[this, NullHandler]> {
-    return new UnionHandler([this, new NullHandler()]);
-  }
-
-  /**
-   * Allows undefined value
-   */
-  optional(): UnionHandler<[this, OptionalHandler]> {
-    return new UnionHandler([this, new OptionalHandler()]);
   }
 
   any(pred: (v: Infer<T>, k: string, obj: any) => boolean): this {
