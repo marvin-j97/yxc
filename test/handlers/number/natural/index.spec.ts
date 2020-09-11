@@ -2,12 +2,12 @@ import fixture from "./fixture";
 import { expect } from "chai";
 import yxc, { createExecutableSchema } from "../../../../src/index";
 
-describe("Number integer (no zero)", () => {
+describe("Number natural (no zero)", () => {
   for (const test of fixture) {
-    const handler = yxc.number().integer();
+    const handler = yxc.number().natural();
     it(`${test.value} should be a ${
       test.expected ? "valid" : "invalid"
-    } integer`, () => {
+    } natural number`, () => {
       const result = createExecutableSchema(handler)(test.value);
       if (test.expected) {
         expect(result.errors).to.be.empty;

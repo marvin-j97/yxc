@@ -2,12 +2,12 @@ import fixture from "./fixture";
 import { expect } from "chai";
 import yxc, { createExecutableSchema } from "../../../../src/index";
 
-describe("Number integer (no zero)", () => {
+describe("Number negative (with zero)", () => {
   for (const test of fixture) {
-    const handler = yxc.number().integer();
+    const handler = yxc.number().negative({ withZero: true });
     it(`${test.value} should be a ${
       test.expected ? "valid" : "invalid"
-    } integer`, () => {
+    } negative number`, () => {
       const result = createExecutableSchema(handler)(test.value);
       if (test.expected) {
         expect(result.errors).to.be.empty;

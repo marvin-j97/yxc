@@ -2,7 +2,7 @@ import fixture from "./fixture";
 import { expect } from "chai";
 import yxc, { createExecutableSchema } from "../../../../src/index";
 
-describe("Number int", () => {
+describe("Number int (no zero)", () => {
   for (const test of fixture) {
     const handler = yxc.number().int();
     it(`${test.value} should be a ${
