@@ -50,12 +50,7 @@ export class ArrayHandler<T extends Handler> extends BaseHandler {
   }
 
   between(min: number, max: number): ArrayHandler<T> {
-    this._rules.push(
-      (v: Array<Infer<T>>) =>
-        (v.length >= min && v.length <= max) ||
-        `Must have between ${min} and ${max} items`,
-    );
-    return this;
+    return this.min(min).max(max);
   }
 
   min(min: number): ArrayHandler<T> {

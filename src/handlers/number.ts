@@ -12,7 +12,12 @@ export class NumberHandler extends AtomicHandler<number> {
     );
   }
 
-  // TODO: .natural({ withZero: boolean }) -> .positive().integer()
+  /**
+   * Only allow natural numbers
+   */
+  natural(opts?: Partial<{ withZero: boolean }>) {
+    return this.positive({ withZero: opts?.withZero }).integer();
+  }
 
   /**
    * Alias for [[integer]]
@@ -50,8 +55,12 @@ export class NumberHandler extends AtomicHandler<number> {
    * yxc.number().integer().validate(-4) // -> OK
    * ```
    */
-  negative(): NumberHandler {
-    this._rules.push((v: number) => v < 0 || `Must be a negative number`);
+  negative(opts?: Partial<{ withZero: boolean }>): NumberHandler {
+    if (opts?.withZero) {
+      this.max(0);
+    } else {
+      this._rules.push((v: number) => v < 0 || `Must be a negative number`);
+    }
     return this;
   }
 
@@ -66,8 +75,12 @@ export class NumberHandler extends AtomicHandler<number> {
    * yxc.number().integer().validate(4) // -> OK
    * ```
    */
-  positive(): NumberHandler {
-    this._rules.push((v: number) => v > 0 || `Must be a positive number`);
+  positive(opts?: Partial<{ withZero: boolean }>): NumberHandler {
+    if (opts?.withZero) {
+      this.min(0);
+    } else {
+      this._rules.push((v: number) => v > 0 || `Must be a positive number`);
+    }
     return this;
   }
 
