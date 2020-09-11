@@ -116,7 +116,7 @@ export class NumberHandler extends AtomicHandler<number> {
    * ```
    */
   min(min: number): NumberHandler {
-    this._rules.push((v: number) => v >= min || `Must be at least ${min}`);
+    this._rules.push((v: number) => v >= min || `Must be ${min} or greater`);
     return this;
   }
 
