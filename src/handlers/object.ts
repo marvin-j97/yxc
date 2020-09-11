@@ -3,8 +3,11 @@ import { IValidationResult, ISchemaDefinition, Infer } from "../types";
 import { UnionHandler } from "./union";
 import { OptionalHandler } from "./optional";
 import { isObject } from "../util";
+import { BaseHandler } from "./base";
 
-export class ObjectHandler<T extends Record<string, Handler>> extends Handler {
+export class ObjectHandler<
+  T extends Record<string, Handler>
+> extends BaseHandler {
   _type!: {
     [K in keyof T]: Infer<T[K]>;
   };

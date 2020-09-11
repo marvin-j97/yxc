@@ -2,12 +2,12 @@ import fixture from "./fixture";
 import { expect } from "chai";
 import yxc, { createExecutableSchema } from "../../../../src/index";
 
-describe("Record (string) type check", () => {
+describe("Object optional", () => {
   for (const test of fixture) {
-    const handler = yxc.record(yxc.string());
+    const handler = yxc.object().optional();
     it(`${test.value} should be a ${
       test.expected ? "valid" : "invalid"
-    } string record`, () => {
+    } optional empty object`, () => {
       const result = createExecutableSchema(handler)(test.value);
       if (test.expected) {
         expect(result.errors).to.be.empty;
