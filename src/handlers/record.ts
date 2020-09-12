@@ -1,8 +1,5 @@
 import { Handler } from "./index";
 import { IValidationResult } from "../types";
-import { UnionHandler } from "./union";
-import { NullHandler } from "./null";
-import { OptionalHandler } from "./optional";
 import { Infer } from "../index";
 import { isObject } from "../util";
 import { BaseHandler } from "./base";
