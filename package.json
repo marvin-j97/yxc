@@ -14,7 +14,7 @@
     "posttranspile": "npm run build:typings",
     "build:umd": "rollup --config",
     "build:typings": "rollup --config rollup.dts.config.js",
-    "doc": "typedoc --out docs src",
+    "doc": "typedoc --out docs src && touch docs/.nojekyll",
     "coverage": "nyc npm test",
     "postcoverage": "nyc report --reporter=json",
     "babel": "babel dist/yxc.js -o dist/yxc.es5.js",

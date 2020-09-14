@@ -71,43 +71,56 @@
 				<section class="tsd-panel tsd-index-panel">
 					<div class="tsd-index-content">
 						<section class="tsd-index-section ">
-							<h3>Type aliases</h3>
+							<h3>References</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-type-alias tsd-parent-kind-module tsd-has-type-parameter"><a href="_index_.html#infer" class="tsd-kind-icon">Infer</a></li>
+								<li class="tsd-kind-reference tsd-parent-kind-module"><a href="_index_.html#ischemadefinition" class="tsd-kind-icon">ISchema<wbr>Definition</a></li>
+								<li class="tsd-kind-reference tsd-parent-kind-module"><a href="_index_.html#ivalidationresult" class="tsd-kind-icon">IValidation<wbr>Result</a></li>
+								<li class="tsd-kind-reference tsd-parent-kind-module"><a href="_index_.html#infer" class="tsd-kind-icon">Infer</a></li>
+								<li class="tsd-kind-reference tsd-parent-kind-module"><a href="_index_.html#rule" class="tsd-kind-icon">Rule</a></li>
+								<li class="tsd-kind-reference tsd-parent-kind-module"><a href="_index_.html#createexecutableschema" class="tsd-kind-icon">create<wbr>Executable<wbr>Schema</a></li>
+								<li class="tsd-kind-reference tsd-parent-kind-module"><a href="_index_.html#createschema" class="tsd-kind-icon">create<wbr>Schema</a></li>
+								<li class="tsd-kind-reference tsd-parent-kind-module"><a href="_index_.html#is" class="tsd-kind-icon">is</a></li>
 							</ul>
 						</section>
 					</div>
 				</section>
 			</section>
 			<section class="tsd-panel-group tsd-member-group ">
-				<h2>Type aliases</h2>
-				<section class="tsd-panel tsd-member tsd-kind-type-alias tsd-parent-kind-module tsd-has-type-parameter">
+				<h2>References</h2>
+				<section class="tsd-panel tsd-member tsd-kind-reference tsd-parent-kind-module">
+					<a name="ischemadefinition" class="tsd-anchor"></a>
+					<h3>ISchema<wbr>Definition</h3>
+					Re-exports <a href="../interfaces/_types_.ischemadefinition.html">ISchemaDefinition</a>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-reference tsd-parent-kind-module">
+					<a name="ivalidationresult" class="tsd-anchor"></a>
+					<h3>IValidation<wbr>Result</h3>
+					Re-exports <a href="../interfaces/_types_.ivalidationresult.html">IValidationResult</a>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-reference tsd-parent-kind-module">
 					<a name="infer" class="tsd-anchor"></a>
 					<h3>Infer</h3>
-					<div class="tsd-signature tsd-kind-icon">Infer&lt;T&gt;<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">T</span><span class="tsd-signature-symbol">[</span><span class="tsd-signature-type">"_type"</span><span class="tsd-signature-symbol">]</span></div>
-					<aside class="tsd-sources">
-						<ul>
-							<li>Defined in <a href="https://github.com/dotvirus/yxc/blob/002ea99/src/index.ts#L45">index.ts:45</a></li>
-						</ul>
-					</aside>
-					<div class="tsd-comment tsd-typography">
-						<div class="lead">
-							<p>Infers a type</p>
-						</div>
-						<pre><code class="language-typescript"><span class="hljs-keyword">import</span> yxc, { Infer } <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;@dotvirus/yxc&quot;</span>
-
-<span class="hljs-keyword">const</span> myObject = yxc.object({
-  name: yxc.string()
-});
-
-<span class="hljs-keyword">type</span> MyType = Infer&lt;<span class="hljs-keyword">typeof</span> myObject&gt;;</code></pre>
-					</div>
-					<h4 class="tsd-type-parameters-title">Type parameters</h4>
-					<ul class="tsd-type-parameters">
-						<li>
-							<h4>T<span class="tsd-signature-symbol">: </span><a href="../classes/_handlers_index_.handler.html" class="tsd-signature-type">Handler</a></h4>
-						</li>
-					</ul>
+					Re-exports <a href="_types_.html#infer">Infer</a>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-reference tsd-parent-kind-module">
+					<a name="rule" class="tsd-anchor"></a>
+					<h3>Rule</h3>
+					Re-exports <a href="_types_.html#rule">Rule</a>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-reference tsd-parent-kind-module">
+					<a name="createexecutableschema" class="tsd-anchor"></a>
+					<h3>create<wbr>Executable<wbr>Schema</h3>
+					Re-exports <a href="_schema_.html#createexecutableschema">createExecutableSchema</a>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-reference tsd-parent-kind-module">
+					<a name="createschema" class="tsd-anchor"></a>
+					<h3>create<wbr>Schema</h3>
+					Re-exports <a href="_schema_.html#createschema">createSchema</a>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-reference tsd-parent-kind-module">
+					<a name="is" class="tsd-anchor"></a>
+					<h3>is</h3>
+					Re-exports <a href="_schema_.html#is">is</a>
 				</section>
 			</section>
 		</div>
@@ -118,6 +131,9 @@
 						<a href="../globals.html"><em>Globals</em></a>
 					</li>
 					<li class=" tsd-kind-module">
+						<a href="_email_.html">&quot;email&quot;</a>
+					</li>
+					<li class=" tsd-kind-module">
 						<a href="_handlers_any_.html">&quot;handlers/any&quot;</a>
 					</li>
 					<li class=" tsd-kind-module">
@@ -125,6 +141,9 @@
 					</li>
 					<li class=" tsd-kind-module">
 						<a href="_handlers_atomic_.html">&quot;handlers/atomic&quot;</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="_handlers_base_.html">&quot;handlers/base&quot;</a>
 					</li>
 					<li class=" tsd-kind-module">
 						<a href="_handlers_boolean_.html">&quot;handlers/boolean&quot;</a>
@@ -157,7 +176,10 @@
 						<a href="_index_.html">&quot;index&quot;</a>
 					</li>
 					<li class=" tsd-kind-module">
-						<a href="_middlewares_.html">&quot;middlewares&quot;</a>
+						<a href="_infer_.html">&quot;infer&quot;</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="_log_.html">&quot;log&quot;</a>
 					</li>
 					<li class=" tsd-kind-module">
 						<a href="_schema_.html">&quot;schema&quot;</a>
@@ -168,12 +190,33 @@
 					<li class=" tsd-kind-module">
 						<a href="_types_.html">&quot;types&quot;</a>
 					</li>
+					<li class=" tsd-kind-module">
+						<a href="_util_.html">&quot;util&quot;</a>
+					</li>
 				</ul>
 			</nav>
 			<nav class="tsd-navigation secondary menu-sticky">
 				<ul class="before-current">
-					<li class=" tsd-kind-type-alias tsd-parent-kind-module tsd-has-type-parameter">
+					<li class=" tsd-kind-reference tsd-parent-kind-module">
+						<a href="_index_.html#ischemadefinition" class="tsd-kind-icon">ISchema<wbr>Definition</a>
+					</li>
+					<li class=" tsd-kind-reference tsd-parent-kind-module">
+						<a href="_index_.html#ivalidationresult" class="tsd-kind-icon">IValidation<wbr>Result</a>
+					</li>
+					<li class=" tsd-kind-reference tsd-parent-kind-module">
 						<a href="_index_.html#infer" class="tsd-kind-icon">Infer</a>
+					</li>
+					<li class=" tsd-kind-reference tsd-parent-kind-module">
+						<a href="_index_.html#rule" class="tsd-kind-icon">Rule</a>
+					</li>
+					<li class=" tsd-kind-reference tsd-parent-kind-module">
+						<a href="_index_.html#createexecutableschema" class="tsd-kind-icon">create<wbr>Executable<wbr>Schema</a>
+					</li>
+					<li class=" tsd-kind-reference tsd-parent-kind-module">
+						<a href="_index_.html#createschema" class="tsd-kind-icon">create<wbr>Schema</a>
+					</li>
+					<li class=" tsd-kind-reference tsd-parent-kind-module">
+						<a href="_index_.html#is" class="tsd-kind-icon">is</a>
 					</li>
 				</ul>
 			</nav>

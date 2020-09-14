@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>IKeyOptions | @dotvirus/yxc</title>
+	<title>IValidationResult | @dotvirus/yxc</title>
 	<meta name="description" content="Documentation for @dotvirus/yxc">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="../assets/css/main.css">
@@ -56,13 +56,13 @@
 					<a href="../globals.html">Globals</a>
 				</li>
 				<li>
-					<a href="../modules/_schema_.html">&quot;schema&quot;</a>
+					<a href="../modules/_types_.html">&quot;types&quot;</a>
 				</li>
 				<li>
-					<a href="_schema_.ikeyoptions.html">IKeyOptions</a>
+					<a href="_types_.ivalidationresult.html">IValidationResult</a>
 				</li>
 			</ul>
-			<h1>Interface IKeyOptions</h1>
+			<h1>Interface IValidationResult</h1>
 		</div>
 	</div>
 </header>
@@ -73,7 +73,7 @@
 				<h3>Hierarchy</h3>
 				<ul class="tsd-hierarchy">
 					<li>
-						<span class="target">IKeyOptions</span>
+						<span class="target">IValidationResult</span>
 					</li>
 				</ul>
 			</section>
@@ -84,12 +84,8 @@
 						<section class="tsd-index-section ">
 							<h3>Properties</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_schema_.ikeyoptions.html#default" class="tsd-kind-icon">default</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_schema_.ikeyoptions.html#handler" class="tsd-kind-icon">handler</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_schema_.ikeyoptions.html#mutateafter" class="tsd-kind-icon">mutate<wbr>After</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_schema_.ikeyoptions.html#mutatebefore" class="tsd-kind-icon">mutate<wbr>Before</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_schema_.ikeyoptions.html#onafter" class="tsd-kind-icon">on<wbr>After</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_schema_.ikeyoptions.html#onbefore" class="tsd-kind-icon">on<wbr>Before</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_types_.ivalidationresult.html#key" class="tsd-kind-icon">key</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_types_.ivalidationresult.html#message" class="tsd-kind-icon">message</a></li>
 							</ul>
 						</section>
 					</div>
@@ -98,62 +94,22 @@
 			<section class="tsd-panel-group tsd-member-group ">
 				<h2>Properties</h2>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
-					<a name="default" class="tsd-anchor"></a>
-					<h3><span class="tsd-flag ts-flagOptional">Optional</span> default</h3>
-					<div class="tsd-signature tsd-kind-icon">default<span class="tsd-signature-symbol">:</span> <a href="../modules/_types_.html#mutation" class="tsd-signature-type">Mutation</a></div>
+					<a name="key" class="tsd-anchor"></a>
+					<h3>key</h3>
+					<div class="tsd-signature tsd-kind-icon">key<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">[]</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/dotvirus/yxc/blob/002ea99/src/schema.ts#L11">schema.ts:11</a></li>
+							<li>Defined in <a href="https://github.com/dotvirus/yxc/blob/f163810/src/types.ts#L10">types.ts:10</a></li>
 						</ul>
 					</aside>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
-					<a name="handler" class="tsd-anchor"></a>
-					<h3>handler</h3>
-					<div class="tsd-signature tsd-kind-icon">handler<span class="tsd-signature-symbol">:</span> <a href="../classes/_handlers_index_.handler.html" class="tsd-signature-type">Handler</a></div>
+					<a name="message" class="tsd-anchor"></a>
+					<h3>message</h3>
+					<div class="tsd-signature tsd-kind-icon">message<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">boolean</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/dotvirus/yxc/blob/002ea99/src/schema.ts#L6">schema.ts:6</a></li>
-						</ul>
-					</aside>
-				</section>
-				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
-					<a name="mutateafter" class="tsd-anchor"></a>
-					<h3><span class="tsd-flag ts-flagOptional">Optional</span> mutate<wbr>After</h3>
-					<div class="tsd-signature tsd-kind-icon">mutate<wbr>After<span class="tsd-signature-symbol">:</span> <a href="../modules/_types_.html#mutation" class="tsd-signature-type">Mutation</a></div>
-					<aside class="tsd-sources">
-						<ul>
-							<li>Defined in <a href="https://github.com/dotvirus/yxc/blob/002ea99/src/schema.ts#L10">schema.ts:10</a></li>
-						</ul>
-					</aside>
-				</section>
-				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
-					<a name="mutatebefore" class="tsd-anchor"></a>
-					<h3><span class="tsd-flag ts-flagOptional">Optional</span> mutate<wbr>Before</h3>
-					<div class="tsd-signature tsd-kind-icon">mutate<wbr>Before<span class="tsd-signature-symbol">:</span> <a href="../modules/_types_.html#mutation" class="tsd-signature-type">Mutation</a></div>
-					<aside class="tsd-sources">
-						<ul>
-							<li>Defined in <a href="https://github.com/dotvirus/yxc/blob/002ea99/src/schema.ts#L9">schema.ts:9</a></li>
-						</ul>
-					</aside>
-				</section>
-				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
-					<a name="onafter" class="tsd-anchor"></a>
-					<h3><span class="tsd-flag ts-flagOptional">Optional</span> on<wbr>After</h3>
-					<div class="tsd-signature tsd-kind-icon">on<wbr>After<span class="tsd-signature-symbol">:</span> <a href="../modules/_types_.html#voidfunc" class="tsd-signature-type">VoidFunc</a></div>
-					<aside class="tsd-sources">
-						<ul>
-							<li>Defined in <a href="https://github.com/dotvirus/yxc/blob/002ea99/src/schema.ts#L8">schema.ts:8</a></li>
-						</ul>
-					</aside>
-				</section>
-				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
-					<a name="onbefore" class="tsd-anchor"></a>
-					<h3><span class="tsd-flag ts-flagOptional">Optional</span> on<wbr>Before</h3>
-					<div class="tsd-signature tsd-kind-icon">on<wbr>Before<span class="tsd-signature-symbol">:</span> <a href="../modules/_types_.html#voidfunc" class="tsd-signature-type">VoidFunc</a></div>
-					<aside class="tsd-sources">
-						<ul>
-							<li>Defined in <a href="https://github.com/dotvirus/yxc/blob/002ea99/src/schema.ts#L7">schema.ts:7</a></li>
+							<li>Defined in <a href="https://github.com/dotvirus/yxc/blob/f163810/src/types.ts#L11">types.ts:11</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -166,6 +122,9 @@
 						<a href="../globals.html"><em>Globals</em></a>
 					</li>
 					<li class=" tsd-kind-module">
+						<a href="../modules/_email_.html">&quot;email&quot;</a>
+					</li>
+					<li class=" tsd-kind-module">
 						<a href="../modules/_handlers_any_.html">&quot;handlers/any&quot;</a>
 					</li>
 					<li class=" tsd-kind-module">
@@ -173,6 +132,9 @@
 					</li>
 					<li class=" tsd-kind-module">
 						<a href="../modules/_handlers_atomic_.html">&quot;handlers/atomic&quot;</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="../modules/_handlers_base_.html">&quot;handlers/base&quot;</a>
 					</li>
 					<li class=" tsd-kind-module">
 						<a href="../modules/_handlers_boolean_.html">&quot;handlers/boolean&quot;</a>
@@ -205,62 +167,50 @@
 						<a href="../modules/_index_.html">&quot;index&quot;</a>
 					</li>
 					<li class=" tsd-kind-module">
-						<a href="../modules/_middlewares_.html">&quot;middlewares&quot;</a>
+						<a href="../modules/_infer_.html">&quot;infer&quot;</a>
 					</li>
-					<li class="current tsd-kind-module">
+					<li class=" tsd-kind-module">
+						<a href="../modules/_log_.html">&quot;log&quot;</a>
+					</li>
+					<li class=" tsd-kind-module">
 						<a href="../modules/_schema_.html">&quot;schema&quot;</a>
 					</li>
 					<li class=" tsd-kind-module">
 						<a href="../modules/_test_.html">&quot;test&quot;</a>
 					</li>
-					<li class=" tsd-kind-module">
+					<li class="current tsd-kind-module">
 						<a href="../modules/_types_.html">&quot;types&quot;</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="../modules/_util_.html">&quot;util&quot;</a>
 					</li>
 				</ul>
 			</nav>
 			<nav class="tsd-navigation secondary menu-sticky">
 				<ul class="before-current">
+					<li class=" tsd-kind-interface tsd-parent-kind-module">
+						<a href="_types_.ischemadefinition.html" class="tsd-kind-icon">ISchema<wbr>Definition</a>
+					</li>
 				</ul>
 				<ul class="current">
 					<li class="current tsd-kind-interface tsd-parent-kind-module">
-						<a href="_schema_.ikeyoptions.html" class="tsd-kind-icon">IKey<wbr>Options</a>
+						<a href="_types_.ivalidationresult.html" class="tsd-kind-icon">IValidation<wbr>Result</a>
 						<ul>
 							<li class=" tsd-kind-property tsd-parent-kind-interface">
-								<a href="_schema_.ikeyoptions.html#default" class="tsd-kind-icon">default</a>
+								<a href="_types_.ivalidationresult.html#key" class="tsd-kind-icon">key</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-interface">
-								<a href="_schema_.ikeyoptions.html#handler" class="tsd-kind-icon">handler</a>
-							</li>
-							<li class=" tsd-kind-property tsd-parent-kind-interface">
-								<a href="_schema_.ikeyoptions.html#mutateafter" class="tsd-kind-icon">mutate<wbr>After</a>
-							</li>
-							<li class=" tsd-kind-property tsd-parent-kind-interface">
-								<a href="_schema_.ikeyoptions.html#mutatebefore" class="tsd-kind-icon">mutate<wbr>Before</a>
-							</li>
-							<li class=" tsd-kind-property tsd-parent-kind-interface">
-								<a href="_schema_.ikeyoptions.html#onafter" class="tsd-kind-icon">on<wbr>After</a>
-							</li>
-							<li class=" tsd-kind-property tsd-parent-kind-interface">
-								<a href="_schema_.ikeyoptions.html#onbefore" class="tsd-kind-icon">on<wbr>Before</a>
+								<a href="_types_.ivalidationresult.html#message" class="tsd-kind-icon">message</a>
 							</li>
 						</ul>
 					</li>
 				</ul>
 				<ul class="after-current">
-					<li class=" tsd-kind-interface tsd-parent-kind-module">
-						<a href="_schema_.ischemadefinition.html" class="tsd-kind-icon">ISchema<wbr>Definition</a>
+					<li class=" tsd-kind-type-alias tsd-parent-kind-module tsd-has-type-parameter">
+						<a href="../modules/_types_.html#infer" class="tsd-kind-icon">Infer</a>
 					</li>
-					<li class=" tsd-kind-interface tsd-parent-kind-module">
-						<a href="_schema_.ivalidationresult.html" class="tsd-kind-icon">IValidation<wbr>Result</a>
-					</li>
-					<li class=" tsd-kind-function tsd-parent-kind-module tsd-has-type-parameter">
-						<a href="../modules/_schema_.html#createexecutableschema" class="tsd-kind-icon">create<wbr>Executable<wbr>Schema</a>
-					</li>
-					<li class=" tsd-kind-function tsd-parent-kind-module">
-						<a href="../modules/_schema_.html#createschema" class="tsd-kind-icon">create<wbr>Schema</a>
-					</li>
-					<li class=" tsd-kind-function tsd-parent-kind-module">
-						<a href="../modules/_schema_.html#formatresult" class="tsd-kind-icon">format<wbr>Result</a>
+					<li class=" tsd-kind-type-alias tsd-parent-kind-module tsd-has-type-parameter">
+						<a href="../modules/_types_.html#rule" class="tsd-kind-icon">Rule</a>
 					</li>
 				</ul>
 			</nav>

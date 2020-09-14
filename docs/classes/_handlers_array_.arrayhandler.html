@@ -81,7 +81,7 @@
 				<h3>Hierarchy</h3>
 				<ul class="tsd-hierarchy">
 					<li>
-						<a href="_handlers_index_.handler.html" class="tsd-signature-type">Handler</a>
+						<a href="_handlers_base_.basehandler.html" class="tsd-signature-type">BaseHandler</a>
 						<ul class="tsd-hierarchy">
 							<li>
 								<span class="target">ArrayHandler</span>
@@ -122,8 +122,9 @@
 								<li class="tsd-kind-method tsd-parent-kind-class"><a href="_handlers_array_.arrayhandler.html#max" class="tsd-kind-icon">max</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class"><a href="_handlers_array_.arrayhandler.html#min" class="tsd-kind-icon">min</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class"><a href="_handlers_array_.arrayhandler.html#notempty" class="tsd-kind-icon">not<wbr>Empty</a></li>
-								<li class="tsd-kind-method tsd-parent-kind-class"><a href="_handlers_array_.arrayhandler.html#nullable" class="tsd-kind-icon">nullable</a></li>
-								<li class="tsd-kind-method tsd-parent-kind-class"><a href="_handlers_array_.arrayhandler.html#optional" class="tsd-kind-icon">optional</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited"><a href="_handlers_array_.arrayhandler.html#nullable" class="tsd-kind-icon">nullable</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited"><a href="_handlers_array_.arrayhandler.html#optional" class="tsd-kind-icon">optional</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited"><a href="_handlers_array_.arrayhandler.html#rule" class="tsd-kind-icon">rule</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class"><a href="_handlers_array_.arrayhandler.html#some" class="tsd-kind-icon">some</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited"><a href="_handlers_array_.arrayhandler.html#test" class="tsd-kind-icon">test</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited"><a href="_handlers_array_.arrayhandler.html#use" class="tsd-kind-icon">use</a></li>
@@ -139,19 +140,19 @@
 					<a name="constructor" class="tsd-anchor"></a>
 					<h3>constructor</h3>
 					<ul class="tsd-signatures tsd-kind-constructor tsd-parent-kind-class">
-						<li class="tsd-signature tsd-kind-icon">new <wbr>Array<wbr>Handler<span class="tsd-signature-symbol">(</span>handler<span class="tsd-signature-symbol">: </span><a href="_handlers_index_.handler.html" class="tsd-signature-type">Handler</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="_handlers_array_.arrayhandler.html" class="tsd-signature-type">ArrayHandler</a></li>
+						<li class="tsd-signature tsd-kind-icon">new <wbr>Array<wbr>Handler<span class="tsd-signature-symbol">(</span>handler<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">T</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="_handlers_array_.arrayhandler.html" class="tsd-signature-type">ArrayHandler</a></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/dotvirus/yxc/blob/002ea99/src/handlers/array.ts#L10">handlers/array.ts:10</a></li>
+									<li>Defined in <a href="https://github.com/dotvirus/yxc/blob/f163810/src/handlers/array.ts#L9">handlers/array.ts:9</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
-									<h5>handler: <a href="_handlers_index_.handler.html" class="tsd-signature-type">Handler</a></h5>
+									<h5>handler: <span class="tsd-signature-type">T</span></h5>
 								</li>
 							</ul>
 							<h4 class="tsd-returns-title">Returns <a href="_handlers_array_.arrayhandler.html" class="tsd-signature-type">ArrayHandler</a></h4>
@@ -167,7 +168,7 @@
 					<div class="tsd-signature tsd-kind-icon">_handler<span class="tsd-signature-symbol">:</span> <a href="_handlers_index_.handler.html" class="tsd-signature-type">Handler</a></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/dotvirus/yxc/blob/002ea99/src/handlers/array.ts#L10">handlers/array.ts:10</a></li>
+							<li>Defined in <a href="https://github.com/dotvirus/yxc/blob/f163810/src/handlers/array.ts#L9">handlers/array.ts:9</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -176,20 +177,20 @@
 					<h3><span class="tsd-flag ts-flagProtected">Protected</span> _rules</h3>
 					<div class="tsd-signature tsd-kind-icon">_rules<span class="tsd-signature-symbol">:</span> <a href="../modules/_types_.html#rule" class="tsd-signature-type">Rule</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol"> = []</span></div>
 					<aside class="tsd-sources">
-						<p>Inherited from <a href="_handlers_optional_.optionalhandler.html">OptionalHandler</a>.<a href="_handlers_optional_.optionalhandler.html#_rules">_rules</a></p>
+						<p>Inherited from <a href="_handlers_index_.handler.html">Handler</a>.<a href="_handlers_index_.handler.html#_rules">_rules</a></p>
 						<ul>
-							<li>Defined in <a href="https://github.com/dotvirus/yxc/blob/002ea99/src/handlers/index.ts#L13">handlers/index.ts:13</a></li>
+							<li>Defined in <a href="https://github.com/dotvirus/yxc/blob/f163810/src/handlers/index.ts#L10">handlers/index.ts:10</a></li>
 						</ul>
 					</aside>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-overwrite">
 					<a name="_type" class="tsd-anchor"></a>
 					<h3>_type</h3>
-					<div class="tsd-signature tsd-kind-icon">_type<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Array</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">T</span><span class="tsd-signature-symbol">[</span><span class="tsd-signature-type">"_type"</span><span class="tsd-signature-symbol">]</span><span class="tsd-signature-symbol">&gt;</span></div>
+					<div class="tsd-signature tsd-kind-icon">_type<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Array</span><span class="tsd-signature-symbol">&lt;</span><a href="../modules/_types_.html#infer" class="tsd-signature-type">Infer</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">T</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span></div>
 					<aside class="tsd-sources">
 						<p>Overrides <a href="_handlers_index_.handler.html">Handler</a>.<a href="_handlers_index_.handler.html#_type">_type</a></p>
 						<ul>
-							<li>Defined in <a href="https://github.com/dotvirus/yxc/blob/002ea99/src/handlers/array.ts#L8">handlers/array.ts:8</a></li>
+							<li>Defined in <a href="https://github.com/dotvirus/yxc/blob/f163810/src/handlers/array.ts#L7">handlers/array.ts:7</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -206,7 +207,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/dotvirus/yxc/blob/002ea99/src/handlers/array.ts#L36">handlers/array.ts:36</a></li>
+									<li>Defined in <a href="https://github.com/dotvirus/yxc/blob/f163810/src/handlers/array.ts#L21">handlers/array.ts:21</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -253,7 +254,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/dotvirus/yxc/blob/002ea99/src/handlers/array.ts#L32">handlers/array.ts:32</a></li>
+									<li>Defined in <a href="https://github.com/dotvirus/yxc/blob/f163810/src/handlers/array.ts#L17">handlers/array.ts:17</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -300,7 +301,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/dotvirus/yxc/blob/002ea99/src/handlers/array.ts#L69">handlers/array.ts:69</a></li>
+									<li>Defined in <a href="https://github.com/dotvirus/yxc/blob/f163810/src/handlers/array.ts#L52">handlers/array.ts:52</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -325,9 +326,9 @@
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
-								<p>Inherited from <a href="_handlers_optional_.optionalhandler.html">OptionalHandler</a>.<a href="_handlers_optional_.optionalhandler.html#check">check</a></p>
+								<p>Inherited from <a href="_handlers_index_.handler.html">Handler</a>.<a href="_handlers_index_.handler.html#check">check</a></p>
 								<ul>
-									<li>Defined in <a href="https://github.com/dotvirus/yxc/blob/002ea99/src/handlers/index.ts#L41">handlers/index.ts:41</a></li>
+									<li>Defined in <a href="https://github.com/dotvirus/yxc/blob/f163810/src/handlers/index.ts#L38">handlers/index.ts:38</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -354,9 +355,9 @@
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
-								<p>Inherited from <a href="_handlers_optional_.optionalhandler.html">OptionalHandler</a>.<a href="_handlers_optional_.optionalhandler.html#custom">custom</a></p>
+								<p>Inherited from <a href="_handlers_index_.handler.html">Handler</a>.<a href="_handlers_index_.handler.html#custom">custom</a></p>
 								<ul>
-									<li>Defined in <a href="https://github.com/dotvirus/yxc/blob/002ea99/src/handlers/index.ts#L63">handlers/index.ts:63</a></li>
+									<li>Defined in <a href="https://github.com/dotvirus/yxc/blob/f163810/src/handlers/index.ts#L68">handlers/index.ts:68</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -387,7 +388,7 @@ yxc.string().test()</code></pre>
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/dotvirus/yxc/blob/002ea99/src/handlers/array.ts#L45">handlers/array.ts:45</a></li>
+									<li>Defined in <a href="https://github.com/dotvirus/yxc/blob/f163810/src/handlers/array.ts#L30">handlers/array.ts:30</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -434,7 +435,7 @@ yxc.string().test()</code></pre>
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/dotvirus/yxc/blob/002ea99/src/handlers/array.ts#L57">handlers/array.ts:57</a></li>
+									<li>Defined in <a href="https://github.com/dotvirus/yxc/blob/f163810/src/handlers/array.ts#L42">handlers/array.ts:42</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -457,7 +458,7 @@ yxc.string().test()</code></pre>
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/dotvirus/yxc/blob/002ea99/src/handlers/array.ts#L50">handlers/array.ts:50</a></li>
+									<li>Defined in <a href="https://github.com/dotvirus/yxc/blob/f163810/src/handlers/array.ts#L35">handlers/array.ts:35</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -480,7 +481,7 @@ yxc.string().test()</code></pre>
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/dotvirus/yxc/blob/002ea99/src/handlers/array.ts#L86">handlers/array.ts:86</a></li>
+									<li>Defined in <a href="https://github.com/dotvirus/yxc/blob/f163810/src/handlers/array.ts#L64">handlers/array.ts:64</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -503,7 +504,7 @@ yxc.string().test()</code></pre>
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/dotvirus/yxc/blob/002ea99/src/handlers/array.ts#L78">handlers/array.ts:78</a></li>
+									<li>Defined in <a href="https://github.com/dotvirus/yxc/blob/f163810/src/handlers/array.ts#L56">handlers/array.ts:56</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -526,24 +527,25 @@ yxc.string().test()</code></pre>
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/dotvirus/yxc/blob/002ea99/src/handlers/array.ts#L62">handlers/array.ts:62</a></li>
+									<li>Defined in <a href="https://github.com/dotvirus/yxc/blob/f163810/src/handlers/array.ts#L47">handlers/array.ts:47</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-returns-title">Returns <a href="_handlers_array_.arrayhandler.html" class="tsd-signature-type">ArrayHandler</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">T</span><span class="tsd-signature-symbol">&gt;</span></h4>
 						</li>
 					</ul>
 				</section>
-				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
 					<a name="nullable" class="tsd-anchor"></a>
 					<h3>nullable</h3>
-					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
 						<li class="tsd-signature tsd-kind-icon">nullable<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="_handlers_union_.unionhandler.html" class="tsd-signature-type">UnionHandler</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-symbol">[</span><span class="tsd-signature-type">this</span><span class="tsd-signature-symbol">, </span><a href="_handlers_null_.nullhandler.html" class="tsd-signature-type">NullHandler</a><span class="tsd-signature-symbol">]</span><span class="tsd-signature-symbol">&gt;</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
+								<p>Inherited from <a href="_handlers_base_.basehandler.html">BaseHandler</a>.<a href="_handlers_base_.basehandler.html#nullable">nullable</a></p>
 								<ul>
-									<li>Defined in <a href="https://github.com/dotvirus/yxc/blob/002ea99/src/handlers/array.ts#L21">handlers/array.ts:21</a></li>
+									<li>Defined in <a href="https://github.com/dotvirus/yxc/blob/f163810/src/handlers/base.ts#L13">handlers/base.ts:13</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -555,17 +557,18 @@ yxc.string().test()</code></pre>
 						</li>
 					</ul>
 				</section>
-				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
 					<a name="optional" class="tsd-anchor"></a>
 					<h3>optional</h3>
-					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
 						<li class="tsd-signature tsd-kind-icon">optional<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="_handlers_union_.unionhandler.html" class="tsd-signature-type">UnionHandler</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-symbol">[</span><span class="tsd-signature-type">this</span><span class="tsd-signature-symbol">, </span><a href="_handlers_optional_.optionalhandler.html" class="tsd-signature-type">OptionalHandler</a><span class="tsd-signature-symbol">]</span><span class="tsd-signature-symbol">&gt;</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
+								<p>Inherited from <a href="_handlers_base_.basehandler.html">BaseHandler</a>.<a href="_handlers_base_.basehandler.html#optional">optional</a></p>
 								<ul>
-									<li>Defined in <a href="https://github.com/dotvirus/yxc/blob/002ea99/src/handlers/array.ts#L28">handlers/array.ts:28</a></li>
+									<li>Defined in <a href="https://github.com/dotvirus/yxc/blob/f163810/src/handlers/base.ts#L20">handlers/base.ts:20</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -574,6 +577,35 @@ yxc.string().test()</code></pre>
 								</div>
 							</div>
 							<h4 class="tsd-returns-title">Returns <a href="_handlers_union_.unionhandler.html" class="tsd-signature-type">UnionHandler</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-symbol">[</span><span class="tsd-signature-type">this</span><span class="tsd-signature-symbol">, </span><a href="_handlers_optional_.optionalhandler.html" class="tsd-signature-type">OptionalHandler</a><span class="tsd-signature-symbol">]</span><span class="tsd-signature-symbol">&gt;</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
+					<a name="rule" class="tsd-anchor"></a>
+					<h3>rule</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
+						<li class="tsd-signature tsd-kind-icon">rule<span class="tsd-signature-symbol">(</span>rule<span class="tsd-signature-symbol">: </span><a href="../modules/_types_.html#rule" class="tsd-signature-type">Rule</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="_handlers_index_.handler.html" class="tsd-signature-type">Handler</a></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<p>Inherited from <a href="_handlers_index_.handler.html">Handler</a>.<a href="_handlers_index_.handler.html#rule">rule</a></p>
+								<ul>
+									<li>Defined in <a href="https://github.com/dotvirus/yxc/blob/f163810/src/handlers/index.ts#L54">handlers/index.ts:54</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Alias for <a href="_handlers_array_.arrayhandler.html#custom">custom</a></p>
+								</div>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>rule: <a href="../modules/_types_.html#rule" class="tsd-signature-type">Rule</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <a href="_handlers_index_.handler.html" class="tsd-signature-type">Handler</a></h4>
 						</li>
 					</ul>
 				</section>
@@ -587,7 +619,7 @@ yxc.string().test()</code></pre>
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/dotvirus/yxc/blob/002ea99/src/handlers/array.ts#L40">handlers/array.ts:40</a></li>
+									<li>Defined in <a href="https://github.com/dotvirus/yxc/blob/f163810/src/handlers/array.ts#L25">handlers/array.ts:25</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -633,9 +665,9 @@ yxc.string().test()</code></pre>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
-								<p>Inherited from <a href="_handlers_optional_.optionalhandler.html">OptionalHandler</a>.<a href="_handlers_optional_.optionalhandler.html#test">test</a></p>
+								<p>Inherited from <a href="_handlers_index_.handler.html">Handler</a>.<a href="_handlers_index_.handler.html#test">test</a></p>
 								<ul>
-									<li>Defined in <a href="https://github.com/dotvirus/yxc/blob/002ea99/src/handlers/index.ts#L33">handlers/index.ts:33</a></li>
+									<li>Defined in <a href="https://github.com/dotvirus/yxc/blob/f163810/src/handlers/index.ts#L30">handlers/index.ts:30</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -662,9 +694,9 @@ yxc.string().test()</code></pre>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
-								<p>Inherited from <a href="_handlers_optional_.optionalhandler.html">OptionalHandler</a>.<a href="_handlers_optional_.optionalhandler.html#use">use</a></p>
+								<p>Inherited from <a href="_handlers_index_.handler.html">Handler</a>.<a href="_handlers_index_.handler.html#use">use</a></p>
 								<ul>
-									<li>Defined in <a href="https://github.com/dotvirus/yxc/blob/002ea99/src/handlers/index.ts#L49">handlers/index.ts:49</a></li>
+									<li>Defined in <a href="https://github.com/dotvirus/yxc/blob/f163810/src/handlers/index.ts#L46">handlers/index.ts:46</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -686,14 +718,14 @@ yxc.string().test()</code></pre>
 					<a name="validate" class="tsd-anchor"></a>
 					<h3>validate</h3>
 					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-overwrite">
-						<li class="tsd-signature tsd-kind-icon">validate<span class="tsd-signature-symbol">(</span>value<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">unknown</span>, key<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">[]</span>, root<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">unknown</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="../interfaces/_schema_.ivalidationresult.html" class="tsd-signature-type">IValidationResult</a><span class="tsd-signature-symbol">[]</span></li>
+						<li class="tsd-signature tsd-kind-icon">validate<span class="tsd-signature-symbol">(</span>value<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">unknown</span>, key<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">[]</span>, root<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">unknown</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="../interfaces/_types_.ivalidationresult.html" class="tsd-signature-type">IValidationResult</a><span class="tsd-signature-symbol">[]</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
-								<p>Overrides <a href="_handlers_optional_.optionalhandler.html">OptionalHandler</a>.<a href="_handlers_optional_.optionalhandler.html#validate">validate</a></p>
+								<p>Overrides <a href="_handlers_index_.handler.html">Handler</a>.<a href="_handlers_index_.handler.html#validate">validate</a></p>
 								<ul>
-									<li>Defined in <a href="https://github.com/dotvirus/yxc/blob/002ea99/src/handlers/array.ts#L94">handlers/array.ts:94</a></li>
+									<li>Defined in <a href="https://github.com/dotvirus/yxc/blob/f163810/src/handlers/array.ts#L72">handlers/array.ts:72</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -708,7 +740,7 @@ yxc.string().test()</code></pre>
 									<h5><span class="tsd-flag ts-flagOptional">Optional</span> root: <span class="tsd-signature-type">unknown</span></h5>
 								</li>
 							</ul>
-							<h4 class="tsd-returns-title">Returns <a href="../interfaces/_schema_.ivalidationresult.html" class="tsd-signature-type">IValidationResult</a><span class="tsd-signature-symbol">[]</span></h4>
+							<h4 class="tsd-returns-title">Returns <a href="../interfaces/_types_.ivalidationresult.html" class="tsd-signature-type">IValidationResult</a><span class="tsd-signature-symbol">[]</span></h4>
 						</li>
 					</ul>
 				</section>
@@ -721,6 +753,9 @@ yxc.string().test()</code></pre>
 						<a href="../globals.html"><em>Globals</em></a>
 					</li>
 					<li class=" tsd-kind-module">
+						<a href="../modules/_email_.html">&quot;email&quot;</a>
+					</li>
+					<li class=" tsd-kind-module">
 						<a href="../modules/_handlers_any_.html">&quot;handlers/any&quot;</a>
 					</li>
 					<li class="current tsd-kind-module">
@@ -728,6 +763,9 @@ yxc.string().test()</code></pre>
 					</li>
 					<li class=" tsd-kind-module">
 						<a href="../modules/_handlers_atomic_.html">&quot;handlers/atomic&quot;</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="../modules/_handlers_base_.html">&quot;handlers/base&quot;</a>
 					</li>
 					<li class=" tsd-kind-module">
 						<a href="../modules/_handlers_boolean_.html">&quot;handlers/boolean&quot;</a>
@@ -760,7 +798,10 @@ yxc.string().test()</code></pre>
 						<a href="../modules/_index_.html">&quot;index&quot;</a>
 					</li>
 					<li class=" tsd-kind-module">
-						<a href="../modules/_middlewares_.html">&quot;middlewares&quot;</a>
+						<a href="../modules/_infer_.html">&quot;infer&quot;</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="../modules/_log_.html">&quot;log&quot;</a>
 					</li>
 					<li class=" tsd-kind-module">
 						<a href="../modules/_schema_.html">&quot;schema&quot;</a>
@@ -770,6 +811,9 @@ yxc.string().test()</code></pre>
 					</li>
 					<li class=" tsd-kind-module">
 						<a href="../modules/_types_.html">&quot;types&quot;</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="../modules/_util_.html">&quot;util&quot;</a>
 					</li>
 				</ul>
 			</nav>
@@ -825,11 +869,14 @@ yxc.string().test()</code></pre>
 							<li class=" tsd-kind-method tsd-parent-kind-class">
 								<a href="_handlers_array_.arrayhandler.html#notempty" class="tsd-kind-icon">not<wbr>Empty</a>
 							</li>
-							<li class=" tsd-kind-method tsd-parent-kind-class">
+							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
 								<a href="_handlers_array_.arrayhandler.html#nullable" class="tsd-kind-icon">nullable</a>
 							</li>
-							<li class=" tsd-kind-method tsd-parent-kind-class">
+							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
 								<a href="_handlers_array_.arrayhandler.html#optional" class="tsd-kind-icon">optional</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
+								<a href="_handlers_array_.arrayhandler.html#rule" class="tsd-kind-icon">rule</a>
 							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-class">
 								<a href="_handlers_array_.arrayhandler.html#some" class="tsd-kind-icon">some</a>
