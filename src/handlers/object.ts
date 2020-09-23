@@ -24,20 +24,52 @@ export class ObjectHandler<
     }
   }
 
-  any(pred: (v: unknown, k: string, obj: any) => boolean): this {
+  any(
+    pred: (
+      v: unknown,
+      k: string,
+      obj: {
+        [K in keyof T]: Infer<T[K]>;
+      },
+    ) => boolean,
+  ): this {
     return this.some(pred);
   }
 
-  all(pred: (v: unknown, k: string, obj: any) => boolean): this {
+  all(
+    pred: (
+      v: unknown,
+      k: string,
+      obj: {
+        [K in keyof T]: Infer<T[K]>;
+      },
+    ) => boolean,
+  ): this {
     return this.every(pred);
   }
 
-  some(pred: (v: unknown, k: string, obj: any) => boolean): this {
+  some(
+    pred: (
+      v: unknown,
+      k: string,
+      obj: {
+        [K in keyof T]: Infer<T[K]>;
+      },
+    ) => boolean,
+  ): this {
     this._rules.push((o) => Object.keys(o).some((k) => pred(o[k], k, o)));
     return this;
   }
 
-  every(pred: (v: unknown, k: string, obj: any) => boolean): this {
+  every(
+    pred: (
+      v: unknown,
+      k: string,
+      obj: {
+        [K in keyof T]: Infer<T[K]>;
+      },
+    ) => boolean,
+  ): this {
     this._rules.push((o) => Object.keys(o).every((k) => pred(o[k], k, o)));
     return this;
   }
@@ -58,7 +90,7 @@ export class ObjectHandler<
         v: {
           [K in keyof T]: T[K]["_type"];
         },
-      ) => Object.keys(v).length == num || `Must have ${num} keys`,
+      ) => Object.keys(v).length === num || `Must have ${num} keys`,
     );
     return this;
   }
