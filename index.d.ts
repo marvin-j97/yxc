@@ -80,10 +80,18 @@ declare class ObjectHandler<T extends Record<string, Handler>> extends BaseHandl
     private _arbitrary;
     private _partial;
     constructor(keys?: T);
-    any(pred: (v: unknown, k: string, obj: any) => boolean): this;
-    all(pred: (v: unknown, k: string, obj: any) => boolean): this;
-    some(pred: (v: unknown, k: string, obj: any) => boolean): this;
-    every(pred: (v: unknown, k: string, obj: any) => boolean): this;
+    any(pred: (v: unknown, k: string, obj: {
+        [K in keyof T]: Infer<T[K]>;
+    }) => boolean): this;
+    all(pred: (v: unknown, k: string, obj: {
+        [K in keyof T]: Infer<T[K]>;
+    }) => boolean): this;
+    some(pred: (v: unknown, k: string, obj: {
+        [K in keyof T]: Infer<T[K]>;
+    }) => boolean): this;
+    every(pred: (v: unknown, k: string, obj: {
+        [K in keyof T]: Infer<T[K]>;
+    }) => boolean): this;
     partial(): this;
     arbitrary(): this;
     numKeys(num: number): this;
@@ -118,10 +126,10 @@ declare class ArrayHandler<T extends Handler> extends BaseHandler {
     _type: Array<Infer<T>>;
     _handler: Handler;
     constructor(handler: T);
-    any(pred: (v: T, i: number, arr: T[]) => boolean): ArrayHandler<T>;
-    all(pred: (v: T, i: number, arr: T[]) => boolean): ArrayHandler<T>;
-    some(pred: (v: T, i: number, arr: T[]) => boolean): ArrayHandler<T>;
-    every(pred: (v: T, i: number, arr: T[]) => boolean): ArrayHandler<T>;
+    any(pred: (v: Infer<T>, i: number, arr: Array<Infer<T>>) => boolean): ArrayHandler<T>;
+    all(pred: (v: Infer<T>, i: number, arr: Array<Infer<T>>) => boolean): ArrayHandler<T>;
+    some(pred: (v: Infer<T>, i: number, arr: Array<Infer<T>>) => boolean): ArrayHandler<T>;
+    every(pred: (v: Infer<T>, i: number, arr: Array<Infer<T>>) => boolean): ArrayHandler<T>;
     length(num: number): ArrayHandler<T>;
     len(num: number): ArrayHandler<T>;
     notEmpty(): ArrayHandler<T>;

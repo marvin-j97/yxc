@@ -449,7 +449,7 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
 
     StringHandler.prototype.length = function (num) {
       this._rules.push(function (v) {
-        return v.length == num || "Must be of length " + num;
+        return v.length === num || "Must be of length " + num;
       });
 
       return this;
@@ -591,7 +591,7 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
 
     ObjectHandler.prototype.numKeys = function (num) {
       this._rules.push(function (v) {
-        return Object.keys(v).length == num || "Must have " + num + " keys";
+        return Object.keys(v).length === num || "Must have " + num + " keys";
       });
 
       return this;
@@ -891,7 +891,7 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
 
     ArrayHandler.prototype.length = function (num) {
       this._rules.push(function (v) {
-        return v.length == num || "Must be of length " + num;
+        return v.length === num || "Must be of length " + num;
       });
 
       return this;
@@ -1093,7 +1093,7 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
 
     RecordHandler.prototype.numKeys = function (num) {
       this._rules.push(function (v) {
-        return Object.keys(v).length == num || "Must have " + num + " keys";
+        return Object.keys(v).length === num || "Must have " + num + " keys";
       });
 
       return this;

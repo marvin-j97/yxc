@@ -278,7 +278,7 @@
             return this.regex(regexp);
         };
         StringHandler.prototype.length = function (num) {
-            this._rules.push(function (v) { return v.length == num || "Must be of length " + num; });
+            this._rules.push(function (v) { return v.length === num || "Must be of length " + num; });
             return this;
         };
         StringHandler.prototype.len = function (num) {
@@ -363,7 +363,7 @@
             return this;
         };
         ObjectHandler.prototype.numKeys = function (num) {
-            this._rules.push(function (v) { return Object.keys(v).length == num || "Must have " + num + " keys"; });
+            this._rules.push(function (v) { return Object.keys(v).length === num || "Must have " + num + " keys"; });
             return this;
         };
         ObjectHandler.prototype.validate = function (value, key, root) {
@@ -546,7 +546,7 @@
             return this;
         };
         ArrayHandler.prototype.length = function (num) {
-            this._rules.push(function (v) { return v.length == num || "Must be of length " + num; });
+            this._rules.push(function (v) { return v.length === num || "Must be of length " + num; });
             return this;
         };
         ArrayHandler.prototype.len = function (num) {
@@ -662,7 +662,7 @@
         };
         RecordHandler.prototype.numKeys = function (num) {
             this._rules.push(function (v) {
-                return Object.keys(v).length == num || "Must have " + num + " keys";
+                return Object.keys(v).length === num || "Must have " + num + " keys";
             });
             return this;
         };
