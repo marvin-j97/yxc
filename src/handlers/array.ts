@@ -42,7 +42,7 @@ export class ArrayHandler<T extends Handler> extends BaseHandler {
 
   length(num: number): ArrayHandler<T> {
     this._rules.push(
-      (v: any[]) => v.length == num || `Must be of length ${num}`,
+      (v: any[]) => v.length === num || `Must be of length ${num}`,
     );
     return this;
   }

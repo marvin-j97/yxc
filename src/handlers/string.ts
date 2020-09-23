@@ -121,7 +121,7 @@ export class StringHandler extends AtomicHandler<string> {
    */
   length(num: number): this {
     this._rules.push(
-      (v: string) => v.length == num || `Must be of length ${num}`,
+      (v: string) => v.length === num || `Must be of length ${num}`,
     );
     return this;
   }

@@ -36,7 +36,7 @@ export class RecordHandler<T extends Handler> extends BaseHandler {
   numKeys(num: number): this {
     this._rules.push(
       (v: { [k: string]: Infer<T> }) =>
-        Object.keys(v).length == num || `Must have ${num} keys`,
+        Object.keys(v).length === num || `Must have ${num} keys`,
     );
     return this;
   }

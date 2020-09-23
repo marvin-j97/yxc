@@ -15,7 +15,7 @@ export class NumberHandler extends AtomicHandler<number> {
   /**
    * Only allow natural numbers
    */
-  natural(opts?: Partial<{ withZero: boolean }>) {
+  natural(opts?: Partial<{ withZero: boolean }>): NumberHandler {
     return this.integer().positive({ withZero: opts?.withZero });
   }
 

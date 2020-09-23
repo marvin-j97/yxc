@@ -13,6 +13,7 @@ module.exports = {
   ],
   rules: {
     curly: "error",
+    eqeqeq: "error",
     "@typescript-eslint/no-explicit-any": "off",
   },
 };
