@@ -1,4 +1,5 @@
-import { AtomicHandler } from "./index";
+import { AtomicHandler } from "./atomic";
+import { isEmail } from "../email";
 
 export class StringHandler extends AtomicHandler<string> {
   constructor() {
@@ -6,81 +7,163 @@ export class StringHandler extends AtomicHandler<string> {
     this._rules.push((v) => typeof v === "string" || "Must be a string");
   }
 
-  endsWith(substr: string) {
-    this._rules.push((v) => v.endsWith(substr));
-  }
-
-  beginsWith(substr: string) {
+  /**
+   * Alias for [[startsWith]]
+   */
+  prefix(substr: string): this {
     return this.startsWith(substr);
   }
 
-  startsWith(substr: string) {
-    this._rules.push((v) => v.startsWith(substr));
+  /**
+   * Alias for [[endsWith]]
+   */
+  suffix(substr: string): this {
+    return this.endsWith(substr);
   }
 
-  email() {
-    const emailRegex = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-    this._rules.push((v) => emailRegex.test(v) || `Must be a valid email`);
+  /**
+   * Check ending of a string
+   *
+   * ```typescript
+   * import yxc from "@dotvirus/yxc"
+   *
+   * yxc.string().endsWith("pusher").validate("test") // -> Fails
+   * yxc.string().endsWith("pusher").validate("Squarepusher") // -> OK
+   * ```
+   */
+  endsWith(substr: string): this {
+    this._rules.push(
+      (v) => v.endsWith(substr) || `Value has to end with ${substr}`,
+    );
     return this;
   }
 
-  numeric() {
+  /**
+   * Alias for [[startsWith]]
+   */
+  beginsWith(substr: string): this {
+    return this.startsWith(substr);
+  }
+
+  /**
+   * Check beginning of a string
+   *
+   * ```typescript
+   * import yxc from "@dotvirus/yxc"
+   *
+   * yxc.string().startsWith("pusher").validate("Squarepusher") // -> Fails
+   * yxc.string().startsWith("Squ").validate("Squarepusher") // -> OK
+   * ```
+   */
+  startsWith(substr: string): this {
+    this._rules.push(
+      (v) => v.startsWith(substr) || `Value has to start with ${substr}`,
+    );
+    return this;
+  }
+
+  /**
+   * Check if string is an email
+   */
+  email(): this {
+    this._rules.push((v) => isEmail(v) || `Must be a valid email`);
+    return this;
+  }
+
+  /**
+   * Fails if string contains non-number (0-9) values
+   */
+  numeric(): this {
     const regexp = /[^0-9]/;
-    this._rules.push((v) => !regexp.test(v) || `Must be numeric`);
+    this._rules.push((v) => (v.length && !regexp.test(v)) || `Must be numeric`);
     return this;
   }
 
-  alphanum(allowSpaces?: boolean) {
+  /**
+   * Only allow alphanumeric values
+   *
+   * @param allowSpaces Allow spaces
+   */
+  alphanum(allowSpaces?: boolean): this {
     const regexp = allowSpaces ? /[^a-zA-Z0-9 ]/ : /[^a-zA-Z0-9]/;
-    this._rules.push((v) => !regexp.test(v) || `Must be alphanumeric`);
-    return this;
-  }
-
-  regex(regexp: RegExp) {
     this._rules.push(
-      (v: string) => regexp.test(v) || `Does not match ${regexp.toString()}`
+      (v) => (v.length && !regexp.test(v)) || `Must be alphanumeric`,
     );
     return this;
   }
 
-  match(regexp: RegExp) {
-    return this.regex(regexp);
-  }
-
-  pattern(regexp: RegExp) {
-    return this.regex(regexp);
-  }
-
-  length(num: number) {
+  /**
+   * Check a regex
+   */
+  regex(regexp: RegExp): this {
     this._rules.push(
-      (v: string) => v.length == num || `Must be of length ${num}`
+      (v: string) => regexp.test(v) || `Does not match ${regexp.toString()}`,
     );
     return this;
   }
 
-  len(num: number) {
+  /**
+   * Alias for [[regex]]
+   */
+  match(regexp: RegExp): this {
+    return this.regex(regexp);
+  }
+
+  /**
+   * Alias for [[regex]]
+   */
+  pattern(regexp: RegExp): this {
+    return this.regex(regexp);
+  }
+
+  /**
+   * Test string length
+   */
+  length(num: number): this {
+    this._rules.push(
+      (v: string) => v.length === num || `Must be of length ${num}`,
+    );
+    return this;
+  }
+
+  /**
+   * Alias for [[length]]
+   */
+  len(num: number): this {
     return this.length(num);
   }
 
-  notEmpty() {
+  /**
+   * Require string to have at least 1 character
+   */
+  notEmpty(/* TODO: trim? */): StringHandler {
     return this.min(1);
   }
 
-  between(min: number, max: number) {
+  /**
+   * Require string to have a length between min and max
+   */
+  between(min: number, max: number): this {
     return this.min(min).max(max);
   }
 
-  min(min: number) {
+  /**
+   * Require minimum string length
+   */
+  min(min: number): this {
     this._rules.push(
       (v: string) =>
-        v.length >= min || `Must be at least ${min} characters long`
+        v.length >= min || `Must be at least ${min} characters long`,
     );
     return this;
   }
 
-  max(max: number) {
+  /**
+   * Limit string length
+   */
+  max(max: number): this {
     this._rules.push(
-      (v: string) => v.length <= max || `Must have at most ${max} characters`
+      (v: string) => v.length <= max || `Must have at most ${max} characters`,
     );
     return this;
   }

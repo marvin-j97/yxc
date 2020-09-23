@@ -1,10 +1,22 @@
-import { AtomicHandler } from "./index";
-import { AnyHandler } from "./any";
+import { Handler } from "./index";
+import { UnionHandler } from "./union";
+import { OptionalHandler } from "./optional";
 
-export class NullHandler extends AnyHandler {
+/**
+ * Null handler
+ */
+export class NullHandler extends Handler {
+  _type!: null;
+
   constructor() {
     super();
-    this.nullable();
-    this._rules.push((v) => v === null || "Must be null");
+    this._rules.push((v: unknown) => v === null || "Must be null");
+  }
+
+  /**
+   * Allows undefined value
+   */
+  optional(): UnionHandler<[this, OptionalHandler]> {
+    return new UnionHandler([this, new OptionalHandler()]);
   }
 }

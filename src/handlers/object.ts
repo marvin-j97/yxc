@@ -1,94 +1,113 @@
 import { Handler } from "./index";
-import { IValidationResult, ISchemaDefinition } from "../schema";
-import debug from "debug";
+import { IValidationResult, ISchemaDefinition, Infer } from "../types";
+import { UnionHandler } from "./union";
+import { OptionalHandler } from "./optional";
+import { isObject } from "../util";
+import { BaseHandler } from "./base";
 
-const log = debug("yxc");
+export class ObjectHandler<
+  T extends Record<string, Handler>
+> extends BaseHandler {
+  _type!: {
+    [K in keyof T]: Infer<T[K]>;
+  };
 
-function deepSet(root: any, segments: string[], value: any): void {
-  // Iterative deep object descent & set
-  let obj = root;
-
-  for (let i = 0; i < segments.length; i++) {
-    const current = obj;
-    const seg = segments[i];
-
-    if (i < segments.length - 1) {
-      obj = (<any>obj)[seg];
-    } else {
-      if (typeof obj === "object" && obj !== null) {
-        (<any>obj)[seg] = value;
-      } else {
-        throw new TypeError(`Tried to set property of atomic value`);
-      }
-    }
-
-    if (obj === undefined) {
-      const nextSeg = segments[i + 1];
-      if (/^[0-9]+$/.test(nextSeg.toString()) || typeof nextSeg === "number")
-        (<any>current)[seg] = [];
-      else (<any>current)[seg] = {};
-      obj = (<any>current)[seg];
-    }
-  }
-}
-
-export class ObjectHandler extends Handler<Record<string, any>> {
   private _keys: ISchemaDefinition = {};
   private _arbitrary = false;
   private _partial = false;
 
-  constructor(keys?: ISchemaDefinition) {
+  constructor(keys?: T) {
     super();
-    this._rules.push(
-      (v) => (typeof v == "object" && !Array.isArray(v)) || "Must be an object"
-    );
+    this._rules.push((v) => isObject(v) || "Must be an object");
     if (keys) {
       this._keys = keys;
     }
   }
 
-  any(pred: (v: any, k: string, obj: any) => boolean) {
+  any(
+    pred: (
+      v: unknown,
+      k: string,
+      obj: {
+        [K in keyof T]: Infer<T[K]>;
+      },
+    ) => boolean,
+  ): this {
     return this.some(pred);
   }
 
-  all(pred: (v: any, k: string, obj: any) => boolean) {
+  all(
+    pred: (
+      v: unknown,
+      k: string,
+      obj: {
+        [K in keyof T]: Infer<T[K]>;
+      },
+    ) => boolean,
+  ): this {
     return this.every(pred);
   }
 
-  some(pred: (v: any, k: string, obj: any) => boolean) {
+  some(
+    pred: (
+      v: unknown,
+      k: string,
+      obj: {
+        [K in keyof T]: Infer<T[K]>;
+      },
+    ) => boolean,
+  ): this {
     this._rules.push((o) => Object.keys(o).some((k) => pred(o[k], k, o)));
     return this;
   }
 
-  every(pred: (v: any, k: string, obj: any) => boolean) {
+  every(
+    pred: (
+      v: unknown,
+      k: string,
+      obj: {
+        [K in keyof T]: Infer<T[K]>;
+      },
+    ) => boolean,
+  ): this {
     this._rules.push((o) => Object.keys(o).every((k) => pred(o[k], k, o)));
     return this;
   }
 
-  partial() {
+  partial(): this {
     this._partial = true;
     return this;
   }
 
-  arbitrary() {
+  arbitrary(): this {
     this._arbitrary = true;
     return this;
   }
 
-  numKeys(num: number) {
+  numKeys(num: number): this {
     this._rules.push(
-      (v: object) => Object.keys(v).length == num || `Must have ${num} keys`
+      (
+        v: {
+          [K in keyof T]: T[K]["_type"];
+        },
+      ) => Object.keys(v).length === num || `Must have ${num} keys`,
     );
     return this;
   }
 
-  validate(value: any, key: string[] = [], root?: any): IValidationResult[] {
+  validate(
+    value: unknown,
+    key: string[] = [],
+    root?: unknown,
+  ): IValidationResult[] {
     const myResults = super.validate(value, key, root);
     const keyResults: IValidationResult[] = [];
 
-    if (typeof value === "object") {
+    if (typeof value === "object" && value !== null) {
+      const _value = <Record<string, unknown>>value;
+
       if (!this._arbitrary) {
-        for (const objKey in value) {
+        for (const objKey in _value) {
           const handler = this._keys[objKey];
 
           if (!handler) {
@@ -104,52 +123,20 @@ export class ObjectHandler extends Handler<Record<string, any>> {
         const handler = this._keys[myKey];
 
         const getResults = (handler: Handler) => {
-          const results = handler.validate(value[myKey], [...key, myKey], root);
+          const results = handler.validate(
+            _value[myKey],
+            [...key, myKey],
+            root,
+          );
           keyResults.push(...results);
           return results;
         };
 
         if (handler instanceof Handler) {
-          if (this._partial) handler.optional();
-          getResults(handler);
-        } else {
-          if (handler.onBefore) {
-            log("Before hook");
-            handler.onBefore(value[myKey], [...key, myKey], root);
-          }
-
-          if (handler.default && value[myKey] === undefined) {
-            log("Using default value");
-            const defVal = handler.default(value[myKey], [...key, myKey], root);
-            deepSet(root, [...key, myKey], defVal);
+          if (this._partial) {
+            getResults(new UnionHandler([handler, new OptionalHandler()]));
           } else {
-            if (handler.mutateBefore) {
-              log("Mutate before");
-              const mutate = handler.mutateBefore(
-                value[myKey],
-                [...key, myKey],
-                root
-              );
-              deepSet(root, [...key, myKey], mutate);
-            }
-
-            if (this._partial) handler.handler.optional();
-            const hadError = !!getResults(handler.handler).length;
-
-            if (!hadError && handler.mutateAfter) {
-              log("Mutate after");
-              const mutate = handler.mutateAfter(
-                value[myKey],
-                [...key, myKey],
-                root
-              );
-              deepSet(root, [...key, myKey], mutate);
-            } else log("Skipping mutate after because validation failed");
-          }
-
-          if (handler.onAfter) {
-            log("After hook");
-            handler.onAfter(value[myKey], [...key, myKey], root);
+            getResults(handler);
           }
         }
       }
