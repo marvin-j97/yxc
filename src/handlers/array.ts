@@ -15,26 +15,26 @@ export class ArrayHandler<T extends Handler> extends BaseHandler {
   }
 
   any(
-    pred: (v: Infer<T>, i: number, arr: Infer<T>[]) => boolean,
+    pred: (v: Infer<T>, i: number, arr: Array<Infer<T>>) => boolean,
   ): ArrayHandler<T> {
     return this.some(pred);
   }
 
   all(
-    pred: (v: Infer<T>, i: number, arr: Infer<T>[]) => boolean,
+    pred: (v: Infer<T>, i: number, arr: Array<Infer<T>>) => boolean,
   ): ArrayHandler<T> {
     return this.every(pred);
   }
 
   some(
-    pred: (v: Infer<T>, i: number, arr: Infer<T>[]) => boolean,
+    pred: (v: Infer<T>, i: number, arr: Array<Infer<T>>) => boolean,
   ): ArrayHandler<T> {
     this._rules.push((arr: Array<Infer<T>>) => arr.some(pred));
     return this;
   }
 
   every(
-    pred: (v: Infer<T>, i: number, arr: Infer<T>[]) => boolean,
+    pred: (v: Infer<T>, i: number, arr: Array<Infer<T>>) => boolean,
   ): ArrayHandler<T> {
     this._rules.push((arr: Array<Infer<T>>) => arr.every(pred));
     return this;
@@ -86,7 +86,7 @@ export class ArrayHandler<T extends Handler> extends BaseHandler {
     const keyResults: IValidationResult[] = [];
 
     if (Array.isArray(value)) {
-      (<Array<Infer<T>>>value).forEach((v, i) => {
+      value.forEach((v, i) => {
         const myKey = i.toString();
         const results = this._handler.validate(v, [...key, myKey], root);
         keyResults.push(...results);
