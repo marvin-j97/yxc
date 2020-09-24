@@ -51,7 +51,8 @@ console.log(result);
 // {
 //   ok: false,
 //   errors: [
-//     { key: ['age'],
+//     {
+//       key: ['age'],
 //       message: 'Must be at least 0'
 //     }
 //   ]
