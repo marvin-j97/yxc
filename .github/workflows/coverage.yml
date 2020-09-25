@@ -13,6 +13,8 @@ jobs:
         with:
           node-version: 14.x
       - run: npm ci
+      - run: npm run build
+      - run: npm run lint
       - run: npm run coverage
       - uses: codecov/codecov-action@v1
         with:
