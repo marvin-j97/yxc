@@ -1,33 +1,24 @@
 import { Handler } from "./handlers/index";
-import { VoidFunc, Mutation } from "./types";
 import { ObjectHandler } from "./handlers/object";
+import { ISchemaDefinition, Infer } from "./types";
 
-export interface IKeyOptions {
-  handler: Handler;
-  onBefore?: VoidFunc;
-  onAfter?: VoidFunc;
-  mutateBefore?: Mutation;
-  mutateAfter?: Mutation;
-  default?: Mutation;
-}
-
-export interface IValidationResult {
-  key: string[];
-  message: string | boolean;
-}
-
-export interface ISchemaDefinition {
-  [key: string]: Handler | IKeyOptions;
-}
-
-export function createExecutableSchema(handler: ObjectHandler) {
-  return (value: any) => handler.validate(value, [], value);
+export function createExecutableSchema(handler: Handler) {
+  return (value: unknown) => {
+    const result = handler.validate(value, [], value);
+    return {
+      ok: !result.length,
+      errors: result,
+    };
+  };
 }
 
 export function createSchema(def: ISchemaDefinition) {
   return createExecutableSchema(new ObjectHandler(def));
 }
 
-export function formatResult(result: IValidationResult[]) {
-  return result.map((v) => v.key.join(".") + ": " + v.message);
+export function is<T extends Handler>(
+  value: unknown,
+  handler: T,
+): value is Infer<T> {
+  return createExecutableSchema(handler)(value).ok;
 }

@@ -1,18 +1,27 @@
-import { AtomicHandler } from "./index";
+import { AtomicHandler } from "./atomic";
 
+/**
+ * Boolean handler
+ */
 export class BooleanHandler extends AtomicHandler<boolean> {
   constructor() {
     super();
-    this._rules.push((v) => typeof v === "boolean" || "Must be a boolean");
+    this._rules.push(
+      (v: unknown) => typeof v === "boolean" || "Must be a boolean",
+    );
   }
 
-  true() {
-    this._rules.push((v) => v == true || "Must be true");
-    return this;
+  /**
+   * Only allows true
+   */
+  true(): BooleanHandler {
+    return this.equals(true);
   }
 
-  false() {
-    this._rules.push((v) => v == false || "Must be false");
-    return this;
+  /**
+   * Only allows false
+   */
+  false(): BooleanHandler {
+    return this.equals(false);
   }
 }

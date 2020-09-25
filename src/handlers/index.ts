@@ -1,20 +1,13 @@
-import { Rule } from "../types";
-import debug from "debug";
+import { IValidationResult, Rule } from "../types";
+import { log } from "../log";
 
-const log = debug("yxc");
-
+/**
+ * Abstract base handler
+ */
 export abstract class Handler<T = any> {
+  _type!: any;
+
   protected _rules: Rule<T>[] = [];
-  protected _optional = false;
-  protected _nullable = false;
-
-  isNullable() {
-    return this._nullable;
-  }
-
-  isOptional() {
-    return this._optional;
-  }
 
   // or(rules: Rule<T>[]) {
   //   this._rules.push((v: T, k, root) => {
@@ -31,38 +24,77 @@ export abstract class Handler<T = any> {
   //   return this;
   // }
 
-  validate(value: any, key?: string[], root?: any) {
+  /**
+   * Alias for [[custom]]
+   */
+  test(rule: Rule<T>): Handler {
+    this.custom(rule);
+    return this;
+  }
+
+  /**
+   * Alias for [[custom]]
+   */
+  check(rule: Rule<T>): Handler {
+    this.custom(rule);
+    return this;
+  }
+
+  /**
+   * Alias for [[custom]]
+   */
+  use(rule: Rule<T>): Handler {
+    this.custom(rule);
+    return this;
+  }
+
+  /**
+   * Alias for [[custom]]
+   */
+  rule(rule: Rule<T>): Handler {
+    this.custom(rule);
+    return this;
+  }
+
+  /**
+   * Add a custom function to test the value with
+   *
+   * ```typescript
+   * import yxc from "@dotvirus/yxc"
+   *
+   * yxc.string().test()
+   * ```
+   */
+  custom(rule: Rule<T>): Handler {
+    this._rules.push(rule);
+    return this;
+  }
+
+  /**
+   * Validate a value
+   * Returns a [[IValidationResult]] array
+   *
+   * ```typescript
+   * import yxc from "@dotvirus/yxc"
+   *
+   * yxc.string().validate(myValue)
+   * ```
+   */
+  validate(
+    value: unknown,
+    key?: string[],
+    root?: unknown,
+  ): IValidationResult[] {
     const results: { key: string[]; message: string | boolean }[] = [];
-
-    log("Checking if undefined");
-    if (value === undefined) {
-      if (this._optional) {
-        log("Value is undefined and optional!");
-        return [];
-      } else {
-        log("Value is undefined, but not optional!");
-        return [{ key: key || [], message: "Value required" }];
-      }
-    }
-
-    log("Checking if null");
-    if (value === null) {
-      if (this._nullable) {
-        log("Value is null and nullable!");
-        return [];
-      } else {
-        log("Value is null, but not nullable!");
-        return [{ key: key || [], message: "Value must not be null" }];
-      }
-    }
 
     log("Checking rules");
     for (const rule of this._rules) {
-      const result = rule(value, key || [], root || value);
+      const result = rule(<any>value, key || [], root || value);
       if (typeof result === "string" || !result) {
         log("Rule failed!");
         results.push({ key: key || [], message: result });
         log("Rule result: " + result);
+        return results;
       } else {
         log("Rule passed!");
       }
@@ -70,61 +102,5 @@ export abstract class Handler<T = any> {
 
     log(`Checked rules, ${results.length} errors`);
     return results;
-  }
-
-  test(rule: Rule<T>) {
-    this.custom(rule);
-    return this;
-  }
-
-  check(rule: Rule<T>) {
-    this.custom(rule);
-    return this;
-  }
-
-  use(rule: Rule<T>) {
-    this.custom(rule);
-    return this;
-  }
-
-  custom(rule: Rule<T>) {
-    this._rules.push(rule);
-    return this;
-  }
-
-  optional() {
-    this._optional = true;
-    return this;
-  }
-
-  nullable() {
-    this._nullable = true;
-    return this;
-  }
-}
-
-export class AtomicHandler<T = string | number | boolean> extends Handler<T> {
-  equals(expected: T) {
-    this._rules.push(
-      (v: T) => v === expected || `Must be equal to ${expected}`
-    );
-    return this;
-  }
-
-  eq(expected: T) {
-    return this.equals(expected);
-  }
-
-  equal(expected: T) {
-    return this.equals(expected);
-  }
-
-  enum(values: T[]) {
-    this._rules.push(
-      (v) =>
-        values.includes(v) ||
-        `Must be one of the following values: ${values.join(", ")}`
-    );
-    return this;
   }
 }
