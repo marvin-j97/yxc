@@ -2,17 +2,19 @@ import fixture from "./fixture";
 import { expect } from "chai";
 import yxc, { createExecutableSchema } from "../../../../src/index";
 
-describe("Partial object check", () => {
+function isDigit(n: number) {
+  return n >= 0 && n < 10;
+}
+
+describe("Object every", () => {
   for (const test of fixture) {
     const handler = yxc
-      .object({
-        a: yxc.number(),
-        b: yxc.string(),
-      })
-      .partial();
+      .object()
+      .arbitrary()
+      .some(<any>isDigit);
     it(`${test.value} should be a ${
       test.expected ? "valid" : "invalid"
-    } partial object`, () => {
+    } object some digits`, () => {
       const result = createExecutableSchema(handler)(test.value);
       if (test.expected) {
         expect(result.errors).to.be.empty;

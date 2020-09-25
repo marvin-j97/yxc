@@ -98,10 +98,7 @@ export class NumberHandler extends AtomicHandler<number> {
    * ```
    */
   between(min: number, max: number): NumberHandler {
-    this._rules.push(
-      (v: number) => (v >= min && v <= max) || `Must be ${min} and ${max}`,
-    );
-    return this;
+    return this.min(min).max(max);
   }
 
   /**

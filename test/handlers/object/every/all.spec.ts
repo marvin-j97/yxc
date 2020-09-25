@@ -2,12 +2,19 @@ import fixture from "./fixture";
 import { expect } from "chai";
 import yxc, { createExecutableSchema } from "../../../../src/index";
 
-describe("Number min", () => {
+function isDigit(n: number) {
+  return n >= 0 && n < 10;
+}
+
+describe("Object all", () => {
   for (const test of fixture) {
-    const handler = yxc.number().min(test.min);
+    const handler = yxc
+      .object()
+      .arbitrary()
+      .all(<any>isDigit);
     it(`${test.value} should be a ${
       test.expected ? "valid" : "invalid"
-    } number >= ${test.min}`, () => {
+    } object all digits`, () => {
       const result = createExecutableSchema(handler)(test.value);
       if (test.expected) {
         expect(result.errors).to.be.empty;

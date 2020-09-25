@@ -132,12 +132,10 @@ export class ObjectHandler<
           return results;
         };
 
-        if (handler instanceof Handler) {
-          if (this._partial) {
-            getResults(new UnionHandler([handler, new OptionalHandler()]));
-          } else {
-            getResults(handler);
-          }
+        if (this._partial) {
+          getResults(new UnionHandler([handler, new OptionalHandler()]));
+        } else {
+          getResults(handler);
         }
       }
     }
