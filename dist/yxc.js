@@ -390,13 +390,11 @@
                         keyResults.push.apply(keyResults, results);
                         return results;
                     };
-                    if (handler instanceof Handler) {
-                        if (this_1._partial) {
-                            getResults(new UnionHandler([handler, new OptionalHandler()]));
-                        }
-                        else {
-                            getResults(handler);
-                        }
+                    if (this_1._partial) {
+                        getResults(new UnionHandler([handler, new OptionalHandler()]));
+                    }
+                    else {
+                        getResults(handler);
                     }
                 };
                 var this_1 = this;
@@ -460,8 +458,7 @@
             return this;
         };
         NumberHandler.prototype.between = function (min, max) {
-            this._rules.push(function (v) { return (v >= min && v <= max) || "Must be " + min + " and " + max; });
-            return this;
+            return this.min(min).max(max);
         };
         NumberHandler.prototype.min = function (min) {
             this._rules.push(function (v) { return v >= min || "Must be " + min + " or greater"; });
