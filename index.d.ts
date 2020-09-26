@@ -11,11 +11,11 @@ declare type Infer<T extends Handler> = T["_type"];
 declare abstract class Handler<T = any> {
     _type: any;
     protected _rules: Rule<T>[];
-    test(rule: Rule<T>): Handler;
-    check(rule: Rule<T>): Handler;
-    use(rule: Rule<T>): Handler;
-    rule(rule: Rule<T>): Handler;
-    custom(rule: Rule<T>): Handler;
+    test(rule: Rule<T>): this;
+    check(rule: Rule<T>): this;
+    use(rule: Rule<T>): this;
+    rule(rule: Rule<T>): this;
+    custom(rule: Rule<T>): this;
     validate(value: unknown, key?: string[], root?: unknown): IValidationResult[];
 }
 
@@ -66,7 +66,7 @@ declare class StringHandler extends AtomicHandler<string> {
     pattern(regexp: RegExp): this;
     length(num: number): this;
     len(num: number): this;
-    notEmpty(): StringHandler;
+    notEmpty(): this;
     between(min: number, max: number): this;
     min(min: number): this;
     max(max: number): this;
@@ -102,40 +102,40 @@ declare class NumberHandler extends AtomicHandler<number> {
     constructor();
     natural(opts?: Partial<{
         withZero: boolean;
-    }>): NumberHandler;
-    int(): NumberHandler;
-    integer(): NumberHandler;
+    }>): this;
+    int(): this;
+    integer(): this;
     negative(opts?: Partial<{
         withZero: boolean;
-    }>): NumberHandler;
+    }>): this;
     positive(opts?: Partial<{
         withZero: boolean;
-    }>): NumberHandler;
-    between(min: number, max: number): NumberHandler;
-    min(min: number): NumberHandler;
-    max(max: number): NumberHandler;
+    }>): this;
+    between(min: number, max: number): this;
+    min(min: number): this;
+    max(max: number): this;
 }
 
 declare class BooleanHandler extends AtomicHandler<boolean> {
     constructor();
-    true(): BooleanHandler;
-    false(): BooleanHandler;
+    true(): this;
+    false(): this;
 }
 
 declare class ArrayHandler<T extends Handler> extends BaseHandler {
     _type: Array<Infer<T>>;
     _handler: Handler;
     constructor(handler: T);
-    any(pred: (v: Infer<T>, i: number, arr: Array<Infer<T>>) => boolean): ArrayHandler<T>;
-    all(pred: (v: Infer<T>, i: number, arr: Array<Infer<T>>) => boolean): ArrayHandler<T>;
-    some(pred: (v: Infer<T>, i: number, arr: Array<Infer<T>>) => boolean): ArrayHandler<T>;
-    every(pred: (v: Infer<T>, i: number, arr: Array<Infer<T>>) => boolean): ArrayHandler<T>;
-    length(num: number): ArrayHandler<T>;
-    len(num: number): ArrayHandler<T>;
-    notEmpty(): ArrayHandler<T>;
-    between(min: number, max: number): ArrayHandler<T>;
-    min(min: number): ArrayHandler<T>;
-    max(max: number): ArrayHandler<T>;
+    any(pred: (v: Infer<T>, i: number, arr: Array<Infer<T>>) => boolean): this;
+    all(pred: (v: Infer<T>, i: number, arr: Array<Infer<T>>) => boolean): this;
+    some(pred: (v: Infer<T>, i: number, arr: Array<Infer<T>>) => boolean): this;
+    every(pred: (v: Infer<T>, i: number, arr: Array<Infer<T>>) => boolean): this;
+    length(num: number): this;
+    len(num: number): this;
+    notEmpty(): this;
+    between(min: number, max: number): this;
+    min(min: number): this;
+    max(max: number): this;
     validate(value: unknown, key?: string[], root?: unknown): IValidationResult[];
 }
 
@@ -182,4 +182,4 @@ declare const _default: {
 };
 
 export default _default;
-export { ISchemaDefinition, IValidationResult, Infer, Rule, createExecutableSchema, createSchema, is };
+export { AnyHandler, ArrayHandler, BooleanHandler, Handler, ISchemaDefinition, IValidationResult, Infer, NullHandler, NumberHandler, ObjectHandler, OptionalHandler, RecordHandler, Rule, StringHandler, UnionHandler, createExecutableSchema, createSchema, is };
