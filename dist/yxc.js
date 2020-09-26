@@ -717,6 +717,17 @@
         undefined: function () { return new OptionalHandler(); },
     };
 
+    exports.AnyHandler = AnyHandler;
+    exports.ArrayHandler = ArrayHandler;
+    exports.BooleanHandler = BooleanHandler;
+    exports.Handler = Handler;
+    exports.NullHandler = NullHandler;
+    exports.NumberHandler = NumberHandler;
+    exports.ObjectHandler = ObjectHandler;
+    exports.OptionalHandler = OptionalHandler;
+    exports.RecordHandler = RecordHandler;
+    exports.StringHandler = StringHandler;
+    exports.UnionHandler = UnionHandler;
     exports.createExecutableSchema = createExecutableSchema;
     exports.createSchema = createSchema;
     exports.default = index;
