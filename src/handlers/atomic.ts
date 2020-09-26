@@ -5,7 +5,7 @@ import { BaseHandler } from "./base";
  */
 export abstract class AtomicHandler<
   T = string | number | boolean
-> extends BaseHandler {
+> extends BaseHandler<T> {
   _type!: T;
 
   /**
