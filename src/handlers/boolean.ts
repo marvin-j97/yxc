@@ -14,14 +14,14 @@ export class BooleanHandler extends AtomicHandler<boolean> {
   /**
    * Only allows true
    */
-  true(): BooleanHandler {
+  true(): this {
     return this.equals(true);
   }
 
   /**
    * Only allows false
    */
-  false(): BooleanHandler {
+  false(): this {
     return this.equals(false);
   }
 }

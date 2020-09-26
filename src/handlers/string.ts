@@ -136,7 +136,7 @@ export class StringHandler extends AtomicHandler<string> {
   /**
    * Require string to have at least 1 character
    */
-  notEmpty(/* TODO: trim? */): StringHandler {
+  notEmpty(/* TODO: trim? */): this {
     return this.min(1);
   }
 

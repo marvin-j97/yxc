@@ -32,3 +32,17 @@ export default {
 
 export * from "./types";
 export * from "./schema";
+
+export {
+  StringHandler,
+  ObjectHandler,
+  NumberHandler,
+  BooleanHandler,
+  ArrayHandler,
+  AnyHandler,
+  UnionHandler,
+  Handler,
+  NullHandler,
+  OptionalHandler,
+  RecordHandler,
+};

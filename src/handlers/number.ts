@@ -15,14 +15,14 @@ export class NumberHandler extends AtomicHandler<number> {
   /**
    * Only allow natural numbers
    */
-  natural(opts?: Partial<{ withZero: boolean }>): NumberHandler {
+  natural(opts?: Partial<{ withZero: boolean }>): this {
     return this.integer().positive({ withZero: opts?.withZero });
   }
 
   /**
    * Alias for [[integer]]
    */
-  int(): NumberHandler {
+  int(): this {
     return this.integer();
   }
 
@@ -37,7 +37,7 @@ export class NumberHandler extends AtomicHandler<number> {
    * yxc.number().integer().validate(4) // -> OK
    * ```
    */
-  integer(): NumberHandler {
+  integer(): this {
     this._rules.push(
       (v: number) => Number.isInteger(v) || `Must be an integer`,
     );
@@ -55,7 +55,7 @@ export class NumberHandler extends AtomicHandler<number> {
    * yxc.number().integer().validate(-4) // -> OK
    * ```
    */
-  negative(opts?: Partial<{ withZero: boolean }>): NumberHandler {
+  negative(opts?: Partial<{ withZero: boolean }>): this {
     if (opts?.withZero) {
       this.max(0);
     } else {
@@ -75,7 +75,7 @@ export class NumberHandler extends AtomicHandler<number> {
    * yxc.number().integer().validate(4) // -> OK
    * ```
    */
-  positive(opts?: Partial<{ withZero: boolean }>): NumberHandler {
+  positive(opts?: Partial<{ withZero: boolean }>): this {
     if (opts?.withZero) {
       this.min(0);
     } else {
@@ -97,7 +97,7 @@ export class NumberHandler extends AtomicHandler<number> {
    * yxc.number().between(0, 5).validate(5) // -> OK
    * ```
    */
-  between(min: number, max: number): NumberHandler {
+  between(min: number, max: number): this {
     return this.min(min).max(max);
   }
 
@@ -112,7 +112,7 @@ export class NumberHandler extends AtomicHandler<number> {
    * yxc.number().min(0).validate(1) // -> OK
    * ```
    */
-  min(min: number): NumberHandler {
+  min(min: number): this {
     this._rules.push((v: number) => v >= min || `Must be ${min} or greater`);
     return this;
   }
@@ -128,7 +128,7 @@ export class NumberHandler extends AtomicHandler<number> {
    * yxc.number().max(0).validate(-1) // -> OK
    * ```
    */
-  max(max: number): NumberHandler {
+  max(max: number): this {
     this._rules.push(
       (v: number) => v <= max || `Must be less than or equal ${max}`,
     );
