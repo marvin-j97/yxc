@@ -27,7 +27,7 @@ export abstract class Handler<T = any> {
   /**
    * Alias for [[custom]]
    */
-  test(rule: Rule<T>): Handler {
+  test(rule: Rule<T>): this {
     this.custom(rule);
     return this;
   }
@@ -35,7 +35,7 @@ export abstract class Handler<T = any> {
   /**
    * Alias for [[custom]]
    */
-  check(rule: Rule<T>): Handler {
+  check(rule: Rule<T>): this {
     this.custom(rule);
     return this;
   }
@@ -43,7 +43,7 @@ export abstract class Handler<T = any> {
   /**
    * Alias for [[custom]]
    */
-  use(rule: Rule<T>): Handler {
+  use(rule: Rule<T>): this {
     this.custom(rule);
     return this;
   }
@@ -51,7 +51,7 @@ export abstract class Handler<T = any> {
   /**
    * Alias for [[custom]]
    */
-  rule(rule: Rule<T>): Handler {
+  rule(rule: Rule<T>): this {
     this.custom(rule);
     return this;
   }
@@ -65,7 +65,7 @@ export abstract class Handler<T = any> {
    * yxc.string().test()
    * ```
    */
-  custom(rule: Rule<T>): Handler {
+  custom(rule: Rule<T>): this {
     this._rules.push(rule);
     return this;
   }
