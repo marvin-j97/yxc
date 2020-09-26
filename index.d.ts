@@ -43,7 +43,7 @@ declare abstract class BaseHandler<T = any> extends Handler<T> {
     optional(): UnionHandler<[this, OptionalHandler]>;
 }
 
-declare abstract class AtomicHandler<T = string | number | boolean> extends BaseHandler {
+declare abstract class AtomicHandler<T = string | number | boolean> extends BaseHandler<T> {
     _type: T;
     equals(expected: T): this;
     eq(expected: T): this;
