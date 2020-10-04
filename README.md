@@ -1,6 +1,6 @@
 # yxc
 
-Schema validation with composition &amp; API middlewares, written in Typescript.
+Schema validation with composition, written in Typescript.
 
 See the full documentation here: https://dotvirus.github.io/yxc/
 
@@ -15,7 +15,7 @@ See the full documentation here: https://dotvirus.github.io/yxc/
 
 ```
 npm i @dotvirus/yxc
-```zzzzz
+```
 
 # Examples
 
