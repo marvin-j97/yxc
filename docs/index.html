@@ -86,15 +86,15 @@
 				<pre><code class="language-typescript"><span class="hljs-keyword">import</span> yxc, { createSchema } <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;@dotvirus/yxc&quot;</span>;
 
 <span class="hljs-keyword">const</span> schema = createSchema({
-  id: yxc.number().integer().positive(),
-  name: yxc.string().notEmpty(),
-  age: yxc.number().integer().min(<span class="hljs-number">0</span>),
+  <span class="hljs-attr">id</span>: yxc.number().integer().positive(),
+  <span class="hljs-attr">name</span>: yxc.string().notEmpty(),
+  <span class="hljs-attr">age</span>: yxc.number().integer().min(<span class="hljs-number">0</span>),
 });
 
 <span class="hljs-keyword">const</span> result = schema({
-  id: <span class="hljs-number">52165</span>,
-  name: <span class="hljs-string">&quot;Test Name&quot;</span>,
-  age: <span class="hljs-number">32</span>,
+  <span class="hljs-attr">id</span>: <span class="hljs-number">52165</span>,
+  <span class="hljs-attr">name</span>: <span class="hljs-string">&quot;Test Name&quot;</span>,
+  <span class="hljs-attr">age</span>: <span class="hljs-number">32</span>,
 });
 <span class="hljs-built_in">console</span>.log(result);
 <span class="hljs-comment">//</span>
@@ -105,9 +105,9 @@
 <span class="hljs-comment">//</span>
 
 <span class="hljs-keyword">const</span> result = schema({
-  id: <span class="hljs-number">52165</span>,
-  name: <span class="hljs-string">&quot;Test Name&quot;</span>,
-  age: <span class="hljs-number">-5</span>,
+  <span class="hljs-attr">id</span>: <span class="hljs-number">52165</span>,
+  <span class="hljs-attr">name</span>: <span class="hljs-string">&quot;Test Name&quot;</span>,
+  <span class="hljs-attr">age</span>: -<span class="hljs-number">5</span>,
 });
 <span class="hljs-built_in">console</span>.log(result);
 <span class="hljs-comment">//</span>
@@ -135,39 +135,39 @@
 				<pre><code class="language-typescript"><span class="hljs-keyword">import</span> yxc, { createExecutableSchema } <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;@dotvirus/yxc&quot;</span>;
 
 <span class="hljs-keyword">const</span> Song = yxc.object({
-  title: yxc.string().notEmpty(),
-  duration: yxc.number().positive().int(),
+  <span class="hljs-attr">title</span>: yxc.string().notEmpty(),
+  <span class="hljs-attr">duration</span>: yxc.number().positive().int(),
 });
 
 <span class="hljs-keyword">const</span> Album = yxc.object({
-  title: yxc.string().notEmpty(),
-  songs: yxc.array(Song).notEmpty(),
-  duration: yxc.number().positive().int(),
-  releaseYear: yxc.number().positive().int(),
+  <span class="hljs-attr">title</span>: yxc.string().notEmpty(),
+  <span class="hljs-attr">songs</span>: yxc.array(Song).notEmpty(),
+  <span class="hljs-attr">duration</span>: yxc.number().positive().int(),
+  <span class="hljs-attr">releaseYear</span>: yxc.number().positive().int(),
 });
 
 <span class="hljs-keyword">const</span> isAlbum = createExecutableSchema(Album);
 
 <span class="hljs-built_in">console</span>.log(
   isAlbum({
-    title: <span class="hljs-string">&quot;Some album&quot;</span>,
-    songs: [
+    <span class="hljs-attr">title</span>: <span class="hljs-string">&quot;Some album&quot;</span>,
+    <span class="hljs-attr">songs</span>: [
       {
-        title: <span class="hljs-string">&quot;Some song&quot;</span>,
-        duration: <span class="hljs-number">125</span>,
+        <span class="hljs-attr">title</span>: <span class="hljs-string">&quot;Some song&quot;</span>,
+        <span class="hljs-attr">duration</span>: <span class="hljs-number">125</span>,
       },
     ],
-    duration: <span class="hljs-number">125</span>,
-    releaseYear: <span class="hljs-number">2015</span>,
+    <span class="hljs-attr">duration</span>: <span class="hljs-number">125</span>,
+    <span class="hljs-attr">releaseYear</span>: <span class="hljs-number">2015</span>,
   }).ok,
 ); <span class="hljs-comment">// -&gt; true</span>
 
 <span class="hljs-built_in">console</span>.log(
   isAlbum({
-    title: <span class="hljs-string">&quot;Some album&quot;</span>,
-    songs: [],
-    duration: <span class="hljs-number">125</span>,
-    releaseYear: <span class="hljs-number">2015</span>,
+    <span class="hljs-attr">title</span>: <span class="hljs-string">&quot;Some album&quot;</span>,
+    <span class="hljs-attr">songs</span>: [],
+    <span class="hljs-attr">duration</span>: <span class="hljs-number">125</span>,
+    <span class="hljs-attr">releaseYear</span>: <span class="hljs-number">2015</span>,
   }).errors,
 );
 <span class="hljs-comment">//</span>
@@ -190,9 +190,9 @@
 				<pre><code class="language-typescript"><span class="hljs-keyword">import</span> yxc, { Infer } <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;@dotvirus/yxc&quot;</span>;
 
 <span class="hljs-keyword">const</span> songSchema = yxc.object({
-  title: yxc.string().notEmpty(),
-  duration: yxc.number().positive().int(),
-  rating: yxc.number().positive().int().nullable(),
+  <span class="hljs-attr">title</span>: yxc.string().notEmpty(),
+  <span class="hljs-attr">duration</span>: yxc.number().positive().int(),
+  <span class="hljs-attr">rating</span>: yxc.number().positive().int().nullable(),
 });
 
 <span class="hljs-keyword">type</span> Song = Infer&lt;<span class="hljs-keyword">typeof</span> songSchema&gt;;
