@@ -27,11 +27,11 @@
     "prebuild": "rm -rf dist && rm -rf build",
     "postbuild": "rm -rf build"
   },
-  "author": "dotvirus",
+  "author": "marvin-j97",
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/dotvirus/yxc.git"
+    "url": "https://github.com/marvin-j97/yxc.git"
   },
   "keywords": [
     "validation",
