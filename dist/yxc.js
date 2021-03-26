@@ -60,7 +60,7 @@
         return Handler;
     }());
 
-    var __extends = (undefined && undefined.__extends) || (function () {
+    var __extends$b = (undefined && undefined.__extends) || (function () {
         var extendStatics = function (d, b) {
             extendStatics = Object.setPrototypeOf ||
                 ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
@@ -74,7 +74,7 @@
         };
     })();
     var OptionalHandler = (function (_super) {
-        __extends(OptionalHandler, _super);
+        __extends$b(OptionalHandler, _super);
         function OptionalHandler() {
             var _this = _super.call(this) || this;
             _this._rules.push(function (v) { return v === undefined || "Must be undefined"; });
@@ -86,7 +86,7 @@
         return OptionalHandler;
     }(Handler));
 
-    var __extends$1 = (undefined && undefined.__extends) || (function () {
+    var __extends$a = (undefined && undefined.__extends) || (function () {
         var extendStatics = function (d, b) {
             extendStatics = Object.setPrototypeOf ||
                 ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
@@ -100,7 +100,7 @@
         };
     })();
     var NullHandler = (function (_super) {
-        __extends$1(NullHandler, _super);
+        __extends$a(NullHandler, _super);
         function NullHandler() {
             var _this = _super.call(this) || this;
             _this._rules.push(function (v) { return v === null || "Must be null"; });
@@ -112,7 +112,7 @@
         return NullHandler;
     }(Handler));
 
-    var __extends$2 = (undefined && undefined.__extends) || (function () {
+    var __extends$9 = (undefined && undefined.__extends) || (function () {
         var extendStatics = function (d, b) {
             extendStatics = Object.setPrototypeOf ||
                 ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
@@ -126,7 +126,7 @@
         };
     })();
     var UnionHandler = (function (_super) {
-        __extends$2(UnionHandler, _super);
+        __extends$9(UnionHandler, _super);
         function UnionHandler(handlers) {
             var _this = _super.call(this) || this;
             _this._rules.push(function (v) {
@@ -146,7 +146,7 @@
         return UnionHandler;
     }(Handler));
 
-    var __extends$3 = (undefined && undefined.__extends) || (function () {
+    var __extends$8 = (undefined && undefined.__extends) || (function () {
         var extendStatics = function (d, b) {
             extendStatics = Object.setPrototypeOf ||
                 ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
@@ -160,7 +160,7 @@
         };
     })();
     var BaseHandler = (function (_super) {
-        __extends$3(BaseHandler, _super);
+        __extends$8(BaseHandler, _super);
         function BaseHandler() {
             return _super !== null && _super.apply(this, arguments) || this;
         }
@@ -173,7 +173,7 @@
         return BaseHandler;
     }(Handler));
 
-    var __extends$4 = (undefined && undefined.__extends) || (function () {
+    var __extends$7 = (undefined && undefined.__extends) || (function () {
         var extendStatics = function (d, b) {
             extendStatics = Object.setPrototypeOf ||
                 ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
@@ -187,7 +187,7 @@
         };
     })();
     var AtomicHandler = (function (_super) {
-        __extends$4(AtomicHandler, _super);
+        __extends$7(AtomicHandler, _super);
         function AtomicHandler() {
             return _super !== null && _super.apply(this, arguments) || this;
         }
@@ -216,7 +216,7 @@
         return emailRegex.test(str);
     }
 
-    var __extends$5 = (undefined && undefined.__extends) || (function () {
+    var __extends$6 = (undefined && undefined.__extends) || (function () {
         var extendStatics = function (d, b) {
             extendStatics = Object.setPrototypeOf ||
                 ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
@@ -230,7 +230,7 @@
         };
     })();
     var StringHandler = (function (_super) {
-        __extends$5(StringHandler, _super);
+        __extends$6(StringHandler, _super);
         function StringHandler() {
             var _this = _super.call(this) || this;
             _this._rules.push(function (v) { return typeof v === "string" || "Must be a string"; });
@@ -307,7 +307,7 @@
         return typeof val === "object" && !Array.isArray(val) && val !== null;
     }
 
-    var __extends$6 = (undefined && undefined.__extends) || (function () {
+    var __extends$5 = (undefined && undefined.__extends) || (function () {
         var extendStatics = function (d, b) {
             extendStatics = Object.setPrototypeOf ||
                 ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
@@ -320,7 +320,7 @@
             d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
         };
     })();
-    var __spreadArrays = (undefined && undefined.__spreadArrays) || function () {
+    var __spreadArrays$2 = (undefined && undefined.__spreadArrays) || function () {
         for (var s = 0, i = 0, il = arguments.length; i < il; i++) s += arguments[i].length;
         for (var r = Array(s), k = 0, i = 0; i < il; i++)
             for (var a = arguments[i], j = 0, jl = a.length; j < jl; j++, k++)
@@ -328,7 +328,7 @@
         return r;
     };
     var ObjectHandler = (function (_super) {
-        __extends$6(ObjectHandler, _super);
+        __extends$5(ObjectHandler, _super);
         function ObjectHandler(keys) {
             var _this = _super.call(this) || this;
             _this._keys = {};
@@ -377,7 +377,7 @@
                         var handler = this._keys[objKey];
                         if (!handler) {
                             keyResults.push({
-                                key: __spreadArrays(key, [objKey]),
+                                key: __spreadArrays$2(key, [objKey]),
                                 message: "Value not allowed",
                             });
                         }
@@ -386,7 +386,7 @@
                 var _loop_1 = function (myKey) {
                     var handler = this_1._keys[myKey];
                     var getResults = function (handler) {
-                        var results = handler.validate(_value_1[myKey], __spreadArrays(key, [myKey]), root);
+                        var results = handler.validate(_value_1[myKey], __spreadArrays$2(key, [myKey]), root);
                         keyResults.push.apply(keyResults, results);
                         return results;
                     };
@@ -407,7 +407,7 @@
         return ObjectHandler;
     }(BaseHandler));
 
-    var __extends$7 = (undefined && undefined.__extends) || (function () {
+    var __extends$4 = (undefined && undefined.__extends) || (function () {
         var extendStatics = function (d, b) {
             extendStatics = Object.setPrototypeOf ||
                 ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
@@ -421,7 +421,7 @@
         };
     })();
     var NumberHandler = (function (_super) {
-        __extends$7(NumberHandler, _super);
+        __extends$4(NumberHandler, _super);
         function NumberHandler() {
             var _this = _super.call(this) || this;
             _this._rules.push(function (v) {
@@ -471,7 +471,7 @@
         return NumberHandler;
     }(AtomicHandler));
 
-    var __extends$8 = (undefined && undefined.__extends) || (function () {
+    var __extends$3 = (undefined && undefined.__extends) || (function () {
         var extendStatics = function (d, b) {
             extendStatics = Object.setPrototypeOf ||
                 ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
@@ -485,7 +485,7 @@
         };
     })();
     var BooleanHandler = (function (_super) {
-        __extends$8(BooleanHandler, _super);
+        __extends$3(BooleanHandler, _super);
         function BooleanHandler() {
             var _this = _super.call(this) || this;
             _this._rules.push(function (v) { return typeof v === "boolean" || "Must be a boolean"; });
@@ -500,7 +500,7 @@
         return BooleanHandler;
     }(AtomicHandler));
 
-    var __extends$9 = (undefined && undefined.__extends) || (function () {
+    var __extends$2 = (undefined && undefined.__extends) || (function () {
         var extendStatics = function (d, b) {
             extendStatics = Object.setPrototypeOf ||
                 ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
@@ -521,7 +521,7 @@
         return r;
     };
     var ArrayHandler = (function (_super) {
-        __extends$9(ArrayHandler, _super);
+        __extends$2(ArrayHandler, _super);
         function ArrayHandler(handler) {
             var _this = _super.call(this) || this;
             _this._rules.push(function (v) { return Array.isArray(v) || "Must be an array"; });
@@ -586,7 +586,7 @@
         return ArrayHandler;
     }(BaseHandler));
 
-    var __extends$a = (undefined && undefined.__extends) || (function () {
+    var __extends$1 = (undefined && undefined.__extends) || (function () {
         var extendStatics = function (d, b) {
             extendStatics = Object.setPrototypeOf ||
                 ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
@@ -600,7 +600,7 @@
         };
     })();
     var AnyHandler = (function (_super) {
-        __extends$a(AnyHandler, _super);
+        __extends$1(AnyHandler, _super);
         function AnyHandler() {
             return _super.call(this) || this;
         }
@@ -615,7 +615,7 @@
         return AnyHandler;
     }(AtomicHandler));
 
-    var __extends$b = (undefined && undefined.__extends) || (function () {
+    var __extends = (undefined && undefined.__extends) || (function () {
         var extendStatics = function (d, b) {
             extendStatics = Object.setPrototypeOf ||
                 ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
@@ -628,7 +628,7 @@
             d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
         };
     })();
-    var __spreadArrays$2 = (undefined && undefined.__spreadArrays) || function () {
+    var __spreadArrays = (undefined && undefined.__spreadArrays) || function () {
         for (var s = 0, i = 0, il = arguments.length; i < il; i++) s += arguments[i].length;
         for (var r = Array(s), k = 0, i = 0; i < il; i++)
             for (var a = arguments[i], j = 0, jl = a.length; j < jl; j++, k++)
@@ -636,7 +636,7 @@
         return r;
     };
     var RecordHandler = (function (_super) {
-        __extends$b(RecordHandler, _super);
+        __extends(RecordHandler, _super);
         function RecordHandler(schema) {
             var _this = _super.call(this) || this;
             _this._rules.push(function (v) { return isObject(v) || "Must be an object"; });
@@ -670,7 +670,7 @@
             if (typeof value === "object") {
                 var _value = value;
                 for (var myKey in _value) {
-                    var results = this._schema.validate(_value[myKey], __spreadArrays$2(key, [myKey]), root);
+                    var results = this._schema.validate(_value[myKey], __spreadArrays(key, [myKey]), root);
                     keyResults.push.apply(keyResults, results);
                 }
             }
