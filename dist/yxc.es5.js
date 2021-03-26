@@ -94,6 +94,8 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
     };
 
     return function (d, b) {
+      if (typeof b !== "function" && b !== null) throw new TypeError("Class extends value " + String(b) + " is not a constructor or null");
+
       _extendStatics(d, b);
 
       function __() {
@@ -140,6 +142,8 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
     };
 
     return function (d, b) {
+      if (typeof b !== "function" && b !== null) throw new TypeError("Class extends value " + String(b) + " is not a constructor or null");
+
       _extendStatics2(d, b);
 
       function __() {
@@ -186,6 +190,8 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
     };
 
     return function (d, b) {
+      if (typeof b !== "function" && b !== null) throw new TypeError("Class extends value " + String(b) + " is not a constructor or null");
+
       _extendStatics3(d, b);
 
       function __() {
@@ -242,6 +248,8 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
     };
 
     return function (d, b) {
+      if (typeof b !== "function" && b !== null) throw new TypeError("Class extends value " + String(b) + " is not a constructor or null");
+
       _extendStatics4(d, b);
 
       function __() {
@@ -286,6 +294,8 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
     };
 
     return function (d, b) {
+      if (typeof b !== "function" && b !== null) throw new TypeError("Class extends value " + String(b) + " is not a constructor or null");
+
       _extendStatics5(d, b);
 
       function __() {
@@ -352,6 +362,8 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
     };
 
     return function (d, b) {
+      if (typeof b !== "function" && b !== null) throw new TypeError("Class extends value " + String(b) + " is not a constructor or null");
+
       _extendStatics6(d, b);
 
       function __() {
@@ -506,6 +518,8 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
     };
 
     return function (d, b) {
+      if (typeof b !== "function" && b !== null) throw new TypeError("Class extends value " + String(b) + " is not a constructor or null");
+
       _extendStatics7(d, b);
 
       function __() {
@@ -516,18 +530,12 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
     };
   }();
 
-  var __spreadArrays$2 = undefined && undefined.__spreadArrays || function () {
-    for (var s = 0, i = 0, il = arguments.length; i < il; i++) {
-      s += arguments[i].length;
+  var __spreadArray$2 = undefined && undefined.__spreadArray || function (to, from) {
+    for (var i = 0, il = from.length, j = to.length; i < il; i++, j++) {
+      to[j] = from[i];
     }
 
-    for (var r = Array(s), k = 0, i = 0; i < il; i++) {
-      for (var a = arguments[i], j = 0, jl = a.length; j < jl; j++, k++) {
-        r[k] = a[j];
-      }
-    }
-
-    return r;
+    return to;
   };
 
   var ObjectHandler = function (_super) {
@@ -614,7 +622,7 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
 
             if (!handler) {
               keyResults.push({
-                key: __spreadArrays$2(key, [objKey]),
+                key: __spreadArray$2(__spreadArray$2([], key), [objKey]),
                 message: "Value not allowed"
               });
             }
@@ -625,7 +633,7 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
           var handler = this_1._keys[myKey];
 
           var getResults = function getResults(handler) {
-            var results = handler.validate(_value_1[myKey], __spreadArrays$2(key, [myKey]), root);
+            var results = handler.validate(_value_1[myKey], __spreadArray$2(__spreadArray$2([], key), [myKey]), root);
             keyResults.push.apply(keyResults, results);
             return results;
           };
@@ -670,6 +678,8 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
     };
 
     return function (d, b) {
+      if (typeof b !== "function" && b !== null) throw new TypeError("Class extends value " + String(b) + " is not a constructor or null");
+
       _extendStatics8(d, b);
 
       function __() {
@@ -774,6 +784,8 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
     };
 
     return function (d, b) {
+      if (typeof b !== "function" && b !== null) throw new TypeError("Class extends value " + String(b) + " is not a constructor or null");
+
       _extendStatics9(d, b);
 
       function __() {
@@ -824,6 +836,8 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
     };
 
     return function (d, b) {
+      if (typeof b !== "function" && b !== null) throw new TypeError("Class extends value " + String(b) + " is not a constructor or null");
+
       _extendStatics10(d, b);
 
       function __() {
@@ -834,18 +848,12 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
     };
   }();
 
-  var __spreadArrays$1 = undefined && undefined.__spreadArrays || function () {
-    for (var s = 0, i = 0, il = arguments.length; i < il; i++) {
-      s += arguments[i].length;
+  var __spreadArray$1 = undefined && undefined.__spreadArray || function (to, from) {
+    for (var i = 0, il = from.length, j = to.length; i < il; i++, j++) {
+      to[j] = from[i];
     }
 
-    for (var r = Array(s), k = 0, i = 0; i < il; i++) {
-      for (var a = arguments[i], j = 0, jl = a.length; j < jl; j++, k++) {
-        r[k] = a[j];
-      }
-    }
-
-    return r;
+    return to;
   };
 
   var arrayRule = function arrayRule(v) {
@@ -943,7 +951,7 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
         value.forEach(function (v, i) {
           var myKey = i.toString();
 
-          var results = _this._handler.validate(v, __spreadArrays$1(key, [myKey]), root);
+          var results = _this._handler.validate(v, __spreadArray$1(__spreadArray$1([], key), [myKey]), root);
 
           keyResults.push.apply(keyResults, results);
         });
@@ -975,6 +983,8 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
     };
 
     return function (d, b) {
+      if (typeof b !== "function" && b !== null) throw new TypeError("Class extends value " + String(b) + " is not a constructor or null");
+
       _extendStatics11(d, b);
 
       function __() {
@@ -1027,6 +1037,8 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
     };
 
     return function (d, b) {
+      if (typeof b !== "function" && b !== null) throw new TypeError("Class extends value " + String(b) + " is not a constructor or null");
+
       _extendStatics12(d, b);
 
       function __() {
@@ -1037,18 +1049,12 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
     };
   }();
 
-  var __spreadArrays = undefined && undefined.__spreadArrays || function () {
-    for (var s = 0, i = 0, il = arguments.length; i < il; i++) {
-      s += arguments[i].length;
+  var __spreadArray = undefined && undefined.__spreadArray || function (to, from) {
+    for (var i = 0, il = from.length, j = to.length; i < il; i++, j++) {
+      to[j] = from[i];
     }
 
-    for (var r = Array(s), k = 0, i = 0; i < il; i++) {
-      for (var a = arguments[i], j = 0, jl = a.length; j < jl; j++, k++) {
-        r[k] = a[j];
-      }
-    }
-
-    return r;
+    return to;
   };
 
   var RecordHandler = function (_super) {
@@ -1113,7 +1119,7 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
         var _value = value;
 
         for (var myKey in _value) {
-          var results = this._schema.validate(_value[myKey], __spreadArrays(key, [myKey]), root);
+          var results = this._schema.validate(_value[myKey], __spreadArray(__spreadArray([], key), [myKey]), root);
 
           keyResults.push.apply(keyResults, results);
         }
