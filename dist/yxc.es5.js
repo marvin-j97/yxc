@@ -15,7 +15,7 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
     }
 
     if (process.env.YXC_DEBUG) {
-      console.log.apply(console, args);
+      console.error.apply(console, args);
     }
   }
 
@@ -602,8 +602,7 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
         key = [];
       }
 
-      var myResults = _super.prototype.validate.call(this, value, key, root);
-
+      var myResults = [];
       var keyResults = [];
 
       if (_typeof(value) === "object" && value !== null) {
@@ -643,6 +642,10 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
         for (var myKey in this._keys) {
           _loop_1(myKey);
         }
+      }
+
+      if (!keyResults.length) {
+        myResults = _super.prototype.validate.call(this, value, key, root);
       }
 
       return myResults.concat(keyResults);
@@ -845,15 +848,17 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
     return r;
   };
 
+  var arrayRule = function arrayRule(v) {
+    return Array.isArray(v) || "Must be an array";
+  };
+
   var ArrayHandler = function (_super) {
     __extends$2(ArrayHandler, _super);
 
     function ArrayHandler(handler) {
       var _this = _super.call(this) || this;
 
-      _this._rules.push(function (v) {
-        return Array.isArray(v) || "Must be an array";
-      });
+      _this._rules.push(arrayRule);
 
       _this._handler = handler;
       return _this;
@@ -931,8 +936,7 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
         key = [];
       }
 
-      var myResults = _super.prototype.validate.call(this, value, key, root);
-
+      var myResults = [];
       var keyResults = [];
 
       if (Array.isArray(value)) {
@@ -943,6 +947,10 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
 
           keyResults.push.apply(keyResults, results);
         });
+      }
+
+      if (!keyResults.length) {
+        myResults = _super.prototype.validate.call(this, value, key, root);
       }
 
       return myResults.concat(keyResults);
@@ -1098,11 +1106,10 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
         key = [];
       }
 
-      var myResults = _super.prototype.validate.call(this, value, key, root);
-
+      var myResults = [];
       var keyResults = [];
 
-      if (_typeof(value) === "object") {
+      if (_typeof(value) === "object" && value !== null) {
         var _value = value;
 
         for (var myKey in _value) {
@@ -1110,6 +1117,10 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
 
           keyResults.push.apply(keyResults, results);
         }
+      }
+
+      if (!keyResults.length) {
+        myResults = _super.prototype.validate.call(this, value, key, root);
       }
 
       return myResults.concat(keyResults);

@@ -10,7 +10,7 @@
             args[_i] = arguments[_i];
         }
         if (process.env.YXC_DEBUG) {
-            console.log.apply(console, args);
+            console.error.apply(console, args);
         }
     }
 
@@ -368,7 +368,7 @@
         };
         ObjectHandler.prototype.validate = function (value, key, root) {
             if (key === void 0) { key = []; }
-            var myResults = _super.prototype.validate.call(this, value, key, root);
+            var myResults = [];
             var keyResults = [];
             if (typeof value === "object" && value !== null) {
                 var _value_1 = value;
@@ -401,6 +401,9 @@
                 for (var myKey in this._keys) {
                     _loop_1(myKey);
                 }
+            }
+            if (!keyResults.length) {
+                myResults = _super.prototype.validate.call(this, value, key, root);
             }
             return myResults.concat(keyResults);
         };
@@ -520,11 +523,12 @@
                 r[k] = a[j];
         return r;
     };
+    var arrayRule = function (v) { return Array.isArray(v) || "Must be an array"; };
     var ArrayHandler = (function (_super) {
         __extends$2(ArrayHandler, _super);
         function ArrayHandler(handler) {
             var _this = _super.call(this) || this;
-            _this._rules.push(function (v) { return Array.isArray(v) || "Must be an array"; });
+            _this._rules.push(arrayRule);
             _this._handler = handler;
             return _this;
         }
@@ -572,7 +576,7 @@
         ArrayHandler.prototype.validate = function (value, key, root) {
             var _this = this;
             if (key === void 0) { key = []; }
-            var myResults = _super.prototype.validate.call(this, value, key, root);
+            var myResults = [];
             var keyResults = [];
             if (Array.isArray(value)) {
                 value.forEach(function (v, i) {
@@ -580,6 +584,9 @@
                     var results = _this._handler.validate(v, __spreadArrays$1(key, [myKey]), root);
                     keyResults.push.apply(keyResults, results);
                 });
+            }
+            if (!keyResults.length) {
+                myResults = _super.prototype.validate.call(this, value, key, root);
             }
             return myResults.concat(keyResults);
         };
@@ -665,14 +672,17 @@
         };
         RecordHandler.prototype.validate = function (value, key, root) {
             if (key === void 0) { key = []; }
-            var myResults = _super.prototype.validate.call(this, value, key, root);
+            var myResults = [];
             var keyResults = [];
-            if (typeof value === "object") {
+            if (typeof value === "object" && value !== null) {
                 var _value = value;
                 for (var myKey in _value) {
                     var results = this._schema.validate(_value[myKey], __spreadArrays(key, [myKey]), root);
                     keyResults.push.apply(keyResults, results);
                 }
+            }
+            if (!keyResults.length) {
+                myResults = _super.prototype.validate.call(this, value, key, root);
             }
             return myResults.concat(keyResults);
         };
