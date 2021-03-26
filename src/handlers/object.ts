@@ -100,7 +100,7 @@ export class ObjectHandler<
     key: string[] = [],
     root?: unknown,
   ): IValidationResult[] {
-    const myResults = super.validate(value, key, root);
+    let myResults: IValidationResult[] = [];
     const keyResults: IValidationResult[] = [];
 
     if (typeof value === "object" && value !== null) {
@@ -138,6 +138,10 @@ export class ObjectHandler<
           getResults(handler);
         }
       }
+    }
+
+    if (!keyResults.length) {
+      myResults = super.validate(value, key, root);
     }
 
     return myResults.concat(keyResults);

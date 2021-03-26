@@ -77,7 +77,7 @@ export class ArrayHandler<T extends Handler> extends BaseHandler {
     root?: unknown,
   ): IValidationResult[] {
     let myResults: IValidationResult[] = [];
-    let keyResults: IValidationResult[] = [];
+    const keyResults: IValidationResult[] = [];
 
     if (Array.isArray(value)) {
       value.forEach((v, i) => {
