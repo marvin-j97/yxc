@@ -1,10 +1,12 @@
 # yxc
 
-Schema validation with composition &amp; API middlewares, written in Typescript.
+Schema validation with composition, written in Typescript.
+
+See the full documentation here: https://marvin-j97.github.io/yxc/
 
 [![npm version](https://badge.fury.io/js/%40dotvirus%2Fyxc.svg)](https://badge.fury.io/js/%40dotvirus%2Fyxc)
-![Node.js CI](https://github.com/dotvirus/yxc/workflows/Node.js%20CI/badge.svg)
-[![codecov](https://codecov.io/gh/dotvirus/yxc/branch/dev/graph/badge.svg)](https://codecov.io/gh/dotvirus/yxc)
+![Node.js CI](https://github.com/marvin-j97/yxc/workflows/Node.js%20CI/badge.svg)
+[![codecov](https://codecov.io/gh/marvin-j97/yxc/branch/dev/graph/badge.svg)](https://codecov.io/gh/marvin-j97/yxc)
 ![npm bundle size](https://img.shields.io/bundlephobia/minzip/@dotvirus/yxc)
 ![David](https://img.shields.io/david/dotvirus/yxc)
 ![npm](https://img.shields.io/npm/dw/@dotvirus/yxc)
@@ -129,7 +131,6 @@ Infer a schema type (Typescript only!)
 
 | `NOTE` | Turn on 'strictNullChecks' in your tsconfig.json, otherwise values may not be inferred correctly. |
 | ------ | ------------------------------------------------------------------------------------------------- |
-
 
 ```typescript
 import yxc, { Infer } from "@dotvirus/yxc";

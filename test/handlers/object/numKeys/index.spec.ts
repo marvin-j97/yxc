@@ -9,7 +9,6 @@ describe("Object numKeys", () => {
       test.expected ? "valid" : "invalid"
     } object with ${test.numKeys} keys`, () => {
       const result = createExecutableSchema(handler)(test.value);
-      console.log(result);
       if (test.expected) {
         expect(result.errors).to.be.empty;
       } else {

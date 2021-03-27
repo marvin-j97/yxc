@@ -15,7 +15,7 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
     }
 
     if (process.env.YXC_DEBUG) {
-      console.log.apply(console, args);
+      console.error.apply(console, args);
     }
   }
 
@@ -78,7 +78,7 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
     return Handler;
   }();
 
-  var __extends = undefined && undefined.__extends || function () {
+  var __extends$b = undefined && undefined.__extends || function () {
     var _extendStatics = function extendStatics(d, b) {
       _extendStatics = Object.setPrototypeOf || {
         __proto__: []
@@ -94,6 +94,8 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
     };
 
     return function (d, b) {
+      if (typeof b !== "function" && b !== null) throw new TypeError("Class extends value " + String(b) + " is not a constructor or null");
+
       _extendStatics(d, b);
 
       function __() {
@@ -105,7 +107,7 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
   }();
 
   var OptionalHandler = function (_super) {
-    __extends(OptionalHandler, _super);
+    __extends$b(OptionalHandler, _super);
 
     function OptionalHandler() {
       var _this = _super.call(this) || this;
@@ -124,7 +126,7 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
     return OptionalHandler;
   }(Handler);
 
-  var __extends$1 = undefined && undefined.__extends || function () {
+  var __extends$a = undefined && undefined.__extends || function () {
     var _extendStatics2 = function extendStatics(d, b) {
       _extendStatics2 = Object.setPrototypeOf || {
         __proto__: []
@@ -140,6 +142,8 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
     };
 
     return function (d, b) {
+      if (typeof b !== "function" && b !== null) throw new TypeError("Class extends value " + String(b) + " is not a constructor or null");
+
       _extendStatics2(d, b);
 
       function __() {
@@ -151,7 +155,7 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
   }();
 
   var NullHandler = function (_super) {
-    __extends$1(NullHandler, _super);
+    __extends$a(NullHandler, _super);
 
     function NullHandler() {
       var _this = _super.call(this) || this;
@@ -170,7 +174,7 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
     return NullHandler;
   }(Handler);
 
-  var __extends$2 = undefined && undefined.__extends || function () {
+  var __extends$9 = undefined && undefined.__extends || function () {
     var _extendStatics3 = function extendStatics(d, b) {
       _extendStatics3 = Object.setPrototypeOf || {
         __proto__: []
@@ -186,6 +190,8 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
     };
 
     return function (d, b) {
+      if (typeof b !== "function" && b !== null) throw new TypeError("Class extends value " + String(b) + " is not a constructor or null");
+
       _extendStatics3(d, b);
 
       function __() {
@@ -197,7 +203,7 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
   }();
 
   var UnionHandler = function (_super) {
-    __extends$2(UnionHandler, _super);
+    __extends$9(UnionHandler, _super);
 
     function UnionHandler(handlers) {
       var _this = _super.call(this) || this;
@@ -226,7 +232,7 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
     return UnionHandler;
   }(Handler);
 
-  var __extends$3 = undefined && undefined.__extends || function () {
+  var __extends$8 = undefined && undefined.__extends || function () {
     var _extendStatics4 = function extendStatics(d, b) {
       _extendStatics4 = Object.setPrototypeOf || {
         __proto__: []
@@ -242,6 +248,8 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
     };
 
     return function (d, b) {
+      if (typeof b !== "function" && b !== null) throw new TypeError("Class extends value " + String(b) + " is not a constructor or null");
+
       _extendStatics4(d, b);
 
       function __() {
@@ -253,7 +261,7 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
   }();
 
   var BaseHandler = function (_super) {
-    __extends$3(BaseHandler, _super);
+    __extends$8(BaseHandler, _super);
 
     function BaseHandler() {
       return _super !== null && _super.apply(this, arguments) || this;
@@ -270,7 +278,7 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
     return BaseHandler;
   }(Handler);
 
-  var __extends$4 = undefined && undefined.__extends || function () {
+  var __extends$7 = undefined && undefined.__extends || function () {
     var _extendStatics5 = function extendStatics(d, b) {
       _extendStatics5 = Object.setPrototypeOf || {
         __proto__: []
@@ -286,6 +294,8 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
     };
 
     return function (d, b) {
+      if (typeof b !== "function" && b !== null) throw new TypeError("Class extends value " + String(b) + " is not a constructor or null");
+
       _extendStatics5(d, b);
 
       function __() {
@@ -297,7 +307,7 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
   }();
 
   var AtomicHandler = function (_super) {
-    __extends$4(AtomicHandler, _super);
+    __extends$7(AtomicHandler, _super);
 
     function AtomicHandler() {
       return _super !== null && _super.apply(this, arguments) || this;
@@ -336,7 +346,7 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
     return emailRegex.test(str);
   }
 
-  var __extends$5 = undefined && undefined.__extends || function () {
+  var __extends$6 = undefined && undefined.__extends || function () {
     var _extendStatics6 = function extendStatics(d, b) {
       _extendStatics6 = Object.setPrototypeOf || {
         __proto__: []
@@ -352,6 +362,8 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
     };
 
     return function (d, b) {
+      if (typeof b !== "function" && b !== null) throw new TypeError("Class extends value " + String(b) + " is not a constructor or null");
+
       _extendStatics6(d, b);
 
       function __() {
@@ -363,7 +375,7 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
   }();
 
   var StringHandler = function (_super) {
-    __extends$5(StringHandler, _super);
+    __extends$6(StringHandler, _super);
 
     function StringHandler() {
       var _this = _super.call(this) || this;
@@ -490,7 +502,7 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
     return _typeof(val) === "object" && !Array.isArray(val) && val !== null;
   }
 
-  var __extends$6 = undefined && undefined.__extends || function () {
+  var __extends$5 = undefined && undefined.__extends || function () {
     var _extendStatics7 = function extendStatics(d, b) {
       _extendStatics7 = Object.setPrototypeOf || {
         __proto__: []
@@ -506,6 +518,8 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
     };
 
     return function (d, b) {
+      if (typeof b !== "function" && b !== null) throw new TypeError("Class extends value " + String(b) + " is not a constructor or null");
+
       _extendStatics7(d, b);
 
       function __() {
@@ -516,22 +530,16 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
     };
   }();
 
-  var __spreadArrays = undefined && undefined.__spreadArrays || function () {
-    for (var s = 0, i = 0, il = arguments.length; i < il; i++) {
-      s += arguments[i].length;
+  var __spreadArray$2 = undefined && undefined.__spreadArray || function (to, from) {
+    for (var i = 0, il = from.length, j = to.length; i < il; i++, j++) {
+      to[j] = from[i];
     }
 
-    for (var r = Array(s), k = 0, i = 0; i < il; i++) {
-      for (var a = arguments[i], j = 0, jl = a.length; j < jl; j++, k++) {
-        r[k] = a[j];
-      }
-    }
-
-    return r;
+    return to;
   };
 
   var ObjectHandler = function (_super) {
-    __extends$6(ObjectHandler, _super);
+    __extends$5(ObjectHandler, _super);
 
     function ObjectHandler(keys) {
       var _this = _super.call(this) || this;
@@ -602,8 +610,7 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
         key = [];
       }
 
-      var myResults = _super.prototype.validate.call(this, value, key, root);
-
+      var myResults = [];
       var keyResults = [];
 
       if (_typeof(value) === "object" && value !== null) {
@@ -615,7 +622,7 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
 
             if (!handler) {
               keyResults.push({
-                key: __spreadArrays(key, [objKey]),
+                key: __spreadArray$2(__spreadArray$2([], key), [objKey]),
                 message: "Value not allowed"
               });
             }
@@ -626,7 +633,7 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
           var handler = this_1._keys[myKey];
 
           var getResults = function getResults(handler) {
-            var results = handler.validate(_value_1[myKey], __spreadArrays(key, [myKey]), root);
+            var results = handler.validate(_value_1[myKey], __spreadArray$2(__spreadArray$2([], key), [myKey]), root);
             keyResults.push.apply(keyResults, results);
             return results;
           };
@@ -645,13 +652,17 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
         }
       }
 
+      if (!keyResults.length) {
+        myResults = _super.prototype.validate.call(this, value, key, root);
+      }
+
       return myResults.concat(keyResults);
     };
 
     return ObjectHandler;
   }(BaseHandler);
 
-  var __extends$7 = undefined && undefined.__extends || function () {
+  var __extends$4 = undefined && undefined.__extends || function () {
     var _extendStatics8 = function extendStatics(d, b) {
       _extendStatics8 = Object.setPrototypeOf || {
         __proto__: []
@@ -667,6 +678,8 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
     };
 
     return function (d, b) {
+      if (typeof b !== "function" && b !== null) throw new TypeError("Class extends value " + String(b) + " is not a constructor or null");
+
       _extendStatics8(d, b);
 
       function __() {
@@ -678,7 +691,7 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
   }();
 
   var NumberHandler = function (_super) {
-    __extends$7(NumberHandler, _super);
+    __extends$4(NumberHandler, _super);
 
     function NumberHandler() {
       var _this = _super.call(this) || this;
@@ -755,7 +768,7 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
     return NumberHandler;
   }(AtomicHandler);
 
-  var __extends$8 = undefined && undefined.__extends || function () {
+  var __extends$3 = undefined && undefined.__extends || function () {
     var _extendStatics9 = function extendStatics(d, b) {
       _extendStatics9 = Object.setPrototypeOf || {
         __proto__: []
@@ -771,6 +784,8 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
     };
 
     return function (d, b) {
+      if (typeof b !== "function" && b !== null) throw new TypeError("Class extends value " + String(b) + " is not a constructor or null");
+
       _extendStatics9(d, b);
 
       function __() {
@@ -782,7 +797,7 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
   }();
 
   var BooleanHandler = function (_super) {
-    __extends$8(BooleanHandler, _super);
+    __extends$3(BooleanHandler, _super);
 
     function BooleanHandler() {
       var _this = _super.call(this) || this;
@@ -805,7 +820,7 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
     return BooleanHandler;
   }(AtomicHandler);
 
-  var __extends$9 = undefined && undefined.__extends || function () {
+  var __extends$2 = undefined && undefined.__extends || function () {
     var _extendStatics10 = function extendStatics(d, b) {
       _extendStatics10 = Object.setPrototypeOf || {
         __proto__: []
@@ -821,6 +836,8 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
     };
 
     return function (d, b) {
+      if (typeof b !== "function" && b !== null) throw new TypeError("Class extends value " + String(b) + " is not a constructor or null");
+
       _extendStatics10(d, b);
 
       function __() {
@@ -831,29 +848,25 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
     };
   }();
 
-  var __spreadArrays$1 = undefined && undefined.__spreadArrays || function () {
-    for (var s = 0, i = 0, il = arguments.length; i < il; i++) {
-      s += arguments[i].length;
+  var __spreadArray$1 = undefined && undefined.__spreadArray || function (to, from) {
+    for (var i = 0, il = from.length, j = to.length; i < il; i++, j++) {
+      to[j] = from[i];
     }
 
-    for (var r = Array(s), k = 0, i = 0; i < il; i++) {
-      for (var a = arguments[i], j = 0, jl = a.length; j < jl; j++, k++) {
-        r[k] = a[j];
-      }
-    }
+    return to;
+  };
 
-    return r;
+  var arrayRule = function arrayRule(v) {
+    return Array.isArray(v) || "Must be an array";
   };
 
   var ArrayHandler = function (_super) {
-    __extends$9(ArrayHandler, _super);
+    __extends$2(ArrayHandler, _super);
 
     function ArrayHandler(handler) {
       var _this = _super.call(this) || this;
 
-      _this._rules.push(function (v) {
-        return Array.isArray(v) || "Must be an array";
-      });
+      _this._rules.push(arrayRule);
 
       _this._handler = handler;
       return _this;
@@ -931,18 +944,21 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
         key = [];
       }
 
-      var myResults = _super.prototype.validate.call(this, value, key, root);
-
+      var myResults = [];
       var keyResults = [];
 
       if (Array.isArray(value)) {
         value.forEach(function (v, i) {
           var myKey = i.toString();
 
-          var results = _this._handler.validate(v, __spreadArrays$1(key, [myKey]), root);
+          var results = _this._handler.validate(v, __spreadArray$1(__spreadArray$1([], key), [myKey]), root);
 
           keyResults.push.apply(keyResults, results);
         });
+      }
+
+      if (!keyResults.length) {
+        myResults = _super.prototype.validate.call(this, value, key, root);
       }
 
       return myResults.concat(keyResults);
@@ -951,7 +967,7 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
     return ArrayHandler;
   }(BaseHandler);
 
-  var __extends$a = undefined && undefined.__extends || function () {
+  var __extends$1 = undefined && undefined.__extends || function () {
     var _extendStatics11 = function extendStatics(d, b) {
       _extendStatics11 = Object.setPrototypeOf || {
         __proto__: []
@@ -967,6 +983,8 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
     };
 
     return function (d, b) {
+      if (typeof b !== "function" && b !== null) throw new TypeError("Class extends value " + String(b) + " is not a constructor or null");
+
       _extendStatics11(d, b);
 
       function __() {
@@ -978,7 +996,7 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
   }();
 
   var AnyHandler = function (_super) {
-    __extends$a(AnyHandler, _super);
+    __extends$1(AnyHandler, _super);
 
     function AnyHandler() {
       return _super.call(this) || this;
@@ -1003,7 +1021,7 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
     return AnyHandler;
   }(AtomicHandler);
 
-  var __extends$b = undefined && undefined.__extends || function () {
+  var __extends = undefined && undefined.__extends || function () {
     var _extendStatics12 = function extendStatics(d, b) {
       _extendStatics12 = Object.setPrototypeOf || {
         __proto__: []
@@ -1019,6 +1037,8 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
     };
 
     return function (d, b) {
+      if (typeof b !== "function" && b !== null) throw new TypeError("Class extends value " + String(b) + " is not a constructor or null");
+
       _extendStatics12(d, b);
 
       function __() {
@@ -1029,22 +1049,16 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
     };
   }();
 
-  var __spreadArrays$2 = undefined && undefined.__spreadArrays || function () {
-    for (var s = 0, i = 0, il = arguments.length; i < il; i++) {
-      s += arguments[i].length;
+  var __spreadArray = undefined && undefined.__spreadArray || function (to, from) {
+    for (var i = 0, il = from.length, j = to.length; i < il; i++, j++) {
+      to[j] = from[i];
     }
 
-    for (var r = Array(s), k = 0, i = 0; i < il; i++) {
-      for (var a = arguments[i], j = 0, jl = a.length; j < jl; j++, k++) {
-        r[k] = a[j];
-      }
-    }
-
-    return r;
+    return to;
   };
 
   var RecordHandler = function (_super) {
-    __extends$b(RecordHandler, _super);
+    __extends(RecordHandler, _super);
 
     function RecordHandler(schema) {
       var _this = _super.call(this) || this;
@@ -1098,18 +1112,21 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
         key = [];
       }
 
-      var myResults = _super.prototype.validate.call(this, value, key, root);
-
+      var myResults = [];
       var keyResults = [];
 
-      if (_typeof(value) === "object") {
+      if (_typeof(value) === "object" && value !== null) {
         var _value = value;
 
         for (var myKey in _value) {
-          var results = this._schema.validate(_value[myKey], __spreadArrays$2(key, [myKey]), root);
+          var results = this._schema.validate(_value[myKey], __spreadArray(__spreadArray([], key), [myKey]), root);
 
           keyResults.push.apply(keyResults, results);
         }
+      }
+
+      if (!keyResults.length) {
+        myResults = _super.prototype.validate.call(this, value, key, root);
       }
 
       return myResults.concat(keyResults);

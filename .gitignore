@@ -103,3 +103,5 @@ typings/
 .tern-port
 
 old_test
+
+.vscode

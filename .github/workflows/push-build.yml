@@ -14,11 +14,11 @@ jobs:
         uses: actions/setup-node@v1
         with:
           node-version: 14.x
-      - run: npm ci
-      - run: npm run lint
-      - run: npm test
-      - run: npm run build
-      - run: npm run doc
+      - run: yarn install
+      - run: yarn lint
+      - run: yarn test
+      - run: yarn build
+      - run: yarn doc
       - uses: stefanzweifel/git-auto-commit-action@v4
         with:
           commit_message: Apply build

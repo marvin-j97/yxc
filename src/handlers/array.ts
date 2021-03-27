@@ -3,6 +3,8 @@ import { IValidationResult } from "../types";
 import { Infer } from "../index";
 import { BaseHandler } from "./base";
 
+const arrayRule = (v: unknown) => Array.isArray(v) || "Must be an array";
+
 export class ArrayHandler<T extends Handler> extends BaseHandler {
   _type!: Array<Infer<T>>;
 
@@ -10,7 +12,7 @@ export class ArrayHandler<T extends Handler> extends BaseHandler {
 
   constructor(handler: T) {
     super();
-    this._rules.push((v: unknown) => Array.isArray(v) || "Must be an array");
+    this._rules.push(arrayRule);
     this._handler = handler;
   }
 
@@ -74,7 +76,7 @@ export class ArrayHandler<T extends Handler> extends BaseHandler {
     key: string[] = [],
     root?: unknown,
   ): IValidationResult[] {
-    const myResults = super.validate(value, key, root);
+    let myResults: IValidationResult[] = [];
     const keyResults: IValidationResult[] = [];
 
     if (Array.isArray(value)) {
@@ -83,6 +85,10 @@ export class ArrayHandler<T extends Handler> extends BaseHandler {
         const results = this._handler.validate(v, [...key, myKey], root);
         keyResults.push(...results);
       });
+    }
+
+    if (!keyResults.length) {
+      myResults = super.validate(value, key, root);
     }
 
     return myResults.concat(keyResults);

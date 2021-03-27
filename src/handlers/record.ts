@@ -46,10 +46,10 @@ export class RecordHandler<T extends Handler> extends BaseHandler {
     key: string[] = [],
     root?: unknown,
   ): IValidationResult[] {
-    const myResults = super.validate(value, key, root);
+    let myResults: IValidationResult[] = [];
     const keyResults: IValidationResult[] = [];
 
-    if (typeof value === "object") {
+    if (typeof value === "object" && value !== null) {
       const _value = <Record<string, unknown>>value;
 
       for (const myKey in _value) {
@@ -60,6 +60,10 @@ export class RecordHandler<T extends Handler> extends BaseHandler {
         );
         keyResults.push(...results);
       }
+    }
+
+    if (!keyResults.length) {
+      myResults = super.validate(value, key, root);
     }
 
     return myResults.concat(keyResults);
