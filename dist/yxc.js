@@ -68,6 +68,8 @@
             return extendStatics(d, b);
         };
         return function (d, b) {
+            if (typeof b !== "function" && b !== null)
+                throw new TypeError("Class extends value " + String(b) + " is not a constructor or null");
             extendStatics(d, b);
             function __() { this.constructor = d; }
             d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
@@ -94,6 +96,8 @@
             return extendStatics(d, b);
         };
         return function (d, b) {
+            if (typeof b !== "function" && b !== null)
+                throw new TypeError("Class extends value " + String(b) + " is not a constructor or null");
             extendStatics(d, b);
             function __() { this.constructor = d; }
             d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
@@ -120,6 +124,8 @@
             return extendStatics(d, b);
         };
         return function (d, b) {
+            if (typeof b !== "function" && b !== null)
+                throw new TypeError("Class extends value " + String(b) + " is not a constructor or null");
             extendStatics(d, b);
             function __() { this.constructor = d; }
             d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
@@ -154,6 +160,8 @@
             return extendStatics(d, b);
         };
         return function (d, b) {
+            if (typeof b !== "function" && b !== null)
+                throw new TypeError("Class extends value " + String(b) + " is not a constructor or null");
             extendStatics(d, b);
             function __() { this.constructor = d; }
             d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
@@ -181,6 +189,8 @@
             return extendStatics(d, b);
         };
         return function (d, b) {
+            if (typeof b !== "function" && b !== null)
+                throw new TypeError("Class extends value " + String(b) + " is not a constructor or null");
             extendStatics(d, b);
             function __() { this.constructor = d; }
             d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
@@ -224,6 +234,8 @@
             return extendStatics(d, b);
         };
         return function (d, b) {
+            if (typeof b !== "function" && b !== null)
+                throw new TypeError("Class extends value " + String(b) + " is not a constructor or null");
             extendStatics(d, b);
             function __() { this.constructor = d; }
             d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
@@ -315,17 +327,17 @@
             return extendStatics(d, b);
         };
         return function (d, b) {
+            if (typeof b !== "function" && b !== null)
+                throw new TypeError("Class extends value " + String(b) + " is not a constructor or null");
             extendStatics(d, b);
             function __() { this.constructor = d; }
             d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
         };
     })();
-    var __spreadArrays$2 = (undefined && undefined.__spreadArrays) || function () {
-        for (var s = 0, i = 0, il = arguments.length; i < il; i++) s += arguments[i].length;
-        for (var r = Array(s), k = 0, i = 0; i < il; i++)
-            for (var a = arguments[i], j = 0, jl = a.length; j < jl; j++, k++)
-                r[k] = a[j];
-        return r;
+    var __spreadArray$2 = (undefined && undefined.__spreadArray) || function (to, from) {
+        for (var i = 0, il = from.length, j = to.length; i < il; i++, j++)
+            to[j] = from[i];
+        return to;
     };
     var ObjectHandler = (function (_super) {
         __extends$5(ObjectHandler, _super);
@@ -377,7 +389,7 @@
                         var handler = this._keys[objKey];
                         if (!handler) {
                             keyResults.push({
-                                key: __spreadArrays$2(key, [objKey]),
+                                key: __spreadArray$2(__spreadArray$2([], key), [objKey]),
                                 message: "Value not allowed",
                             });
                         }
@@ -386,7 +398,7 @@
                 var _loop_1 = function (myKey) {
                     var handler = this_1._keys[myKey];
                     var getResults = function (handler) {
-                        var results = handler.validate(_value_1[myKey], __spreadArrays$2(key, [myKey]), root);
+                        var results = handler.validate(_value_1[myKey], __spreadArray$2(__spreadArray$2([], key), [myKey]), root);
                         keyResults.push.apply(keyResults, results);
                         return results;
                     };
@@ -418,6 +430,8 @@
             return extendStatics(d, b);
         };
         return function (d, b) {
+            if (typeof b !== "function" && b !== null)
+                throw new TypeError("Class extends value " + String(b) + " is not a constructor or null");
             extendStatics(d, b);
             function __() { this.constructor = d; }
             d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
@@ -482,6 +496,8 @@
             return extendStatics(d, b);
         };
         return function (d, b) {
+            if (typeof b !== "function" && b !== null)
+                throw new TypeError("Class extends value " + String(b) + " is not a constructor or null");
             extendStatics(d, b);
             function __() { this.constructor = d; }
             d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
@@ -511,17 +527,17 @@
             return extendStatics(d, b);
         };
         return function (d, b) {
+            if (typeof b !== "function" && b !== null)
+                throw new TypeError("Class extends value " + String(b) + " is not a constructor or null");
             extendStatics(d, b);
             function __() { this.constructor = d; }
             d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
         };
     })();
-    var __spreadArrays$1 = (undefined && undefined.__spreadArrays) || function () {
-        for (var s = 0, i = 0, il = arguments.length; i < il; i++) s += arguments[i].length;
-        for (var r = Array(s), k = 0, i = 0; i < il; i++)
-            for (var a = arguments[i], j = 0, jl = a.length; j < jl; j++, k++)
-                r[k] = a[j];
-        return r;
+    var __spreadArray$1 = (undefined && undefined.__spreadArray) || function (to, from) {
+        for (var i = 0, il = from.length, j = to.length; i < il; i++, j++)
+            to[j] = from[i];
+        return to;
     };
     var arrayRule = function (v) { return Array.isArray(v) || "Must be an array"; };
     var ArrayHandler = (function (_super) {
@@ -581,7 +597,7 @@
             if (Array.isArray(value)) {
                 value.forEach(function (v, i) {
                     var myKey = i.toString();
-                    var results = _this._handler.validate(v, __spreadArrays$1(key, [myKey]), root);
+                    var results = _this._handler.validate(v, __spreadArray$1(__spreadArray$1([], key), [myKey]), root);
                     keyResults.push.apply(keyResults, results);
                 });
             }
@@ -601,6 +617,8 @@
             return extendStatics(d, b);
         };
         return function (d, b) {
+            if (typeof b !== "function" && b !== null)
+                throw new TypeError("Class extends value " + String(b) + " is not a constructor or null");
             extendStatics(d, b);
             function __() { this.constructor = d; }
             d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
@@ -630,17 +648,17 @@
             return extendStatics(d, b);
         };
         return function (d, b) {
+            if (typeof b !== "function" && b !== null)
+                throw new TypeError("Class extends value " + String(b) + " is not a constructor or null");
             extendStatics(d, b);
             function __() { this.constructor = d; }
             d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
         };
     })();
-    var __spreadArrays = (undefined && undefined.__spreadArrays) || function () {
-        for (var s = 0, i = 0, il = arguments.length; i < il; i++) s += arguments[i].length;
-        for (var r = Array(s), k = 0, i = 0; i < il; i++)
-            for (var a = arguments[i], j = 0, jl = a.length; j < jl; j++, k++)
-                r[k] = a[j];
-        return r;
+    var __spreadArray = (undefined && undefined.__spreadArray) || function (to, from) {
+        for (var i = 0, il = from.length, j = to.length; i < il; i++, j++)
+            to[j] = from[i];
+        return to;
     };
     var RecordHandler = (function (_super) {
         __extends(RecordHandler, _super);
@@ -677,7 +695,7 @@
             if (typeof value === "object" && value !== null) {
                 var _value = value;
                 for (var myKey in _value) {
-                    var results = this._schema.validate(_value[myKey], __spreadArrays(key, [myKey]), root);
+                    var results = this._schema.validate(_value[myKey], __spreadArray(__spreadArray([], key), [myKey]), root);
                     keyResults.push.apply(keyResults, results);
                 }
             }
