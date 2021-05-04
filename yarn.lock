@@ -823,8 +823,8 @@
     fastq "^1.6.0"
 
 "@types/chai@^4.2.11":
-  version "4.2.15"
-  resolved "https://registry.yarnpkg.com/@types/chai/-/chai-4.2.15.tgz#b7a6d263c2cecf44b6de9a051cf496249b154553"
+  version "4.2.17"
+  resolved "https://registry.yarnpkg.com/@types/chai/-/chai-4.2.17.tgz#85f9f0610f514b22a94125d441f73eef65bde5cc"
 
 "@types/estree@*":
   version "0.0.47"
