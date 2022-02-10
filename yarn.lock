@@ -24,7 +24,7 @@
   dependencies:
     "@babel/highlight" "^7.10.4"
 
-"@babel/code-frame@^7.10.4", "@babel/code-frame@^7.12.13":
+"@babel/code-frame@^7.12.13":
   version "7.12.13"
   resolved "https://registry.yarnpkg.com/@babel/code-frame/-/code-frame-7.12.13.tgz#dcfc826beef65e75c50e21d3837d7d95798dd658"
   dependencies:
@@ -2454,7 +2454,7 @@ lunr@^2.3.9:
   version "2.3.9"
   resolved "https://registry.yarnpkg.com/lunr/-/lunr-2.3.9.tgz#18b123142832337dd6e964df1a5a7707b25d35e1"
 
-magic-string@^0.25.2:
+magic-string@^0.25.2, magic-string@^0.25.7:
   version "0.25.7"
   resolved "https://registry.yarnpkg.com/magic-string/-/magic-string-0.25.7.tgz#3f497d6fd34c669c6798dcb821f2ef31f5445051"
   dependencies:
@@ -3003,11 +3003,13 @@ rollup-plugin-commonjs@^10.1.0:
     resolve "^1.11.0"
     rollup-pluginutils "^2.8.1"
 
-rollup-plugin-dts@^1.4.13:
-  version "1.4.14"
-  resolved "https://registry.yarnpkg.com/rollup-plugin-dts/-/rollup-plugin-dts-1.4.14.tgz#f049ac5729c1f2618f96a93c4c8bf28e20f1456a"
+rollup-plugin-dts@^3.0.1:
+  version "3.0.1"
+  resolved "https://registry.yarnpkg.com/rollup-plugin-dts/-/rollup-plugin-dts-3.0.1.tgz#4419efb51d935cc0cff6f577f8aad97a980ee524"
+  dependencies:
+    magic-string "^0.25.7"
   optionalDependencies:
-    "@babel/code-frame" "^7.10.4"
+    "@babel/code-frame" "^7.12.13"
 
 rollup-plugin-node-resolve@^5.2.0:
   version "5.2.0"
